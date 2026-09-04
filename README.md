@@ -82,11 +82,11 @@ against a real browser.
 
 ```bash
 pnpm dev              # docs and playground — the loop for the system itself
-pnpm docs             # just the documentation site
-pnpm playground       # just the component sandbox
-pnpm app              # the application template
-pnpm site             # the website template
-pnpm fullstack        # the full-stack template
+pnpm dev:docs         # just the documentation site
+pnpm dev:playground   # just the component sandbox
+pnpm dev:app          # the application template
+pnpm dev:site         # the website template
+pnpm dev:fullstack    # the full-stack template
 pnpm build
 pnpm lint
 pnpm typecheck
@@ -134,7 +134,7 @@ See the [publishing guide](apps/docs/src/pages/guides/publishing.mdx).
 
 ## Documentation
 
-`pnpm docs`, or read the source under `apps/docs/src/pages`:
+`pnpm dev:docs`, or read the source under `apps/docs/src/pages`:
 
 - [Getting started](apps/docs/src/pages/guides/getting-started.mdx)
 - [Architecture](apps/docs/src/pages/guides/architecture.mdx)

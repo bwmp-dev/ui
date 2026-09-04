@@ -5,7 +5,7 @@ packages:
   - 'tooling/*'
 
 allowBuilds:
-  '@parcel/watcher': set this to true or false
+  '@parcel/watcher': true
   esbuild: true
 
 # Single source of truth for third-party versions across every workspace package.
