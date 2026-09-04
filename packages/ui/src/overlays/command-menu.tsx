@@ -25,6 +25,12 @@ export type CommandMenuProps = {
   open: boolean
   onOpenChange: (open: boolean) => void
   actions: readonly CommandAction[]
+  /**
+   * The dialog's accessible name. Rendered visually hidden — the palette has no
+   * visible heading, but a dialog without a name is unusable with a screen
+   * reader.
+   */
+  title?: string
   placeholder?: string
   emptyMessage?: ReactNode
   /** Rendered under the list, typically a hint row. */
@@ -83,6 +89,7 @@ export function CommandMenu({
   open,
   onOpenChange,
   actions,
+  title = 'Command palette',
   placeholder = 'Search…',
   emptyMessage = 'No matching commands.',
   footer,
@@ -96,11 +103,23 @@ export function CommandMenu({
         <BaseDialog.Backdrop className="bg-overlay overlay-motion fixed inset-0 z-[var(--z-overlay)]" />
         <BaseDialog.Viewport className="fixed inset-0 z-[var(--z-dialog)] flex justify-center overflow-y-auto p-4 pt-[12vh]">
           <BaseDialog.Popup
+            /*
+             * The combobox is permanently open, so it treats Escape as "close
+             * the list" and stops the event before the dialog sees it. Handling
+             * it in the capture phase keeps Escape meaning "close the palette".
+             */
+            onKeyDownCapture={(event) => {
+              if (event.key !== 'Escape') return
+              event.preventDefault()
+              onOpenChange(false)
+            }}
             className={cn(
               'surface-panel popup-motion flex h-fit w-full max-w-lg flex-col overflow-hidden shadow-lg',
               className,
             )}
           >
+            <BaseDialog.Title className="sr-only">{title}</BaseDialog.Title>
+
             <BaseCombobox.Root
               open
               items={groups}
@@ -137,8 +156,13 @@ export function CommandMenu({
                 )}
               </BaseCombobox.List>
 
-              <BaseCombobox.Empty className="text-fg-muted px-3 py-8 text-center text-xs">
-                {emptyMessage}
+              {/*
+                Base UI keeps this element mounted so screen readers announce
+                the change; only its children come and go. Padding therefore
+                belongs inside, or the palette carries a permanent gap.
+              */}
+              <BaseCombobox.Empty>
+                <p className="text-fg-muted px-3 py-8 text-center text-xs">{emptyMessage}</p>
               </BaseCombobox.Empty>
 
               {footer ? (

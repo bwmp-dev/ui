@@ -1,0 +1,8 @@
+{
+  "extends": "@stack/config-typescript/react-app",
+  "include": ["src", "e2e", "*.config.ts", "vitest.setup.ts"],
+  "compilerOptions": {
+    "paths": { "~/*": ["./src/*"] },
+    "types": ["vite/client", "node"]
+  }
+}

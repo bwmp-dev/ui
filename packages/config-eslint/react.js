@@ -32,6 +32,16 @@ export const react = tseslint.config(
       ],
     },
   },
+  {
+    // Base UI's `render` prop takes element *templates* whose children and href
+    // are supplied later. The static a11y checks cannot see that.
+    files: ['**/*.test.{ts,tsx}', '**/*.stories.tsx'],
+    rules: {
+      'jsx-a11y/anchor-has-content': 'off',
+      'jsx-a11y/anchor-is-valid': 'off',
+      'jsx-a11y/heading-has-content': 'off',
+    },
+  },
 )
 
 export default react

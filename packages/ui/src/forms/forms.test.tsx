@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { Field } from './field'
 import { Input } from './input'
 import { Select } from './select'
-import { Checkbox, Switch } from './toggles'
+import { Checkbox, RadioGroup, Switch } from './toggles'
 
 describe('Field', () => {
   it('wires the label, description and error to the control', () => {
@@ -103,5 +103,33 @@ describe('Checkbox and Switch', () => {
     const toggle = screen.getByRole('switch', { name: /Auto-deploy/ })
     await user.click(toggle)
     expect(toggle).toBeChecked()
+  })
+})
+
+describe('grouped choices', () => {
+  it('names each radio from its own label, not the field label', () => {
+    render(
+      <Field name="appearance">
+        <Field.Label>Colour scheme</Field.Label>
+        <RadioGroup defaultValue="system" aria-labelledby="scheme-label">
+          <RadioGroup.Item value="system" label="System" />
+          <RadioGroup.Item value="light" label="Light" />
+          <RadioGroup.Item value="dark" label="Dark" />
+        </RadioGroup>
+      </Field>,
+    )
+
+    // Without an explicit label id, Base UI names every radio after the field,
+    // and the group becomes three identically-announced options.
+    expect(screen.getByRole('radio', { name: 'Light' })).toBeInTheDocument()
+    expect(screen.getByRole('radio', { name: 'Dark' })).toBeInTheDocument()
+    expect(screen.queryByRole('radio', { name: 'Colour scheme' })).not.toBeInTheDocument()
+  })
+
+  it('describes a switch from its own description', () => {
+    render(<Switch label="Auto-deploy" description="Runs on every push to main." />)
+    expect(screen.getByRole('switch', { name: 'Auto-deploy' })).toHaveAccessibleDescription(
+      'Runs on every push to main.',
+    )
   })
 })

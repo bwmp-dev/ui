@@ -107,10 +107,21 @@ function ComboboxItem({ className, children, ...props }: ComponentPropsWithRef<t
   )
 }
 
-function ComboboxEmpty({ className, children, ...props }: ComponentPropsWithRef<typeof BaseCombobox.Empty>) {
+/**
+ * Base UI keeps this element mounted so screen readers announce the change;
+ * only its children come and go. The padding therefore lives on the inner
+ * element, otherwise the list carries a permanent gap at the bottom.
+ */
+function ComboboxEmpty({
+  className,
+  children,
+  ...props
+}: ComponentPropsWithRef<typeof BaseCombobox.Empty>) {
   return (
-    <BaseCombobox.Empty {...props} className={cn('text-fg-muted px-2 py-3 text-center text-xs', className)}>
-      {children ?? 'No results.'}
+    <BaseCombobox.Empty {...props}>
+      <p className={cn('text-fg-muted px-2 py-3 text-center text-xs', className)}>
+        {children ?? 'No results.'}
+      </p>
     </BaseCombobox.Empty>
   )
 }

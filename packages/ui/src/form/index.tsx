@@ -94,7 +94,11 @@ export function FormField({
   )
 }
 
-export type SubmitButtonProps = Omit<ButtonProps, 'type' | 'loading' | 'disabled'> & {
+export type SubmitButtonProps = Omit<
+  ButtonProps,
+  // `form` on a <button> is an id string; here it is the form instance.
+  'type' | 'loading' | 'disabled' | 'form'
+> & {
   form: AnyFormApi
   /** Also disable while the form is untouched. */
   requireDirty?: boolean

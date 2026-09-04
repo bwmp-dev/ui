@@ -1,0 +1,31 @@
+/*
+ * Three imports, in this order:
+ *   1. Tailwind itself
+ *   2. the design tokens and their Tailwind theme bridge
+ *   3. the class names used inside @stack/ui, so they survive tree shaking
+ */
+@import 'tailwindcss';
+@import '@stack/tokens/theme.css';
+@import '@stack/ui/styles.css';
+
+/*
+ * Example brands, so the appearance settings page has something to switch
+ * between. A real project deletes this import and keeps only the block below.
+ */
+@import '@stack/tokens/themes/brands.css';
+
+/*
+ * Project branding. Overriding a handful of custom properties rebrands every
+ * component; there is never a reason to fork @stack/ui.
+ *
+ * Declared after the token import, so it beats the base tokens at equal
+ * specificity. A `data-theme` on <html> uses `:root[data-theme]` and beats
+ * this in turn.
+ */
+:root {
+  --accent: light-dark(oklch(0.52 0.14 44), oklch(0.72 0.14 55));
+  --accent-hover: light-dark(oklch(0.46 0.14 44), oklch(0.78 0.13 55));
+  --accent-active: light-dark(oklch(0.41 0.13 44), oklch(0.83 0.11 55));
+  --accent-fg: light-dark(oklch(1 0 0), oklch(0.19 0.03 55));
+  --accent-text: light-dark(oklch(0.48 0.14 44), oklch(0.79 0.12 55));
+}

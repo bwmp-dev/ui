@@ -1,4 +1,4 @@
-import type { ComponentPropsWithRef, ReactNode } from 'react'
+import { useId, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox'
 import { Radio as BaseRadio } from '@base-ui/react/radio'
 import { RadioGroup as BaseRadioGroup } from '@base-ui/react/radio-group'
@@ -14,15 +14,39 @@ const controlBox = [
   'data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
 ]
 
+/**
+ * Ids for the inline label and description.
+ *
+ * Base UI points a control's `aria-labelledby` at the nearest label provider,
+ * which inside a `<Field>` is the field's own label. For a group of choices
+ * that is wrong: every radio would be announced as "Colour scheme" rather than
+ * "Light" or "Dark". Naming each control from its own label fixes that, and
+ * leaves the group label doing its actual job on the group.
+ */
+function useControlLabelling(label: ReactNode, description: ReactNode) {
+  const id = useId()
+  return {
+    labelId: label === undefined ? undefined : `${id}-label`,
+    descriptionId: description === undefined ? undefined : `${id}-description`,
+  }
+}
+
 export type CheckboxProps = ComponentPropsWithRef<typeof BaseCheckbox.Root> & {
-  /** Convenience label rendered beside the box and wired up by Base UI. */
+  /** Convenience label rendered beside the box. */
   label?: ReactNode
   description?: ReactNode
 }
 
 export function Checkbox({ label, description, className, ...props }: CheckboxProps) {
+  const { labelId, descriptionId } = useControlLabelling(label, description)
+
   const control = (
-    <BaseCheckbox.Root {...props} className={cn(controlBox, 'size-4 rounded-xs', className)}>
+    <BaseCheckbox.Root
+      aria-labelledby={labelId}
+      aria-describedby={descriptionId}
+      {...props}
+      className={cn(controlBox, 'size-4 rounded-xs', className)}
+    >
       <BaseCheckbox.Indicator className="flex data-[unchecked]:hidden">
         {props.indeterminate ? (
           <Minus size={11} strokeWidth={3} aria-hidden />
@@ -36,11 +60,19 @@ export function Checkbox({ label, description, className, ...props }: CheckboxPr
   if (!label && !description) return control
 
   return (
-    <label className="group/check flex cursor-pointer items-start gap-2">
+    // Still a <label>, so clicking the text toggles the control. The explicit
+    // `aria-labelledby` above is what supplies the name.
+    <label className="flex cursor-pointer items-start gap-2">
       <span className="flex h-[var(--ui-line-height)] items-center">{control}</span>
       <span className="min-w-0">
-        <span className="text-ui text-fg block">{label}</span>
-        {description ? <span className="text-fg-muted block text-xs">{description}</span> : null}
+        <span id={labelId} className="text-ui text-fg block">
+          {label}
+        </span>
+        {description ? (
+          <span id={descriptionId} className="text-fg-muted block text-xs">
+            {description}
+          </span>
+        ) : null}
       </span>
     </label>
   )
@@ -69,12 +101,16 @@ export type RadioProps = ComponentPropsWithRef<typeof BaseRadio.Root> & {
 }
 
 function RadioItem({ label, description, className, ...props }: RadioProps) {
+  const { labelId, descriptionId } = useControlLabelling(label, description)
+
   const control = (
     <BaseRadio.Root
+      aria-labelledby={labelId}
+      aria-describedby={descriptionId}
       {...props}
       className={cn(
         controlBox,
-        'size-4 rounded-full data-[checked]:bg-transparent data-[checked]:border-accent',
+        'data-[checked]:border-accent size-4 rounded-full data-[checked]:bg-transparent',
         className,
       )}
     >
@@ -85,11 +121,19 @@ function RadioItem({ label, description, className, ...props }: RadioProps) {
   if (!label && !description) return control
 
   return (
+    // Still a <label>, so clicking the text toggles the control. The explicit
+    // `aria-labelledby` above is what supplies the name.
     <label className="flex cursor-pointer items-start gap-2">
       <span className="flex h-[var(--ui-line-height)] items-center">{control}</span>
       <span className="min-w-0">
-        <span className="text-ui text-fg block">{label}</span>
-        {description ? <span className="text-fg-muted block text-xs">{description}</span> : null}
+        <span id={labelId} className="text-ui text-fg block">
+          {label}
+        </span>
+        {description ? (
+          <span id={descriptionId} className="text-fg-muted block text-xs">
+            {description}
+          </span>
+        ) : null}
       </span>
     </label>
   )
@@ -107,8 +151,12 @@ export type SwitchProps = ComponentPropsWithRef<typeof BaseSwitch.Root> & {
  * saved by a submit button, it is a Checkbox.
  */
 export function Switch({ label, description, className, ...props }: SwitchProps) {
+  const { labelId, descriptionId } = useControlLabelling(label, description)
+
   const control = (
     <BaseSwitch.Root
+      aria-labelledby={labelId}
+      aria-describedby={descriptionId}
       {...props}
       className={cn(
         'bg-line-strong relative h-4 w-7 shrink-0 rounded-full p-px',
@@ -133,8 +181,14 @@ export function Switch({ label, description, className, ...props }: SwitchProps)
   return (
     <label className="flex cursor-pointer items-start justify-between gap-4">
       <span className="min-w-0">
-        <span className="text-ui text-fg block">{label}</span>
-        {description ? <span className="text-fg-muted block text-xs">{description}</span> : null}
+        <span id={labelId} className="text-ui text-fg block">
+          {label}
+        </span>
+        {description ? (
+          <span id={descriptionId} className="text-fg-muted block text-xs">
+            {description}
+          </span>
+        ) : null}
       </span>
       <span className="flex h-[var(--ui-line-height)] items-center">{control}</span>
     </label>
