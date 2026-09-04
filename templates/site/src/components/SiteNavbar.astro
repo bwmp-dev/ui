@@ -1,0 +1,52 @@
+---
+import { GitHubIcon } from '@stack/icons'
+import ThemeToggle from './ThemeToggle.astro'
+import MobileNav from './MobileNav.astro'
+import { NAV, SITE } from '~/content/site'
+---
+
+<header
+  class="border-line bg-canvas/85 sticky top-0 z-40 border-b backdrop-blur-sm supports-[backdrop-filter]:bg-canvas/70"
+>
+  <div class="mx-auto flex h-14 max-w-page items-center gap-4 px-6">
+    <a href="/" class="focus-ring text-fg flex items-center gap-2 rounded-sm font-semibold">
+      <span
+        class="bg-accent text-accent-fg grid size-6 place-items-center rounded-md text-xs font-bold"
+      >
+        {SITE.name.slice(0, 1)}
+      </span>
+      {SITE.name}
+    </a>
+
+    <nav aria-label="Main" class="ml-4 hidden items-center gap-1 md:flex">
+      {
+        NAV.map((item) => (
+          <a
+            href={item.href}
+            class="text-fg-muted hover:text-fg hover:bg-hover focus-ring transition-control rounded-md px-2.5 py-1.5 text-sm font-medium"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex flex-1 items-center justify-end gap-1">
+      <a
+        href={SITE.github}
+        rel="noreferrer"
+        aria-label={`${SITE.name} on GitHub`}
+        class="text-fg-muted hover:text-fg hover:bg-hover focus-ring grid size-control-md place-items-center rounded-md"
+      >
+        <GitHubIcon size={16} />
+      </a>
+      {/*
+        Both are plain Astro with a few lines of inline script. The header ships
+        no framework code at all; the only island on this page is the gallery,
+        which genuinely needs state and hydrates on `visible`.
+      */}
+      <ThemeToggle />
+      <MobileNav />
+    </div>
+  </div>
+</header>

@@ -1,0 +1,37 @@
+---
+/**
+ * One feature explained at length, with something to look at beside it.
+ *
+ * Alternate `reversed` down the page so a run of these does not read as a
+ * template. Content goes in the default slot; the visual goes in `media`.
+ */
+interface Props {
+  id?: string
+  eyebrow: string
+  title: string
+  reversed?: boolean
+}
+
+const { id, eyebrow, title, reversed = false } = Astro.props
+---
+
+<section id={id} class="scroll-mt-20 px-6 py-16">
+  <div
+    class:list={[
+      'mx-auto grid max-w-page items-center gap-10 lg:grid-cols-2 lg:gap-16',
+      reversed && 'lg:[&>*:first-child]:order-2',
+    ]}
+  >
+    <div class="max-w-xl">
+      <p class="text-accent-text text-xs font-semibold tracking-widest uppercase">{eyebrow}</p>
+      <h2 class="text-fg mt-2 text-2xl font-semibold tracking-tight">{title}</h2>
+      <div class="text-fg-muted mt-4 flex flex-col gap-4">
+        <slot />
+      </div>
+    </div>
+
+    <div class="min-w-0">
+      <slot name="media" />
+    </div>
+  </div>
+</section>

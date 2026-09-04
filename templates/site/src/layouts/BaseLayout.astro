@@ -1,0 +1,60 @@
+---
+import Seo from '~/components/Seo.astro'
+import SiteNavbar from '~/components/SiteNavbar.astro'
+import SiteFooter from '~/components/SiteFooter.astro'
+import { SITE } from '~/content/site'
+import '~/styles.css'
+
+interface Props {
+  title?: string
+  description?: string
+  noindex?: boolean
+  /** Hide the shared header and footer, e.g. on a bare error page. */
+  bare?: boolean
+}
+
+const { title, description, noindex, bare = false } = Astro.props
+---
+
+<!doctype html>
+<html lang={SITE.locale} data-appearance="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <Seo title={title} description={description} noindex={noindex} />
+
+    <!--
+      Applies the stored colour scheme before first paint. It has to be a
+      blocking classic script: a module script is deferred, and the page would
+      paint in the wrong scheme first.
+    -->
+    <script is:inline>
+      ;(function () {
+        try {
+          var stored = JSON.parse(localStorage.getItem('meridian:theme') || '{}')
+          var appearance = stored.appearance || 'system'
+          if (appearance === 'system') {
+            appearance = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          }
+          document.documentElement.setAttribute('data-appearance', appearance)
+        } catch (_) {}
+      })()
+    </script>
+  </head>
+
+  <body class="bg-canvas text-fg min-h-dvh">
+    <a
+      href="#main"
+      class="focus-ring bg-surface-raised border-line sr-only rounded-md border px-3 py-2 focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50"
+    >
+      Skip to content
+    </a>
+
+    {!bare && <SiteNavbar />}
+    <main id="main">
+      <slot />
+    </main>
+    {!bare && <SiteFooter />}
+  </body>
+</html>

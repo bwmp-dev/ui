@@ -1,0 +1,19 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'>
+  <rect width='1200' height='630' fill='#12131a'/>
+  <g opacity='0.5'>
+    <line x1='0' y1='157' x2='1200' y2='157' stroke='#2a2d38'/>
+    <line x1='0' y1='473' x2='1200' y2='473' stroke='#2a2d38'/>
+    <line x1='96' y1='0' x2='96' y2='630' stroke='#2a2d38'/>
+  </g>
+  <g transform='translate(96,190)' font-family='Inter, system-ui, sans-serif'>
+    <g>
+      <rect x='0' y='0' width='56' height='56' rx='14' fill='#8fa4ff'/>
+      <path d='M14 40V16l14 12 14-12v24' fill='none' stroke='#12131a' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round'/>
+    </g>
+    <text x='76' y='38' fill='#e6e8ef' font-size='38' font-weight='600'>Meridian</text>
+    <text x='0' y='140' fill='#e6e8ef' font-size='58' font-weight='600' letter-spacing='-1'>Read your logs like a</text>
+    <text x='0' y='206' fill='#e6e8ef' font-size='58' font-weight='600' letter-spacing='-1'>database, not a firehose.</text>
+    <text x='0' y='268' fill='#9aa0b0' font-size='24'>Local-first log explorer for distributed systems</text>
+  </g>
+  <text x='96' y='546' fill='#8fa4ff' font-size='20' font-family='ui-monospace, SFMono-Regular, Menlo, monospace'>meridian.example</text>
+</svg>

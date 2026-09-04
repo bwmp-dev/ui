@@ -1,0 +1,30 @@
+---
+import { LinkButton } from '@stack/ui'
+import { DiscordIcon, GitHubIcon } from '@stack/icons'
+import { SITE } from '~/content/site'
+---
+
+<section class="px-6 py-16">
+  <div
+    class="border-line bg-surface mx-auto flex max-w-page flex-col items-start gap-6 rounded-lg border p-8 sm:flex-row sm:items-center sm:justify-between"
+  >
+    <div class="max-w-xl">
+      <h2 class="text-fg text-xl font-semibold tracking-tight">Built in the open</h2>
+      <p class="text-fg-muted mt-2">
+        Issues, discussions and pull requests are all in one repository. Bug reports with a log
+        sample are the most useful contribution there is.
+      </p>
+    </div>
+
+    <div class="flex shrink-0 flex-wrap gap-3">
+      <LinkButton href={SITE.github} variant="primary" rel="noreferrer">
+        <GitHubIcon size={16} />
+        Star on GitHub
+      </LinkButton>
+      <LinkButton href={SITE.discord} rel="noreferrer">
+        <DiscordIcon size={16} />
+        Join Discord
+      </LinkButton>
+    </div>
+  </div>
+</section>

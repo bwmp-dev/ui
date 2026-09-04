@@ -1,0 +1,48 @@
+---
+import { Badge, LinkButton } from '@stack/ui'
+import { GitHubIcon } from '@stack/icons'
+import { SITE } from '~/content/site'
+
+/**
+ * The hero states what the project is and gives one primary action.
+ *
+ * No full-viewport type and no decorative background: on a project site the
+ * fastest thing you can do for a visitor is tell them what it does and show it.
+ */
+---
+
+<section class="px-6 pt-14 pb-10 sm:pt-20">
+  <div class="mx-auto max-w-page">
+    <div class="max-w-3xl">
+      <Badge tone="accent" variant="subtle" shape="pill">
+        v{SITE.version} · Apache 2.0
+      </Badge>
+
+      <h1 class="text-fg mt-5 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+        {SITE.tagline}
+      </h1>
+
+      <p class="text-fg-muted mt-5 max-w-prose text-lg">
+        {SITE.description}
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        {/*
+          Rendered on the server. `LinkButton` never hydrates here — it is
+          markup and classes, and the browser handles the navigation.
+        */}
+        <LinkButton href="#install" variant="primary" size="lg">
+          Install {SITE.name}
+        </LinkButton>
+        <LinkButton href={SITE.github} size="lg" rel="noreferrer">
+          <GitHubIcon size={16} />
+          View source
+        </LinkButton>
+      </div>
+
+      <p class="text-fg-subtle mt-4 text-sm">
+        macOS, Linux and Windows · no account required
+      </p>
+    </div>
+  </div>
+</section>

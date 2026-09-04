@@ -1,0 +1,66 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro'
+import ProjectHero from '~/components/ProjectHero.astro'
+import FeatureGrid from '~/components/FeatureGrid.astro'
+import FeatureSection from '~/components/FeatureSection.astro'
+import Screenshots from '~/components/Screenshots.astro'
+import Install from '~/components/Install.astro'
+import GithubCta from '~/components/GithubCta.astro'
+import Faq from '~/components/Faq.astro'
+import { Code } from '@stack/ui'
+---
+
+<BaseLayout>
+  <ProjectHero />
+
+  <Screenshots />
+
+  <FeatureGrid />
+
+  <!--
+    Two long-form sections between the grid and the install block. Alternating
+    the media side keeps a run of them from reading as a template.
+  -->
+  <FeatureSection id="sql" eyebrow="Querying" title="A WHERE clause, not a regular expression">
+    <p>
+      Ingest parses each line into typed columns — timestamp, level, service, trace id and whatever
+      structured fields the line carried. Everything after that is ordinary SQL.
+    </p>
+    <p>
+      Unparsed lines are not discarded. They stay searchable as text, so switching a service to
+      structured logging is something you can do gradually.
+    </p>
+
+    <div slot="media">
+      <Code block>{`select service, count(*) as errors
+from logs
+where level = 'error'
+  and ts > now() - interval '1 hour'
+group by service
+order by errors desc`}</Code>
+    </div>
+  </FeatureSection>
+
+  <FeatureSection id="local" eyebrow="Local-first" title="Your logs stay on your machine" reversed>
+    <p>
+      The index is a file next to the logs it describes. There is no server to run, no account to
+      create, and nothing leaves the machine unless you export it deliberately.
+    </p>
+    <p>
+      That also means it keeps working offline — on a plane, or inside a customer network where the
+      hosted alternative is unreachable exactly when you need it.
+    </p>
+
+    <div slot="media">
+      <Code block>{`$ meridian index ./logs/*.jsonl
+  indexed 4.2 GB · 11.8M lines · 38s
+
+$ meridian query "level = 'error' and service = 'checkout'"
+  1,204 matches · 0.04s`}</Code>
+    </div>
+  </FeatureSection>
+
+  <Install />
+  <Faq />
+  <GithubCta />
+</BaseLayout>

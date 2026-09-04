@@ -6,6 +6,7 @@ packages:
 
 allowBuilds:
   '@parcel/watcher': set this to true or false
+  esbuild: true
 
 # Single source of truth for third-party versions across every workspace package.
 # Members reference these with "catalog:" instead of pinning their own ranges.
@@ -63,6 +64,7 @@ catalog:
   '@astrojs/react': 6.0.5
   '@astrojs/mdx': ^8.0.0
   '@astrojs/sitemap': ^3.7.4
+  '@astrojs/check': ^0.9.5
 
 minimumReleaseAgeExclude:
   - '@vitest/mocker@5.0.0'
@@ -73,8 +75,10 @@ minimumReleaseAgeExclude:
   - vitest@5.0.0
   - '@types/react-dom@19.2.7'
   - lucide-react@1.40.0
+  - astro@7.3.1
 
 onlyBuiltDependencies:
   - esbuild
+  - '@parcel/watcher'
   - '@tailwindcss/oxide'
   - sharp

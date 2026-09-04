@@ -1,0 +1,43 @@
+---
+import Section from './Section.astro'
+import { Code, LinkButton } from '@stack/ui'
+import { SITE } from '~/content/site'
+
+const platforms = [
+  { id: 'macos', label: 'macOS', command: 'brew install meridian' },
+  { id: 'linux', label: 'Linux', command: 'curl -fsSL https://meridian.example/install.sh | sh' },
+  { id: 'windows', label: 'Windows', command: 'winget install Meridian.Meridian' },
+]
+---
+
+<Section
+  id="install"
+  eyebrow="Install"
+  title={`Get ${SITE.name} ${SITE.version}`}
+  description="One binary, no runtime to install. The CLI and the desktop app come from the same release."
+  width="content"
+>
+  <!--
+    Three commands, all visible. A tab strip would hide two of them behind a
+    click for no benefit — most people are scanning for their own platform.
+  -->
+  <ul class="flex flex-col gap-3">
+    {
+      platforms.map((platform) => (
+        <li class="border-line bg-surface flex flex-wrap items-center gap-3 rounded-md border px-4 py-3">
+          <span class="text-fg w-20 shrink-0 text-sm font-medium">{platform.label}</span>
+          <Code className="min-w-0 flex-1 overflow-x-auto">{platform.command}</Code>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="mt-6 flex flex-wrap items-center gap-3">
+    <LinkButton href={`${SITE.github}/releases/latest`} variant="primary" rel="noreferrer">
+      Download binaries
+    </LinkButton>
+    <LinkButton href={`${SITE.github}#getting-started`} variant="ghost" rel="noreferrer">
+      Build from source
+    </LinkButton>
+  </div>
+</Section>

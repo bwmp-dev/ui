@@ -1,0 +1,29 @@
+@import 'tailwindcss';
+@import '@stack/tokens/theme.css';
+@import '@stack/ui/styles.css';
+
+/* Scan this project's own markup for utility classes. */
+@source './';
+
+/*
+ * Project branding. One block, declared after the tokens so it wins.
+ */
+:root {
+  --accent: light-dark(oklch(0.5 0.15 264), oklch(0.74 0.13 264));
+  --accent-hover: light-dark(oklch(0.44 0.15 264), oklch(0.8 0.12 264));
+  --accent-active: light-dark(oklch(0.39 0.14 264), oklch(0.85 0.1 264));
+  --accent-fg: light-dark(oklch(1 0 0), oklch(0.18 0.03 264));
+  --accent-text: light-dark(oklch(0.46 0.15 264), oklch(0.8 0.12 264));
+  --radius-base: 0.5rem;
+}
+
+/*
+ * A marketing page reads at 16px, unlike a dashboard. The UI token stays as it
+ * is so shared components keep their proportions.
+ */
+@layer base {
+  body {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}

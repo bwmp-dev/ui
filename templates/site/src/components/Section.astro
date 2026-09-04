@@ -1,0 +1,35 @@
+---
+/**
+ * The rhythm every section shares: one max width, one vertical spacing scale,
+ * one optional heading block. Sections differ in content, not in geometry.
+ */
+interface Props {
+  id?: string
+  eyebrow?: string
+  title?: string
+  description?: string
+  /** Wide sections (galleries, tables) opt out of the prose width. */
+  width?: 'content' | 'page'
+  class?: string
+}
+
+const { id, eyebrow, title, description, width = 'page', class: className = '' } = Astro.props
+const maxWidth = width === 'content' ? 'max-w-content' : 'max-w-page'
+---
+
+<section id={id} class:list={['scroll-mt-20 px-6 py-16 sm:py-20', className]}>
+  <div class:list={['mx-auto', maxWidth]}>
+    {
+      (eyebrow || title || description) && (
+        <header class="mb-10 max-w-2xl">
+          {eyebrow && (
+            <p class="text-accent-text text-xs font-semibold tracking-widest uppercase">{eyebrow}</p>
+          )}
+          {title && <h2 class="text-fg mt-2 text-3xl font-semibold tracking-tight">{title}</h2>}
+          {description && <p class="text-fg-muted mt-3 text-lg">{description}</p>}
+        </header>
+      )
+    }
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,42 @@
+---
+import Section from './Section.astro'
+import { FAQ } from '~/content/faq'
+---
+
+<Section id="faq" eyebrow="FAQ" title="Questions people actually ask" width="content">
+  <!--
+    Native <details>. An accordion component would need JavaScript, keyboard
+    handling and ARIA to end up exactly here — and this one is searchable by the
+    browser's find-in-page even while collapsed.
+  -->
+  <dl class="divide-line divide-y">
+    {
+      FAQ.map((item) => (
+        <div class="py-1">
+          <details class="group">
+            <summary
+              class="focus-ring text-fg marker:content-none flex cursor-pointer list-none items-center justify-between gap-4 rounded-sm py-3 font-medium"
+            >
+              <dt>{item.question}</dt>
+              <svg
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                aria-hidden="true"
+                class="text-fg-subtle shrink-0 transition-transform group-open:rotate-45"
+              >
+                <path
+                  d="M8 3v10M3 8h10"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </summary>
+            <dd class="text-fg-muted max-w-prose pb-4 text-sm">{item.answer}</dd>
+          </details>
+        </div>
+      ))
+    }
+  </dl>
+</Section>

@@ -1,0 +1,34 @@
+---
+import Section from './Section.astro'
+import { FEATURES } from '~/content/features'
+---
+
+<Section
+  id="features"
+  eyebrow="Features"
+  title="Built for reading logs, not storing them"
+  description="Meridian assumes you already have the logs. Its job is to make them answerable."
+>
+  <!--
+    A plain grid with a rule between rows rather than a card each: the cards add
+    nothing here except twelve more borders.
+  -->
+  <ul class="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      FEATURES.map((feature) => (
+        <li>
+          {/* A React component, so `className` — `class` is for Astro's own markup. */}
+          <feature.icon
+            width={18}
+            height={18}
+            aria-hidden="true"
+            className="text-accent-text"
+            strokeWidth={1.75}
+          />
+          <h3 class="text-fg mt-3 font-semibold">{feature.title}</h3>
+          <p class="text-fg-muted mt-1.5 text-sm">{feature.description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

@@ -1,0 +1,38 @@
+---
+import Section from './Section.astro'
+import { ScreenshotGallery } from '~/islands/ScreenshotGallery'
+
+/**
+ * The gallery is an island because switching shots needs state. It hydrates on
+ * `visible`, so a visitor who never scrolls this far downloads nothing for it.
+ */
+const shots = [
+  {
+    src: '/screenshots/query.svg',
+    alt: 'The query view, showing a SQL editor above a table of parsed log lines.',
+    label: 'Query',
+    caption: 'Write a WHERE clause against parsed fields instead of a regular expression.',
+  },
+  {
+    src: '/screenshots/trace.svg',
+    alt: 'A trace view showing spans across four services on a timeline.',
+    label: 'Traces',
+    caption: 'Follow one request across every service that handled it.',
+  },
+  {
+    src: '/screenshots/terminal.svg',
+    alt: 'The command line interface streaming filtered log output.',
+    label: 'Terminal',
+    caption: 'The same engine, piped into whatever you already use.',
+  },
+]
+---
+
+<Section
+  id="screenshots"
+  eyebrow="Screenshots"
+  title="What it looks like"
+  description="Sample content. Replace these with real captures before launch."
+>
+  <ScreenshotGallery client:visible shots={shots} />
+</Section>
