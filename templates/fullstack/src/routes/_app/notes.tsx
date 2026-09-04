@@ -124,7 +124,7 @@ function NoteCard({ note, onEdit }: { note: Note; onEdit: () => void }) {
         </Card.Header>
 
         {note.body ? (
-          <Card.Content className="text-fg-muted pt-0 text-xs whitespace-pre-wrap">
+          <Card.Content className="pt-0 text-xs whitespace-pre-wrap text-fg-muted">
             {note.body}
           </Card.Content>
         ) : null}

@@ -6,16 +6,16 @@ import { IconButton } from '../core/button'
 
 export const drawerContentVariants = cv({
   base: [
-    'bg-surface-raised border-line drawer-motion fixed flex flex-col shadow-lg',
+    'fixed flex flex-col border-line bg-surface-raised shadow-lg drawer-motion',
     'focus:outline-none',
   ],
   variants: {
     side: {
       right:
-        'inset-y-0 right-0 h-dvh w-[min(28rem,calc(100vw-3rem))] border-l data-[starting-style]:translate-x-full data-[ending-style]:translate-x-full',
-      left: 'inset-y-0 left-0 h-dvh w-[min(28rem,calc(100vw-3rem))] border-r data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full',
+        'inset-y-0 right-0 h-dvh w-[min(28rem,calc(100vw-3rem))] border-l data-[ending-style]:translate-x-full data-[starting-style]:translate-x-full',
+      left: 'inset-y-0 left-0 h-dvh w-[min(28rem,calc(100vw-3rem))] border-r data-[ending-style]:-translate-x-full data-[starting-style]:-translate-x-full',
       bottom:
-        'inset-x-0 bottom-0 max-h-[85dvh] rounded-t-lg border-t data-[starting-style]:translate-y-full data-[ending-style]:translate-y-full',
+        'inset-x-0 bottom-0 max-h-[85dvh] rounded-t-lg border-t data-[ending-style]:translate-y-full data-[starting-style]:translate-y-full',
     },
   },
   defaultVariants: { side: 'right' },
@@ -35,14 +35,14 @@ function DrawerContent({
 }: DrawerContentProps) {
   return (
     <BaseDrawer.Portal>
-      <BaseDrawer.Backdrop className="bg-overlay overlay-motion fixed inset-0 z-[var(--z-overlay)]" />
+      <BaseDrawer.Backdrop className="fixed inset-0 z-[var(--z-overlay)] bg-overlay overlay-motion" />
       <BaseDrawer.Popup
         {...props}
         className={cn('z-[var(--z-drawer)]', drawerContentVariants({ side, className }))}
       >
         {side === 'bottom' ? (
           <div className="flex justify-center pt-2" aria-hidden>
-            <span className="bg-line-strong h-1 w-9 rounded-full" />
+            <span className="h-1 w-9 rounded-full bg-line-strong" />
           </div>
         ) : null}
         {showCloseButton ? (
@@ -61,7 +61,7 @@ function DrawerHeader({ className, ...props }: ComponentPropsWithRef<'div'>) {
   return (
     <div
       {...props}
-      className={cn('border-line-muted shrink-0 border-b px-4 py-3 pr-10', className)}
+      className={cn('shrink-0 border-b border-line-muted px-4 py-3 pr-10', className)}
     />
   )
 }
@@ -75,7 +75,7 @@ function DrawerFooter({ className, ...props }: ComponentPropsWithRef<'div'>) {
     <div
       {...props}
       className={cn(
-        'border-line-muted flex shrink-0 items-center justify-end gap-2 border-t px-4 py-3',
+        'flex shrink-0 items-center justify-end gap-2 border-t border-line-muted px-4 py-3',
         className,
       )}
     />
@@ -95,9 +95,12 @@ export const Drawer = Object.assign(BaseDrawer.Root, {
   Close: BaseDrawer.Close,
   Content: DrawerContent,
   Header: DrawerHeader,
-  Title: function DrawerTitle({ className, ...props }: ComponentPropsWithRef<typeof BaseDrawer.Title>) {
+  Title: function DrawerTitle({
+    className,
+    ...props
+  }: ComponentPropsWithRef<typeof BaseDrawer.Title>) {
     return (
-      <BaseDrawer.Title {...props} className={cn('text-ui text-fg font-semibold', className)} />
+      <BaseDrawer.Title {...props} className={cn('text-ui font-semibold text-fg', className)} />
     )
   },
   Description: function DrawerDescription({
@@ -105,7 +108,7 @@ export const Drawer = Object.assign(BaseDrawer.Root, {
     ...props
   }: ComponentPropsWithRef<typeof BaseDrawer.Description>) {
     return (
-      <BaseDrawer.Description {...props} className={cn('text-fg-muted mt-1 text-xs', className)} />
+      <BaseDrawer.Description {...props} className={cn('mt-1 text-xs text-fg-muted', className)} />
     )
   },
   Body: DrawerBody,

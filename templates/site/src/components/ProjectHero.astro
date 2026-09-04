@@ -18,19 +18,21 @@ import { SITE } from '~/content/site'
         v{SITE.version} · Apache 2.0
       </Badge>
 
-      <h1 class="text-fg mt-5 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+      <h1 class="mt-5 text-4xl font-semibold tracking-tight text-balance text-fg sm:text-5xl">
         {SITE.tagline}
       </h1>
 
-      <p class="text-fg-muted mt-5 max-w-prose text-lg">
+      <p class="mt-5 max-w-prose text-lg text-fg-muted">
         {SITE.description}
       </p>
 
       <div class="mt-8 flex flex-wrap items-center gap-3">
-        {/*
+        {
+          /*
           Rendered on the server. `LinkButton` never hydrates here — it is
           markup and classes, and the browser handles the navigation.
-        */}
+        */
+        }
         <LinkButton href="#install" variant="primary" size="lg">
           Install {SITE.name}
         </LinkButton>
@@ -40,9 +42,7 @@ import { SITE } from '~/content/site'
         </LinkButton>
       </div>
 
-      <p class="text-fg-subtle mt-4 text-sm">
-        macOS, Linux and Windows · no account required
-      </p>
+      <p class="mt-4 text-sm text-fg-subtle">macOS, Linux and Windows · no account required</p>
     </div>
   </div>
 </section>

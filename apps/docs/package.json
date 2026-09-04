@@ -1,0 +1,45 @@
+{
+  "name": "@stack/docs",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "extract-props": "node scripts/extract-props.mjs",
+    "predev": "node scripts/extract-props.mjs",
+    "prebuild": "node scripts/extract-props.mjs",
+    "pretypecheck": "node scripts/extract-props.mjs",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "lint": "eslint .",
+    "clean": "rimraf dist .astro .turbo"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "catalog:",
+    "@astrojs/react": "catalog:",
+    "@stack/hooks": "workspace:*",
+    "@stack/icons": "workspace:*",
+    "@stack/tokens": "workspace:*",
+    "@stack/ui": "workspace:*",
+    "@stack/utils": "workspace:*",
+    "@tanstack/react-table": "catalog:",
+    "astro": "catalog:",
+    "lucide-react": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "shiki": "catalog:"
+  },
+  "devDependencies": {
+    "@astrojs/check": "catalog:",
+    "@stack/config-eslint": "workspace:*",
+    "@stack/config-typescript": "workspace:*",
+    "@tailwindcss/vite": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "eslint": "catalog:",
+    "rimraf": "^6.1.2",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:"
+  }
+}

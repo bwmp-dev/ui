@@ -1,0 +1,8 @@
+{
+  "extends": "@stack/config-typescript/react-app",
+  "include": ["src", "*.config.ts"],
+  "compilerOptions": {
+    "paths": { "~/*": ["./src/*"] },
+    "types": ["vite/client", "node"]
+  }
+}

@@ -148,6 +148,9 @@ export function useAppearanceToggle(): () => void {
  *
  * It sets the same attributes the provider does, from the same storage key.
  */
-export function themeInitScript(storageKey = 'stack:theme', defaultDensity: Density = 'comfortable') {
+export function themeInitScript(
+  storageKey = 'stack:theme',
+  defaultDensity: Density = 'comfortable',
+) {
   return `(function(){try{var p=JSON.parse(localStorage.getItem(${JSON.stringify(storageKey)})||"{}");var a=p.appearance||"system";if(a==="system"){a=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}var e=document.documentElement;e.setAttribute("data-appearance",a);e.setAttribute("data-density",p.density||${JSON.stringify(defaultDensity)});if(p.theme){e.setAttribute("data-theme",p.theme)}}catch(_){}})()`
 }

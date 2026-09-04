@@ -19,23 +19,23 @@ export function Slider({ label, showValue = true, className, ...props }: SliderP
       {label || showValue ? (
         <div className="flex items-baseline justify-between gap-2">
           {label ? (
-            <BaseSlider.Label className="text-fg text-xs font-medium">{label}</BaseSlider.Label>
+            <BaseSlider.Label className="text-xs font-medium text-fg">{label}</BaseSlider.Label>
           ) : (
             <span />
           )}
-          {showValue ? <BaseSlider.Value className="text-fg-muted font-mono text-2xs" /> : null}
+          {showValue ? <BaseSlider.Value className="font-mono text-2xs text-fg-muted" /> : null}
         </div>
       ) : null}
 
       <BaseSlider.Control className="flex h-4 w-full touch-none items-center select-none">
-        <BaseSlider.Track className="bg-surface-sunken h-1 w-full rounded-full">
-          <BaseSlider.Indicator className="bg-accent h-full rounded-full" />
+        <BaseSlider.Track className="h-1 w-full rounded-full bg-surface-sunken">
+          <BaseSlider.Indicator className="h-full rounded-full bg-accent" />
           <BaseSlider.Thumb
             className={cn(
-              'border-accent bg-surface size-3.5 rounded-full border-2 shadow-xs',
+              'size-3.5 rounded-full border-2 border-accent bg-surface shadow-xs',
               'focus-ring transition-control',
               'data-[dragging]:scale-110',
-              'data-[disabled]:border-line-strong data-[disabled]:cursor-not-allowed',
+              'data-[disabled]:cursor-not-allowed data-[disabled]:border-line-strong',
             )}
           />
         </BaseSlider.Track>

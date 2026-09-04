@@ -28,7 +28,10 @@ async function copyFiltered(from, to) {
 await rm(OUT, { recursive: true, force: true })
 
 for (const template of Object.values(TEMPLATES)) {
-  await copyFiltered(join(REPO_ROOT, 'templates', template.directory), join(OUT, template.directory))
+  await copyFiltered(
+    join(REPO_ROOT, 'templates', template.directory),
+    join(OUT, template.directory),
+  )
 }
 
 const packages = {}

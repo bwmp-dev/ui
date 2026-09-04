@@ -25,7 +25,9 @@ test('navigates between sections and keeps the sidebar in step', async ({ signed
 test('shows a 404 page for an unknown route', async ({ signedIn: page }) => {
   await page.goto('/nope')
   await expect(page.getByRole('heading', { name: 'Page not found' })).toBeVisible()
-  await page.getByRole('link', { name: 'Go to devices' }).click()
+  // The 404 links home rather than at a specific feature, so it survives
+  // `--no-example`, where /devices does not exist.
+  await page.getByRole('link', { name: 'Go home' }).click()
   await expect(page.getByRole('heading', { name: 'Devices' })).toBeVisible()
 })
 

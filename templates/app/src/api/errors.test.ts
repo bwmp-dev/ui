@@ -28,8 +28,12 @@ describe('userMessage', () => {
   it('explains what the user can do about it', () => {
     expect(userMessage(new ApiError('x', { kind: 'network' }))).toMatch(/connection/i)
     expect(userMessage(new ApiError('x', { kind: 'auth', status: 401 }))).toMatch(/sign in/i)
-    expect(userMessage(new ApiError('x', { kind: 'http', status: 404 }))).toMatch(/no longer exists/i)
-    expect(userMessage(new ApiError('x', { kind: 'http', status: 409 }))).toMatch(/changed this first/i)
+    expect(userMessage(new ApiError('x', { kind: 'http', status: 404 }))).toMatch(
+      /no longer exists/i,
+    )
+    expect(userMessage(new ApiError('x', { kind: 'http', status: 409 }))).toMatch(
+      /changed this first/i,
+    )
   })
 
   it('keeps validation copy from the server, which is specific', () => {

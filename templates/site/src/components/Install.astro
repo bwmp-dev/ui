@@ -24,8 +24,8 @@ const platforms = [
   <ul class="flex flex-col gap-3">
     {
       platforms.map((platform) => (
-        <li class="border-line bg-surface flex flex-wrap items-center gap-3 rounded-md border px-4 py-3">
-          <span class="text-fg w-20 shrink-0 text-sm font-medium">{platform.label}</span>
+        <li class="flex flex-wrap items-center gap-3 rounded-md border border-line bg-surface px-4 py-3">
+          <span class="w-20 shrink-0 text-sm font-medium text-fg">{platform.label}</span>
           <Code className="min-w-0 flex-1 overflow-x-auto">{platform.command}</Code>
         </li>
       ))

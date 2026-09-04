@@ -1,0 +1,161 @@
+---
+import DocsShell from '~/components/DocsShell.astro'
+import { Code } from 'astro:components'
+
+const cnExample = `import { cn } from '@stack/utils'
+
+// Later classes win, including against the component's own variants.
+cn('h-8 bg-accent', 'h-10 bg-danger') // 'h-10 bg-danger'`
+
+const cvExample = `import { cv, type VariantProps } from '@stack/utils'
+
+export const badgeVariants = cv({
+  base: 'inline-flex items-center rounded-sm border',
+  variants: {
+    tone: { neutral: 'bg-surface-sunken', danger: 'bg-danger-subtle text-danger-text' },
+    size: { sm: 'h-4 px-1 text-2xs', md: 'h-5 px-1.5 text-xs' },
+  },
+  defaultVariants: { tone: 'neutral', size: 'md' },
+})
+
+export type BadgeVariants = VariantProps<typeof badgeVariants>`
+
+const extendExample = `import { cv } from '@stack/utils'
+import { buttonVariants } from '@stack/ui'
+
+// The variant map is exported, so a project extends rather than forks.
+const projectButton = cv({
+  base: 'inline-flex items-center justify-center rounded-md border font-medium',
+  variants: {
+    ...buttonVariants.variants,
+    variant: { ...buttonVariants.variants.variant, brand: 'bg-brand text-white' },
+  },
+  defaultVariants: { variant: 'brand', size: 'md' },
+})`
+
+const groups = [
+  {
+    title: 'Assertions',
+    items: [
+      [
+        'invariant(condition, message)',
+        'Throws when something impossible happens. The message may be a thunk, so expensive interpolation is skipped on the happy path.',
+      ],
+      [
+        'assertNever(value)',
+        'Exhaustiveness guard. If it stops type-checking, a union gained a member a switch does not handle.',
+      ],
+    ],
+  },
+  {
+    title: 'Objects',
+    items: [
+      ['keys / entries', 'Object.keys and Object.entries without widening the key type to string.'],
+      ['pick / omit', 'Typed subset and removal.'],
+      ['isRecord(value)', 'Narrows unknown to a plain object.'],
+    ],
+  },
+  {
+    title: 'URLs',
+    items: [
+      [
+        'toQueryString(params)',
+        'null and undefined are dropped rather than encoded as "null". Arrays become repeated keys.',
+      ],
+      ['joinPath(...segments)', 'Exactly one slash between segments.'],
+      ['buildUrl(base, path, query?)', 'The two above, combined.'],
+      ['isExternalUrl(href, origin?)', 'True for another origin or a non-http scheme.'],
+    ],
+  },
+  {
+    title: 'Formatting',
+    items: [
+      [
+        'formatNumber / formatBytes',
+        'Intl-backed, with the formatter memoised — constructing one costs more than the format call.',
+      ],
+      [
+        'formatDateTime / formatRelativeTime',
+        'Locale-aware. Both return an em dash for an invalid date rather than "Invalid Date".',
+      ],
+      ['formatDuration(ms)', 'Human elapsed time: 340ms, 1m 30s, 1h 12m.'],
+      [
+        'truncateMiddle(value, max)',
+        'Shortens from the middle, keeping both ends legible. For ids, hashes and paths.',
+      ],
+    ],
+  },
+  {
+    title: 'JSON',
+    items: [
+      [
+        'safeJsonParse / safeJsonStringify',
+        'Return a result rather than throwing, and hand back the error instead of swallowing it.',
+      ],
+      [
+        'parseJsonOr(text, fallback)',
+        'The convenience version, for when there is nothing useful to do with the error.',
+      ],
+    ],
+  },
+]
+---
+
+<DocsShell
+  title="Utilities"
+  description="@stack/utils — small, framework-independent helpers. Deliberately not a dumping ground."
+>
+  <h2 id="cn">cn</h2>
+  <p>
+    Joins class names and resolves Tailwind conflicts, so the last one wins. This is what makes
+    <code>className</code> a real override on every component rather than a suggestion.
+  </p>
+  <Code code={cnExample} lang="ts" themes={{ light: 'github-light', dark: 'github-dark-dimmed' }} />
+  <p>
+    It is configured with this design system's theme namespaces. Without that, tailwind-merge has no
+    way to know that <code>text-ui</code> is a font size rather than a colour, and
+    <code>cn('text-sm', 'text-ui')</code> would keep both.
+  </p>
+
+  <h2 id="cv">cv</h2>
+  <p>A small class-variance helper: base classes, variants, compound variants and defaults.</p>
+  <Code code={cvExample} lang="ts" themes={{ light: 'github-light', dark: 'github-dark-dimmed' }} />
+
+  <h3>Why not class-variance-authority</h3>
+  <p>
+    Two concrete reasons. It does not resolve Tailwind conflicts, so every call site has to be
+    wrapped in <code>cn</code> — and that is exactly where override bugs come from. And it does not expose
+    the variant map, which is what lets a project extend a component instead of forking it:
+  </p>
+  <Code
+    code={extendExample}
+    lang="ts"
+    themes={{ light: 'github-light', dark: 'github-dark-dimmed' }}
+  />
+  <p>
+    It is about sixty lines. Owning it costs nothing and removes a dependency from the bottom of the
+    stack.
+  </p>
+
+  <h2 id="rest">The rest</h2>
+  {
+    groups.map((group) => (
+      <section class="not-prose mt-6">
+        <h3 class="text-lg font-semibold text-fg">{group.title}</h3>
+        <div class="mt-2 overflow-hidden rounded-md border border-line">
+          {group.items.map(([name, summary], index) => (
+            <div
+              class:list={[
+                'px-4 py-3',
+                index !== group.items.length - 1 && 'border-b border-line-muted',
+              ]}
+            >
+              <code class="font-mono text-xs text-fg">{name}</code>
+              <p class="mt-1 max-w-prose text-sm text-fg-muted">{summary}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    ))
+  }
+</DocsShell>

@@ -9,21 +9,19 @@ import { FAQ } from '~/content/faq'
     handling and ARIA to end up exactly here — and this one is searchable by the
     browser's find-in-page even while collapsed.
   -->
-  <dl class="divide-line divide-y">
+  <dl class="divide-y divide-line">
     {
       FAQ.map((item) => (
         <div class="py-1">
           <details class="group">
-            <summary
-              class="focus-ring text-fg marker:content-none flex cursor-pointer list-none items-center justify-between gap-4 rounded-sm py-3 font-medium"
-            >
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 rounded-sm py-3 font-medium text-fg focus-ring marker:content-none">
               <dt>{item.question}</dt>
               <svg
                 viewBox="0 0 16 16"
                 width="16"
                 height="16"
                 aria-hidden="true"
-                class="text-fg-subtle shrink-0 transition-transform group-open:rotate-45"
+                class="shrink-0 text-fg-subtle transition-transform group-open:rotate-45"
               >
                 <path
                   d="M8 3v10M3 8h10"
@@ -33,7 +31,7 @@ import { FAQ } from '~/content/faq'
                 />
               </svg>
             </summary>
-            <dd class="text-fg-muted max-w-prose pb-4 text-sm">{item.answer}</dd>
+            <dd class="max-w-prose pb-4 text-sm text-fg-muted">{item.answer}</dd>
           </details>
         </div>
       ))

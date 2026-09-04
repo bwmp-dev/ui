@@ -23,7 +23,7 @@ export type AppShellProps = ComponentPropsWithRef<'div'> & {
  */
 export function AppShell({ sidebar, header, className, children, ...props }: AppShellProps) {
   return (
-    <div {...props} className={cn('bg-canvas flex h-dvh w-full overflow-hidden', className)}>
+    <div {...props} className={cn('flex h-dvh w-full overflow-hidden bg-canvas', className)}>
       {sidebar}
       <div className="flex min-w-0 flex-1 flex-col">
         {header}
@@ -86,9 +86,9 @@ export function PageHeader({
       {above}
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <h1 className="text-fg truncate text-lg font-semibold">{title}</h1>
+          <h1 className="truncate text-lg font-semibold text-fg">{title}</h1>
           {description ? (
-            <p className="text-fg-muted mt-1 max-w-prose text-xs">{description}</p>
+            <p className="mt-1 max-w-prose text-xs text-fg-muted">{description}</p>
           ) : null}
         </div>
         {actions ? <div className="flex shrink-0 items-center gap-2">{actions}</div> : null}

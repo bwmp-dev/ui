@@ -117,7 +117,9 @@ test.describe('devices', () => {
     await page.getByRole('option', { name: 'eu-west-1' }).click()
     await dialog.getByRole('button', { name: 'Create device' }).click()
 
-    await expect(dialog.getByText('Use lower-case letters, numbers and hyphens only.')).toBeVisible()
+    await expect(
+      dialog.getByText('Use lower-case letters, numbers and hyphens only.'),
+    ).toBeVisible()
     await expect(name).toHaveAttribute('aria-invalid', 'true')
     // The dialog stays open so the value can be corrected.
     await expect(dialog).toBeVisible()

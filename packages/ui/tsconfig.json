@@ -1,10 +1,6 @@
 {
   "extends": "@stack/config-typescript/library",
-  "include": [
-    "src",
-    "*.config.ts",
-    "vitest.setup.ts"
-  ],
+  "include": ["src", "*.config.ts", "vitest.setup.ts"],
   "compilerOptions": {
     "outDir": "dist",
     "noEmit": true

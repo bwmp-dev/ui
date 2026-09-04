@@ -1,0 +1,66 @@
+---
+import DocsShell from '~/components/DocsShell.astro'
+import Preview from '~/components/Preview.astro'
+import PropsTable from '~/components/PropsTable.astro'
+import FormFields from '~/demos/form-fields'
+import FormValidation from '~/demos/form-validation'
+import ComboboxDemo from '~/demos/combobox-demo'
+---
+
+<DocsShell
+  title="Forms"
+  description="Fields, controls and the wiring that keeps a label attached to its input."
+>
+  <h2 id="field">Field</h2>
+  <p>
+    <code>Field</code> generates the ids and the <code>aria-describedby</code> /
+    <code>aria-invalid</code> relationships between a label, a control, its description and its error.
+    That is the part that is easy to get subtly wrong by hand; everything visual is ours.
+  </p>
+
+  <Preview demo="form-fields" title="The controls" contained={false}>
+    <FormFields client:visible />
+  </Preview>
+
+  <Preview
+    demo="form-validation"
+    title="Validation"
+    description="Errors appear only once the field has been touched, so a pristine form is not covered in red."
+  >
+    <FormValidation client:visible />
+  </Preview>
+
+  <h3>Accessibility</h3>
+  <ul>
+    <li>
+      The required asterisk on <code>Field.Label</code> is decorative. Put <code>required</code> on the
+      control too — that is what actually gets announced.
+    </li>
+    <li>
+      Controls in a group name themselves from their own label, so a radio group announces "Light",
+      not the field's name three times.
+    </li>
+    <li>Every control is reachable and operable with the keyboard alone.</li>
+  </ul>
+
+  <h3>API</h3>
+  <PropsTable type="FieldProps" element="div" />
+  <PropsTable type="InputProps" element="input" />
+
+  <h2 id="combobox">Combobox</h2>
+  <p>
+    A filterable select. Pass the full collection to <code>items</code> on the root — that is what makes
+    filtering, typeahead and virtual focus work — and render the list with a function child.
+  </p>
+  <Preview demo="combobox-demo" title="Filtering">
+    <ComboboxDemo client:visible />
+  </Preview>
+  <PropsTable type="ComboboxInputProps" element="input" />
+
+  <h2 id="select">Select</h2>
+  <p>
+    Also pass <code>items</code> to <code>Select</code>: it is what lets the trigger render the
+    selected item's <em>label</em> rather than its raw value.
+  </p>
+  <PropsTable type="SelectTriggerProps" element="button" />
+</DocsShell>

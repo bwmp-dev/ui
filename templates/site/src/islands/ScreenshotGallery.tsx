@@ -32,7 +32,7 @@ export function ScreenshotGallery({ shots }: { shots: Shot[] }) {
       {shots.map((shot, index) => (
         <Tabs.Panel key={shot.label} value={shot.label} className="mt-4">
           <figure className="m-0 flex flex-col gap-3">
-            <div className="border-line bg-surface-sunken overflow-hidden rounded-lg border shadow-md">
+            <div className="overflow-hidden rounded-lg border border-line bg-surface-sunken shadow-md">
               <img
                 src={shot.src}
                 alt={shot.alt}
@@ -43,7 +43,7 @@ export function ScreenshotGallery({ shots }: { shots: Shot[] }) {
                 className="block w-full"
               />
             </div>
-            <figcaption className="text-fg-muted text-sm">{shot.caption}</figcaption>
+            <figcaption className="text-sm text-fg-muted">{shot.caption}</figcaption>
           </figure>
         </Tabs.Panel>
       ))}

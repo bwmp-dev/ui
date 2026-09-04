@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": false,
   "license": "MIT",
-  "files": ["*.json"],
-  "publishConfig": { "access": "restricted" },
+  "files": [
+    "*.json"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  },
   "exports": {
     "./base": "./base.json",
     "./library": "./library.json",

@@ -80,12 +80,7 @@ export function FormField({
   const showError = field.state.meta.isTouched && messages.length > 0
 
   return (
-    <Field
-      name={field.name}
-      invalid={showError}
-      orientation={orientation}
-      className={className}
-    >
+    <Field name={field.name} invalid={showError} orientation={orientation} className={className}>
       <Field.Label required={required}>{label}</Field.Label>
       {children(field)}
       {description ? <Field.Description>{description}</Field.Description> : null}

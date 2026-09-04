@@ -6,12 +6,12 @@ import { NAV, SITE } from '~/content/site'
 ---
 
 <header
-  class="border-line bg-canvas/85 sticky top-0 z-40 border-b backdrop-blur-sm supports-[backdrop-filter]:bg-canvas/70"
+  class="sticky top-0 z-40 border-b border-line bg-canvas/85 backdrop-blur-sm supports-[backdrop-filter]:bg-canvas/70"
 >
   <div class="mx-auto flex h-14 max-w-page items-center gap-4 px-6">
-    <a href="/" class="focus-ring text-fg flex items-center gap-2 rounded-sm font-semibold">
+    <a href="/" class="flex items-center gap-2 rounded-sm font-semibold text-fg focus-ring">
       <span
-        class="bg-accent text-accent-fg grid size-6 place-items-center rounded-md text-xs font-bold"
+        class="grid size-6 place-items-center rounded-md bg-accent text-xs font-bold text-accent-fg"
       >
         {SITE.name.slice(0, 1)}
       </span>
@@ -23,7 +23,7 @@ import { NAV, SITE } from '~/content/site'
         NAV.map((item) => (
           <a
             href={item.href}
-            class="text-fg-muted hover:text-fg hover:bg-hover focus-ring transition-control rounded-md px-2.5 py-1.5 text-sm font-medium"
+            class="rounded-md px-2.5 py-1.5 text-sm font-medium text-fg-muted focus-ring transition-control hover:bg-hover hover:text-fg"
           >
             {item.label}
           </a>
@@ -36,15 +36,17 @@ import { NAV, SITE } from '~/content/site'
         href={SITE.github}
         rel="noreferrer"
         aria-label={`${SITE.name} on GitHub`}
-        class="text-fg-muted hover:text-fg hover:bg-hover focus-ring grid size-control-md place-items-center rounded-md"
+        class="grid size-control-md place-items-center rounded-md text-fg-muted focus-ring hover:bg-hover hover:text-fg"
       >
         <GitHubIcon size={16} />
       </a>
-      {/*
+      {
+        /*
         Both are plain Astro with a few lines of inline script. The header ships
         no framework code at all; the only island on this page is the gallery,
         which genuinely needs state and hydrates on `visible`.
-      */}
+      */
+      }
       <ThemeToggle />
       <MobileNav />
     </div>

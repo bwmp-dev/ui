@@ -1,0 +1,81 @@
+---
+layout: ~/layouts/GuideLayout.astro
+title: Testing
+description: Test behaviour, in the browser where it matters, and stop there.
+---
+
+## What is tested where
+
+| Tool                     | For                                                        |
+| ------------------------ | ---------------------------------------------------------- |
+| Vitest + Testing Library | Component behaviour and keyboard interaction               |
+| Vitest (node)            | Pure logic: formatting, URLs, error mapping, the generator |
+| Playwright               | Whole workflows, in a real browser                         |
+
+There is no coverage target. Coverage measures which lines ran, not whether the
+thing works, and chasing it produces tests that assert implementation details
+and then break every refactor.
+
+## Query by role
+
+Every component test finds elements the way a user does:
+
+```tsx
+screen.getByRole('button', { name: 'Save changes' })
+screen.getByRole('combobox', { name: 'Release channel' })
+```
+
+This is not stylistic. A test that passes `getByRole('button', { name: 'Save' })`
+has proven the button has an accessible name — the assertion and the
+accessibility check are the same act. `data-testid` proves nothing.
+
+Two things this caught while the library was being written: radios inside a
+`Field` were announced with the field's label instead of their own, and the
+command palette had no accessible name at all. Both were invisible on screen.
+
+## Test the contract, not the internals
+
+```tsx
+// Yes — the behaviour someone depends on
+it('closes on Escape and restores focus to the trigger', async () => {
+  await user.click(trigger)
+  await user.keyboard('{Escape}')
+  await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
+  await waitFor(() => expect(trigger).toHaveFocus())
+})
+
+// No — asserts a decision you should be free to change
+expect(dialog).toHaveClass('popup-motion')
+```
+
+Behaviour worth pinning: focus trapping, focus restoration, Escape, what a
+control is named, what a keystroke does, and what happens when a request fails.
+
+## End-to-end
+
+Playwright runs against the production build rather than the dev server: the
+overlay and HMR make failures harder to read, and it is closer to what ships.
+
+The application template covers navigation and route guards, dialog keyboard
+behaviour, a select, form validation, a full create–read–update–delete
+workflow, and the theming attributes.
+
+A useful habit: address dialogs by their accessible name. Toasts also render
+with `role="dialog"` — the correct ARIA pattern for a notification with actions
+— so a bare `getByRole('dialog')` becomes ambiguous the moment a toast appears.
+
+## Compile the CSS
+
+`packages/ui/src/styles.test.ts` compiles the real stylesheet and asserts that
+the utilities exist. Renaming a token type-checks perfectly and silently removes
+styling from every consumer; this is the only thing that catches it.
+
+## Running
+
+```bash
+pnpm test          # unit and component tests, everywhere
+pnpm test:e2e      # Playwright
+pnpm test:watch    # while working
+```
+
+Turbo caches by input, so an unchanged package is not re-tested.

@@ -16,8 +16,8 @@ function NavbarRoot({ sticky = false, bordered = true, className, ...props }: Na
     <header
       {...props}
       className={cn(
-        'bg-surface flex h-navbar w-full shrink-0 items-center gap-3 px-3',
-        bordered && 'border-line border-b',
+        'flex h-navbar w-full shrink-0 items-center gap-3 bg-surface px-3',
+        bordered && 'border-b border-line',
         sticky && 'sticky top-0 z-[var(--z-navbar)]',
         className,
       )}
@@ -29,7 +29,7 @@ function NavbarBrand({ className, ...props }: ComponentPropsWithRef<'div'>) {
   return (
     <div
       {...props}
-      className={cn('text-ui text-fg flex shrink-0 items-center gap-2 font-semibold', className)}
+      className={cn('flex shrink-0 items-center gap-2 text-ui font-semibold text-fg', className)}
     />
   )
 }
@@ -57,8 +57,8 @@ function NavbarLink({ active, className, children, render, ...props }: NavbarLin
       'aria-current': active ? ('page' as const) : undefined,
       ...props,
       className: cn(
-        'text-ui text-fg-muted flex h-control-md items-center rounded-md px-2 font-medium',
-        'transition-control focus-ring hover:bg-hover hover:text-fg',
+        'flex h-control-md items-center rounded-md px-2 text-ui font-medium text-fg-muted',
+        'focus-ring transition-control hover:bg-hover hover:text-fg',
         'aria-[current=page]:text-fg data-[active]:text-fg',
         className,
       ),
@@ -91,8 +91,8 @@ function NavigationMenuTrigger({
     <BaseNavigationMenu.Trigger
       {...props}
       className={cn(
-        'text-ui text-fg-muted flex h-control-md items-center gap-1 rounded-md px-2 font-medium',
-        'transition-control focus-ring hover:bg-hover hover:text-fg',
+        'flex h-control-md items-center gap-1 rounded-md px-2 text-ui font-medium text-fg-muted',
+        'focus-ring transition-control hover:bg-hover hover:text-fg',
         'data-[popup-open]:text-fg',
         className,
       )}
@@ -111,7 +111,7 @@ function NavigationMenuViewport({ className }: { className?: string }) {
       <BaseNavigationMenu.Positioner sideOffset={6} className="z-[var(--z-popover)]">
         <BaseNavigationMenu.Popup
           className={cn(
-            'surface-panel popup-motion origin-[var(--transform-origin)] overflow-hidden',
+            'origin-[var(--transform-origin)] popup-motion overflow-hidden surface-panel',
             className,
           )}
         >

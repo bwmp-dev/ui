@@ -151,7 +151,11 @@ export function DeviceFormDialog({ open, onOpenChange, device }: DeviceFormDialo
 
             <form.Field name="notes">
               {(field) => (
-                <FormField field={field} label="Notes" description="Optional. Visible to your team.">
+                <FormField
+                  field={field}
+                  label="Notes"
+                  description="Optional. Visible to your team."
+                >
                   {(f) => (
                     <Textarea
                       value={f.state.value}

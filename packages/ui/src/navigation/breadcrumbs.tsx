@@ -8,10 +8,15 @@ export type BreadcrumbsProps = ComponentPropsWithRef<'nav'> & {
   label?: string
 }
 
-function BreadcrumbsRoot({ label = 'Breadcrumb', className, children, ...props }: BreadcrumbsProps) {
+function BreadcrumbsRoot({
+  label = 'Breadcrumb',
+  className,
+  children,
+  ...props
+}: BreadcrumbsProps) {
   return (
     <nav aria-label={label} {...props} className={cn('min-w-0', className)}>
-      <ol className="text-fg-muted flex min-w-0 items-center gap-1 text-xs">{children}</ol>
+      <ol className="flex min-w-0 items-center gap-1 text-xs text-fg-muted">{children}</ol>
     </nav>
   )
 }
@@ -42,7 +47,7 @@ function BreadcrumbItem({
       ...props,
       className: cn(
         'truncate rounded-xs',
-        current ? 'text-fg font-medium' : 'hover:text-fg focus-ring transition-control',
+        current ? 'font-medium text-fg' : 'focus-ring transition-control hover:text-fg',
         className,
       ),
       children,
@@ -52,7 +57,7 @@ function BreadcrumbItem({
   return (
     <li className="flex min-w-0 items-center gap-1">
       {element}
-      {current ? null : <ChevronRight size={12} aria-hidden className="text-fg-subtle shrink-0" />}
+      {current ? null : <ChevronRight size={12} aria-hidden className="shrink-0 text-fg-subtle" />}
     </li>
   )
 }

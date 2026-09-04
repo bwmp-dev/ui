@@ -4,15 +4,9 @@
   "printWidth": 100,
   "trailingComma": "all",
   "arrowParens": "always",
-  "plugins": [
-    "prettier-plugin-astro",
-    "prettier-plugin-tailwindcss"
-  ],
-  "tailwindStylesheet": "./packages/tokens/src/tailwind.css",
-  "tailwindFunctions": [
-    "cn",
-    "cv"
-  ],
+  "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./packages/tokens/src/tailwind-intellisense.css",
+  "tailwindFunctions": ["cn", "cv"],
   "overrides": [
     {
       "files": "*.astro",

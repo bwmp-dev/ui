@@ -31,7 +31,7 @@ const DialogRoot = BaseDialog.Root
 
 export const dialogContentVariants = cv({
   base: [
-    'surface-panel popup-motion',
+    'popup-motion surface-panel',
     'relative flex max-h-[calc(100dvh-4rem)] w-full flex-col overflow-hidden',
     'shadow-lg',
   ],
@@ -62,7 +62,7 @@ function DialogContent({
 }: DialogContentProps) {
   return (
     <BaseDialog.Portal>
-      <BaseDialog.Backdrop className="bg-overlay overlay-motion fixed inset-0 z-[var(--z-overlay)]" />
+      <BaseDialog.Backdrop className="fixed inset-0 z-[var(--z-overlay)] bg-overlay overlay-motion" />
       <BaseDialog.Viewport className="fixed inset-0 z-[var(--z-dialog)] grid place-items-center overflow-y-auto p-8">
         <BaseDialog.Popup {...props} className={dialogContentVariants({ size, className })}>
           {showCloseButton ? (
@@ -82,13 +82,13 @@ function DialogHeader({ className, ...props }: ComponentPropsWithRef<'div'>) {
   return (
     <div
       {...props}
-      className={cn('border-line-muted shrink-0 border-b px-4 py-3 pr-10', className)}
+      className={cn('shrink-0 border-b border-line-muted px-4 py-3 pr-10', className)}
     />
   )
 }
 
 function DialogTitle({ className, ...props }: ComponentPropsWithRef<typeof BaseDialog.Title>) {
-  return <BaseDialog.Title {...props} className={cn('text-ui text-fg font-semibold', className)} />
+  return <BaseDialog.Title {...props} className={cn('text-ui font-semibold text-fg', className)} />
 }
 
 function DialogDescription({
@@ -96,7 +96,7 @@ function DialogDescription({
   ...props
 }: ComponentPropsWithRef<typeof BaseDialog.Description>) {
   return (
-    <BaseDialog.Description {...props} className={cn('text-fg-muted mt-1 text-xs', className)} />
+    <BaseDialog.Description {...props} className={cn('mt-1 text-xs text-fg-muted', className)} />
   )
 }
 
@@ -109,7 +109,7 @@ function DialogFooter({ className, ...props }: ComponentPropsWithRef<'div'>) {
     <div
       {...props}
       className={cn(
-        'border-line-muted flex shrink-0 items-center justify-end gap-2 border-t px-4 py-3',
+        'flex shrink-0 items-center justify-end gap-2 border-t border-line-muted px-4 py-3',
         className,
       )}
     />

@@ -3,7 +3,7 @@ import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
 import { cv, type VariantProps } from '@stack/utils'
 
 export const avatarVariants = cv({
-  base: 'bg-surface-sunken text-fg-muted relative inline-flex shrink-0 items-center justify-center overflow-hidden font-medium select-none',
+  base: 'relative inline-flex shrink-0 items-center justify-center overflow-hidden bg-surface-sunken font-medium text-fg-muted select-none',
   variants: {
     size: {
       xs: 'size-4 text-[0.5rem]',
@@ -48,15 +48,7 @@ export type AvatarProps = ComponentPropsWithRef<'span'> &
  * until the image has decoded, so there is no flash of initials on a cached
  * image and no empty box on a broken URL.
  */
-export function Avatar({
-  src,
-  name,
-  fallback,
-  size,
-  shape,
-  className,
-  ...props
-}: AvatarProps) {
+export function Avatar({ src, name, fallback, size, shape, className, ...props }: AvatarProps) {
   return (
     <BaseAvatar.Root {...props} className={avatarVariants({ size, shape, className })}>
       {src ? (

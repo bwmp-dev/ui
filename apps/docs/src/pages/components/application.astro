@@ -1,0 +1,49 @@
+---
+import DocsShell from '~/components/DocsShell.astro'
+import Preview from '~/components/Preview.astro'
+import PropsTable from '~/components/PropsTable.astro'
+import AppLayoutDemo from '~/demos/app-layout-demo'
+---
+
+<DocsShell
+  title="Application"
+  description="The shell, toolbars, property panels and the resizable split — the furniture of a desktop-style web app."
+>
+  <Preview
+    demo="app-layout-demo"
+    title="Toolbar, split pane, settings and properties"
+    contained={false}
+  >
+    <AppLayoutDemo client:visible />
+  </Preview>
+
+  <h2 id="app-shell">AppShell</h2>
+  <p>
+    A full-height sidebar beside a scrolling content column. Only the content area scrolls, which is
+    what keeps the sidebar and toolbar fixed without <code>position: fixed</code> and its z-index consequences.
+  </p>
+  <PropsTable type="AppShellProps" element="div" />
+
+  <h2 id="toolbar">Toolbar</h2>
+  <p>
+    Base UI gives the toolbar roving tab focus: the whole band is one tab stop and arrow keys move
+    between controls, the behaviour people expect from an editor. Wrap controls in
+    <code>Toolbar.Button</code> so they participate.
+  </p>
+  <PropsTable type="ToolbarProps" element="div" />
+
+  <h2 id="split-pane">SplitPane</h2>
+  <p>
+    The divider is a real <code>role="separator"</code> with <code>aria-valuenow</code>, and arrow
+    keys resize it — a drag-only splitter is unusable without a mouse. Sizes are percentages, so the
+    layout survives a window resize without any measurement.
+  </p>
+  <PropsTable type="SplitPaneProps" />
+
+  <h2 id="property-panel">PropertyPanel and SettingsSection</h2>
+  <p>
+    Label and value pairs render as <code>&lt;dt&gt;</code> and <code>&lt;dd&gt;</code>, so the
+    relationship survives in the accessibility tree. A two-column grid of divs does not.
+  </p>
+  <PropsTable type="SettingsSectionProps" element="section" />
+</DocsShell>

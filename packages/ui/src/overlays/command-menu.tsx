@@ -100,7 +100,7 @@ export function CommandMenu({
   return (
     <BaseDialog.Root open={open} onOpenChange={onOpenChange}>
       <BaseDialog.Portal>
-        <BaseDialog.Backdrop className="bg-overlay overlay-motion fixed inset-0 z-[var(--z-overlay)]" />
+        <BaseDialog.Backdrop className="fixed inset-0 z-[var(--z-overlay)] bg-overlay overlay-motion" />
         <BaseDialog.Viewport className="fixed inset-0 z-[var(--z-dialog)] flex justify-center overflow-y-auto p-4 pt-[12vh]">
           <BaseDialog.Popup
             /*
@@ -114,7 +114,7 @@ export function CommandMenu({
               onOpenChange(false)
             }}
             className={cn(
-              'surface-panel popup-motion flex h-fit w-full max-w-lg flex-col overflow-hidden shadow-lg',
+              'flex h-fit w-full max-w-lg popup-motion flex-col overflow-hidden surface-panel shadow-lg',
               className,
             )}
           >
@@ -130,12 +130,12 @@ export function CommandMenu({
                 action.onSelect()
               }}
             >
-              <div className="border-line-muted flex items-center gap-2 border-b px-3">
-                <Search size={14} aria-hidden className="text-fg-subtle shrink-0" />
+              <div className="flex items-center gap-2 border-b border-line-muted px-3">
+                <Search size={14} aria-hidden className="shrink-0 text-fg-subtle" />
                 <BaseCombobox.Input
                   placeholder={placeholder}
                   aria-label={placeholder}
-                  className="text-ui text-fg placeholder:text-fg-subtle h-9 w-full bg-transparent outline-none"
+                  className="h-9 w-full bg-transparent text-ui text-fg outline-none placeholder:text-fg-subtle"
                 />
               </div>
 
@@ -143,7 +143,7 @@ export function CommandMenu({
                 {(group: CommandGroup) => (
                   <BaseCombobox.Group key={group.value || 'ungrouped'} items={group.items}>
                     {group.value ? (
-                      <BaseCombobox.GroupLabel className="text-fg-subtle px-2 pt-2 pb-1 text-2xs font-medium uppercase">
+                      <BaseCombobox.GroupLabel className="px-2 pt-2 pb-1 text-2xs font-medium text-fg-subtle uppercase">
                         {group.value}
                       </BaseCombobox.GroupLabel>
                     ) : null}
@@ -162,11 +162,11 @@ export function CommandMenu({
                 belongs inside, or the palette carries a permanent gap.
               */}
               <BaseCombobox.Empty>
-                <p className="text-fg-muted px-3 py-8 text-center text-xs">{emptyMessage}</p>
+                <p className="px-3 py-8 text-center text-xs text-fg-muted">{emptyMessage}</p>
               </BaseCombobox.Empty>
 
               {footer ? (
-                <div className="border-line-muted text-fg-subtle border-t px-3 py-2 text-2xs">
+                <div className="border-t border-line-muted px-3 py-2 text-2xs text-fg-subtle">
                   {footer}
                 </div>
               ) : null}
@@ -185,16 +185,16 @@ function CommandMenuItem({ action }: { action: CommandAction }) {
       value={action}
       disabled={action.disabled}
       className={cn(
-        'text-ui text-fg flex cursor-default items-center gap-2.5 rounded-sm px-2 py-1.5 select-none',
+        'flex cursor-default items-center gap-2.5 rounded-sm px-2 py-1.5 text-ui text-fg select-none',
         'data-[highlighted]:bg-hover',
-        'data-[disabled]:text-fg-disabled data-[disabled]:pointer-events-none',
+        'data-[disabled]:pointer-events-none data-[disabled]:text-fg-disabled',
       )}
     >
-      {Icon ? <Icon width={14} height={14} aria-hidden className="text-fg-muted shrink-0" /> : null}
+      {Icon ? <Icon width={14} height={14} aria-hidden className="shrink-0 text-fg-muted" /> : null}
       <span className="min-w-0 flex-1">
         <span className="block truncate">{action.label}</span>
         {action.description ? (
-          <span className="text-fg-subtle block truncate text-xs">{action.description}</span>
+          <span className="block truncate text-xs text-fg-subtle">{action.description}</span>
         ) : null}
       </span>
       {action.shortcut?.length ? (

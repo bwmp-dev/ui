@@ -60,10 +60,7 @@ export function useLocalStorage<T>(
 ): [T, (value: T | ((previous: T) => T)) => void, () => void] {
   const serializer = (options.serializer ?? jsonSerializer) as Serializer<T>
 
-  const subscribe = useCallback(
-    (onChange: () => void) => subscribeToKey(key, onChange),
-    [key],
-  )
+  const subscribe = useCallback((onChange: () => void) => subscribeToKey(key, onChange), [key])
 
   const getSnapshot = useCallback(() => {
     try {

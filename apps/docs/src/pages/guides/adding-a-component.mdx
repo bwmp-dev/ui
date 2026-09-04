@@ -1,0 +1,124 @@
+---
+layout: ~/layouts/GuideLayout.astro
+title: Adding a component
+description: When something belongs in @stack/ui, and what it has to do once it is there.
+---
+
+## First: should it be here?
+
+Most components should not be. `@stack/ui` is the layer that is most expensive
+to change, and every addition is a permanent maintenance cost.
+
+It belongs in the shared library when:
+
+- **two projects need it**, not one that might have a sibling later;
+- it is **generic** — a device status badge is application knowledge; a `Badge`
+  with tones is not;
+- it has **no domain knowledge**: no routes, no API shapes, no product nouns.
+
+Otherwise it lives in the project. That is not a lesser outcome. A component
+that has grown eleven props to serve two screens is worse than two components
+that each serve one well.
+
+## Then: build it or wrap it?
+
+Use Base UI when the interaction is the hard part — focus trapping, focus
+restoration, typeahead, roving focus, collision-aware positioning. Getting those
+right is a project in itself, and getting them wrong is invisible until somebody
+tries to use the app without a mouse.
+
+Build it ourselves when it is markup and styling. `Button`, `Badge`, `Card`,
+`Kbd` and `SplitPane` are ours; `Dialog`, `Select`, `Combobox`, `Tabs` and
+`Toolbar` are wrappers.
+
+`SplitPane` is the interesting middle: Base UI has no splitter, and the WAI-ARIA
+window splitter pattern is small enough to implement correctly — a focusable
+`role="separator"` with `aria-valuenow` and arrow-key resizing.
+
+## The shape
+
+```tsx
+import type { ComponentPropsWithRef } from 'react'
+import { cn, cv, type VariantProps } from '@stack/utils'
+
+export const thingVariants = cv({
+  base: 'inline-flex items-center rounded-md border focus-ring transition-control',
+  variants: {
+    tone: { neutral: 'border-line bg-surface', accent: 'border-accent-line bg-accent-subtle' },
+    size: { sm: 'h-control-sm px-gutter-sm text-xs', md: 'h-control-md px-gutter-md text-ui' },
+  },
+  defaultVariants: { tone: 'neutral', size: 'md' },
+})
+
+export type ThingProps = ComponentPropsWithRef<'div'> &
+  VariantProps<typeof thingVariants> & {
+    /** JSDoc here becomes the description in the docs API table. */
+    label?: string
+  }
+
+export function Thing({ tone, size, className, ...props }: ThingProps) {
+  return <div {...props} className={thingVariants({ tone, size, className })} />
+}
+```
+
+The requirements, in order of how often they are missed:
+
+1. **Semantic tokens only.** `bg-surface`, not `bg-slate-800`. A component that
+   names a colour cannot be rebranded.
+2. **Density-aware geometry.** `h-control-md`, not `h-8`.
+3. **`className` passes through `cv` or `cn`**, so an override actually wins.
+4. **Spread the rest of the props.** Hiding the underlying element's API is how
+   a component becomes a wall.
+5. **`ref` is a normal prop.** React 19 needs no `forwardRef`; the lint config
+   rejects importing it.
+6. **Export the variants** so a project can extend rather than fork.
+7. **JSDoc every non-obvious prop.** It is extracted into the docs at build
+   time, so a comment here is documentation everywhere.
+
+## Accessibility
+
+Non-negotiable, because these are the bottom of the stack:
+
+- A real `<button>` for a button, real `<dt>`/`<dd>` for pairs, a real `<table>`
+  for tabular data.
+- Everything reachable and operable by keyboard, with a visible focus ring.
+- Anything icon-only takes a required `label`.
+- State is never conveyed by colour alone — that is why `Badge` has `dot`.
+- Motion goes through the shared utilities, so reduced motion reaches it.
+
+If a control needs focus management or ARIA relationships, that is the signal to
+use Base UI rather than write it.
+
+## Tests
+
+One test file, covering behaviour rather than markup:
+
+```tsx
+it('takes its accessible name from label', () => {
+  render(<IconButton icon={Plus} label="Add device" />)
+  expect(screen.getByRole('button', { name: 'Add device' })).toBeInTheDocument()
+})
+```
+
+Queries by role, so the test and the accessibility check are the same act. See
+[Testing](/guides/testing).
+
+## Documenting it
+
+1. Add a demo to `apps/docs/src/demos/`. It is a real component, rendered live,
+   and its source is read from the file — so the snippet cannot go stale.
+2. Add it to the relevant page under `src/pages/components/`, with a `Preview`
+   and a `PropsTable`.
+3. `PropsTable` reads the TypeScript declarations at build time. Nothing to
+   write by hand, and nothing to keep in sync.
+
+Mark a demo `client:visible` only if it is interactive. A static demo renders to
+HTML and ships no JavaScript.
+
+## Finally
+
+```bash
+pnpm changeset      # patch for a fix, minor for a new component
+```
+
+See [Publishing](/guides/publishing).

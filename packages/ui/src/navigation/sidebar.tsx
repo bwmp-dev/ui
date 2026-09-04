@@ -13,7 +13,7 @@ function SidebarRoot({ label = 'Main', className, ...props }: SidebarProps) {
       aria-label={label}
       {...props}
       className={cn(
-        'border-line bg-surface flex h-full w-sidebar shrink-0 flex-col border-r',
+        'flex h-full w-sidebar shrink-0 flex-col border-r border-line bg-surface',
         className,
       )}
     />
@@ -22,10 +22,7 @@ function SidebarRoot({ label = 'Main', className, ...props }: SidebarProps) {
 
 function SidebarHeader({ className, ...props }: ComponentPropsWithRef<'div'>) {
   return (
-    <div
-      {...props}
-      className={cn('flex h-navbar shrink-0 items-center gap-2 px-3', className)}
-    />
+    <div {...props} className={cn('flex h-navbar shrink-0 items-center gap-2 px-3', className)} />
   )
 }
 
@@ -51,7 +48,7 @@ function SidebarGroup({ title, action, className, children, ...props }: SidebarG
       {title || action ? (
         <div className="flex h-6 items-center justify-between gap-2 px-2">
           {title ? (
-            <span className="text-fg-subtle text-2xs font-medium tracking-wide uppercase">
+            <span className="text-2xs font-medium tracking-wide text-fg-subtle uppercase">
               {title}
             </span>
           ) : (
@@ -95,8 +92,8 @@ function SidebarItem({
       'aria-current': active ? ('page' as const) : undefined,
       ...props,
       className: cn(
-        'text-ui text-fg-muted flex h-control-md items-center gap-2 rounded-md px-2',
-        'transition-control focus-ring',
+        'flex h-control-md items-center gap-2 rounded-md px-2 text-ui text-fg-muted',
+        'focus-ring transition-control',
         'hover:bg-hover hover:text-fg',
         // `data-active` is what a router link sets; `aria-current` is what we set.
         'aria-[current=page]:bg-selected aria-[current=page]:text-fg data-[active]:bg-selected data-[active]:text-fg',
@@ -114,9 +111,7 @@ function SidebarItem({
 }
 
 function SidebarFooter({ className, ...props }: ComponentPropsWithRef<'div'>) {
-  return (
-    <div {...props} className={cn('border-line-muted shrink-0 border-t p-2', className)} />
-  )
+  return <div {...props} className={cn('shrink-0 border-t border-line-muted p-2', className)} />
 }
 
 /**

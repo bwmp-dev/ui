@@ -1,0 +1,77 @@
+---
+import propTypes from '~/generated/props.json'
+
+/**
+ * The props of a component, read from its TypeScript declarations at build
+ * time. Nothing here is written by hand, so it cannot drift from the source.
+ */
+interface Props {
+  /** Name of the exported props type, e.g. `ButtonProps`. */
+  type: string
+  /** The DOM element whose attributes are also accepted. */
+  element?: string
+}
+
+type PropEntry = {
+  name: string
+  type: string
+  optional: boolean
+  description: string | null
+  defaultValue: string | null
+}
+
+type PropType = { name: string; description: string | null; props: PropEntry[] }
+
+const { type, element } = Astro.props
+const entry = (propTypes as Record<string, PropType>)[type]
+
+if (!entry) {
+  throw new Error(`No exported type named ${type} was found in @stack/ui.`)
+}
+---
+
+<div class="not-prose my-6">
+  <div class="overflow-x-auto rounded-md border border-line">
+    <table class="w-full border-collapse text-sm">
+      <thead class="bg-surface-sunken text-fg-subtle">
+        <tr class="border-b border-line">
+          <th class="px-3 py-2 text-left text-2xs font-medium tracking-wide uppercase">Prop</th>
+          <th class="px-3 py-2 text-left text-2xs font-medium tracking-wide uppercase">Type</th>
+          <th class="px-3 py-2 text-left text-2xs font-medium tracking-wide uppercase">Default</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          entry.props.map((prop) => (
+            <tr class="border-b border-line-muted align-top last:border-b-0">
+              <td class="px-3 py-2.5 whitespace-nowrap">
+                <code class="font-mono text-xs text-fg">{prop.name}</code>
+                {!prop.optional && <span class="ml-1 text-2xs text-danger-text">required</span>}
+                {prop.description && (
+                  <p class="mt-1 max-w-md text-xs whitespace-normal text-fg-muted">
+                    {prop.description}
+                  </p>
+                )}
+              </td>
+              <td class="px-3 py-2.5">
+                <code class="font-mono text-xs break-all text-accent-text">{prop.type}</code>
+              </td>
+              <td class="px-3 py-2.5 font-mono text-xs whitespace-nowrap text-fg-muted">
+                {prop.defaultValue ?? '—'}
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  {
+    element && (
+      <p class="mt-2 text-xs text-fg-subtle">
+        Also accepts every prop of <code class="font-mono">{`<${element}>`}</code>, including{' '}
+        <code class="font-mono">ref</code>, and merges <code class="font-mono">className</code>.
+      </p>
+    )
+  }
+</div>

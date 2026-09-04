@@ -65,11 +65,11 @@ export function Checkbox({ label, description, className, ...props }: CheckboxPr
     <label className="flex cursor-pointer items-start gap-2">
       <span className="flex h-[var(--ui-line-height)] items-center">{control}</span>
       <span className="min-w-0">
-        <span id={labelId} className="text-ui text-fg block">
+        <span id={labelId} className="block text-ui text-fg">
           {label}
         </span>
         {description ? (
-          <span id={descriptionId} className="text-fg-muted block text-xs">
+          <span id={descriptionId} className="block text-xs text-fg-muted">
             {description}
           </span>
         ) : null}
@@ -110,11 +110,11 @@ function RadioItem({ label, description, className, ...props }: RadioProps) {
       {...props}
       className={cn(
         controlBox,
-        'data-[checked]:border-accent size-4 rounded-full data-[checked]:bg-transparent',
+        'size-4 rounded-full data-[checked]:border-accent data-[checked]:bg-transparent',
         className,
       )}
     >
-      <BaseRadio.Indicator className="bg-accent size-2 rounded-full data-[unchecked]:hidden" />
+      <BaseRadio.Indicator className="size-2 rounded-full bg-accent data-[unchecked]:hidden" />
     </BaseRadio.Root>
   )
 
@@ -126,11 +126,11 @@ function RadioItem({ label, description, className, ...props }: RadioProps) {
     <label className="flex cursor-pointer items-start gap-2">
       <span className="flex h-[var(--ui-line-height)] items-center">{control}</span>
       <span className="min-w-0">
-        <span id={labelId} className="text-ui text-fg block">
+        <span id={labelId} className="block text-ui text-fg">
           {label}
         </span>
         {description ? (
-          <span id={descriptionId} className="text-fg-muted block text-xs">
+          <span id={descriptionId} className="block text-xs text-fg-muted">
             {description}
           </span>
         ) : null}
@@ -159,8 +159,8 @@ export function Switch({ label, description, className, ...props }: SwitchProps)
       aria-describedby={descriptionId}
       {...props}
       className={cn(
-        'bg-line-strong relative h-4 w-7 shrink-0 rounded-full p-px',
-        'transition-control focus-ring',
+        'relative h-4 w-7 shrink-0 rounded-full bg-line-strong p-px',
+        'focus-ring transition-control',
         'data-[checked]:bg-accent',
         'data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
         className,
@@ -181,11 +181,11 @@ export function Switch({ label, description, className, ...props }: SwitchProps)
   return (
     <label className="flex cursor-pointer items-start justify-between gap-4">
       <span className="min-w-0">
-        <span id={labelId} className="text-ui text-fg block">
+        <span id={labelId} className="block text-ui text-fg">
           {label}
         </span>
         {description ? (
-          <span id={descriptionId} className="text-fg-muted block text-xs">
+          <span id={descriptionId} className="block text-xs text-fg-muted">
             {description}
           </span>
         ) : null}

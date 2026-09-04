@@ -46,9 +46,9 @@ function NotFound() {
   return (
     <div className="grid min-h-dvh place-items-center p-6">
       <div className="flex max-w-narrow flex-col items-center gap-3 text-center">
-        <p className="text-fg-subtle font-mono text-2xs tracking-widest uppercase">Error 404</p>
-        <h1 className="text-fg text-2xl font-semibold">Page not found</h1>
-        <p className="text-fg-muted text-xs">
+        <p className="font-mono text-2xs tracking-widest text-fg-subtle uppercase">Error 404</p>
+        <h1 className="text-2xl font-semibold text-fg">Page not found</h1>
+        <p className="text-xs text-fg-muted">
           The page you asked for does not exist, or you no longer have access to it.
         </p>
         <div className="mt-2 flex items-center gap-2">

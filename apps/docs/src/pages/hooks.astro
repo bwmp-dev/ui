@@ -1,0 +1,139 @@
+---
+import DocsShell from '~/components/DocsShell.astro'
+import { Code } from 'astro:components'
+
+/**
+ * Hooks are documented by hand rather than extracted, because what matters
+ * about a hook is when to reach for it — and that is not in its type.
+ */
+const hooks = [
+  {
+    name: 'useMediaQuery',
+    signature: 'useMediaQuery(query: string, serverFallback?: boolean): boolean',
+    summary:
+      'Tracks a CSS media query. Backed by useSyncExternalStore, so the first client render already has the right answer and there is no post-hydration flash.',
+    example: `const isDesktop = useMediaQuery('(min-width: 64rem)')`,
+  },
+  {
+    name: 'usePrefersReducedMotion',
+    signature: 'usePrefersReducedMotion(): boolean',
+    summary:
+      'The OS motion preference. Most of the time you do not need it: the motion tokens already collapse to 1ms under reduced motion.',
+    example: `const reduced = usePrefersReducedMotion()`,
+  },
+  {
+    name: 'useDebouncedValue',
+    signature: 'useDebouncedValue<T>(value: T, delay?: number): T',
+    summary:
+      'A copy of the value that settles once it has been stable. Use it for derived work such as a search request — never for the input value itself, which would make typing feel laggy.',
+    example: `const [query, setQuery] = useState('')
+const debounced = useDebouncedValue(query, 250)
+const results = useQuery(searchQuery(debounced))`,
+  },
+  {
+    name: 'useDebouncedCallback',
+    signature: 'useDebouncedCallback<A>(fn: (...args: A) => void, delay?): DebouncedCallback<A>',
+    summary:
+      'A stable debounced wrapper. Its identity never changes, so it is safe in dependency arrays; pending calls are cancelled on unmount. Exposes cancel() and flush().',
+    example: `const save = useDebouncedCallback((draft: string) => persist(draft), 800)`,
+  },
+  {
+    name: 'useLocalStorage',
+    signature: 'useLocalStorage<T>(key: string, initial: T): [T, setter, remove]',
+    summary:
+      'A JSON value in localStorage, synchronised across every hook instance and every browser tab. Returns the initial value during SSR and the first client render so the markup matches.',
+    example: `const [collapsed, setCollapsed] = useLocalStorage('sidebar:collapsed', false)`,
+  },
+  {
+    name: 'useClipboard',
+    signature: 'useClipboard(resetAfter?: number): { copy, copied, error, reset }',
+    summary:
+      'Copies text and exposes a short-lived "copied" flag for button feedback. Permission failures surface as an error rather than silently doing nothing.',
+    example: `const { copy, copied } = useClipboard()
+<IconButton icon={Copy} label={copied ? 'Copied' : 'Copy'} onClick={() => copy(token)} />`,
+  },
+  {
+    name: 'useEventListener',
+    signature: 'useEventListener(type, handler, target?, options?): void',
+    summary:
+      'A DOM listener for the lifetime of the component. The handler runs through an Effect Event, so an inline arrow function does not tear down and re-attach the listener every render.',
+    example: `useEventListener('resize', () => setWidth(window.innerWidth))`,
+  },
+  {
+    name: 'useHotkey',
+    signature: 'useHotkey(combo: string | string[], handler, options?): void',
+    summary:
+      'Keyboard shortcuts. "mod" resolves to Command on Apple platforms and Control elsewhere. Keystrokes typed into a form field are ignored unless you opt in.',
+    example: `useHotkey('mod+k', () => setPaletteOpen(true), { enableInFormFields: true })`,
+  },
+  {
+    name: 'useControllableState',
+    signature: 'useControllableState<T>({ value, defaultValue, onChange }): [T, setter]',
+    summary:
+      'Lets a component work controlled or uncontrolled. Always calls onChange, including while controlled — which is what a parent needs in order to update the value it is passing down.',
+    example: `const [open, setOpen] = useControllableState({
+  value: props.open,
+  defaultValue: props.defaultOpen ?? false,
+  onChange: props.onOpenChange,
+})`,
+  },
+  {
+    name: 'usePrevious',
+    signature: 'usePrevious<T>(value: T): T | undefined',
+    summary:
+      'The value from the previous render. If you are comparing against it to derive other state, compute that value during render instead — it is almost always simpler.',
+    example: `const previousStatus = usePrevious(status)`,
+  },
+  {
+    name: 'useLatest',
+    signature: 'useLatest<T>(value: T): { readonly current: T }',
+    summary:
+      'A ref holding the most recent committed value, for reading changing props from a timer or a long-lived subscription. Never read it during render. For work inside an effect, prefer React’s useEffectEvent.',
+    example: `const latestOnChange = useLatest(onChange)`,
+  },
+  {
+    name: 'useMounted',
+    signature: 'useMounted(): boolean',
+    summary:
+      'False during SSR and the hydrating render. Only reach for it when markup genuinely cannot match — using it to gate a whole subtree throws away server rendering.',
+    example: `const mounted = useMounted()`,
+  },
+]
+---
+
+<DocsShell
+  title="Hooks"
+  description="@stack/hooks — genuinely reusable React hooks, and nothing that is a thin wrapper around React itself."
+>
+  <p>
+    These are built on modern React: <code>useSyncExternalStore</code> for anything that reads an external
+    source, and <code>useEffectEvent</code> for the latest-value problem. There is no
+    <code>useMount</code>, no <code>useUpdateEffect</code> and no wrapper around
+    <code>useState</code> — a hook earns its place by removing a real problem.
+  </p>
+
+  {
+    hooks.map((hook) => (
+      <section class="not-prose mt-6 rounded-md border border-line">
+        <header class="border-b border-line-muted bg-surface-sunken px-4 py-3">
+          <h2 id={hook.name} class="font-mono text-sm font-semibold text-fg">
+            {hook.name}
+          </h2>
+          <code class="mt-1 block font-mono text-xs break-all text-fg-subtle">
+            {hook.signature}
+          </code>
+        </header>
+        <div class="px-4 py-3">
+          <p class="max-w-prose text-sm text-fg-muted">{hook.summary}</p>
+        </div>
+        <div class="border-t border-line-muted">
+          <Code
+            code={hook.example}
+            lang="tsx"
+            themes={{ light: 'github-light', dark: 'github-dark-dimmed' }}
+          />
+        </div>
+      </section>
+    ))
+  }
+</DocsShell>

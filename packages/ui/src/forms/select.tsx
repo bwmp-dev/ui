@@ -56,7 +56,7 @@ function SelectTrigger({
           {renderValue}
         </BaseSelect.Value>
       )}
-      <BaseSelect.Icon className="text-fg-subtle shrink-0">
+      <BaseSelect.Icon className="shrink-0 text-fg-subtle">
         <ChevronDown size={14} aria-hidden />
       </BaseSelect.Icon>
     </BaseSelect.Trigger>
@@ -69,7 +69,12 @@ export type SelectContentProps = ComponentPropsWithRef<typeof BaseSelect.Popup> 
   align?: 'start' | 'center' | 'end'
 }
 
-function SelectContent({ className, sideOffset = 4, align = 'start', ...props }: SelectContentProps) {
+function SelectContent({
+  className,
+  sideOffset = 4,
+  align = 'start',
+  ...props
+}: SelectContentProps) {
   return (
     <BaseSelect.Portal>
       <BaseSelect.Positioner
@@ -81,7 +86,7 @@ function SelectContent({ className, sideOffset = 4, align = 'start', ...props }:
         <BaseSelect.Popup
           {...props}
           className={cn(
-            'surface-panel popup-motion',
+            'popup-motion surface-panel',
             'max-h-[var(--available-height)] min-w-[var(--anchor-width)] overflow-y-auto p-1',
             'origin-[var(--transform-origin)]',
             className,
@@ -99,13 +104,13 @@ function SelectItem({ className, children, ...props }: SelectItemProps) {
     <BaseSelect.Item
       {...props}
       className={cn(
-        'text-ui text-fg relative flex cursor-default items-center gap-2 rounded-sm py-1 pr-2 pl-6 select-none',
+        'relative flex cursor-default items-center gap-2 rounded-sm py-1 pr-2 pl-6 text-ui text-fg select-none',
         'data-[highlighted]:bg-hover',
-        'data-[disabled]:text-fg-disabled data-[disabled]:pointer-events-none',
+        'data-[disabled]:pointer-events-none data-[disabled]:text-fg-disabled',
         className,
       )}
     >
-      <BaseSelect.ItemIndicator className="text-accent-text absolute left-1.5 flex">
+      <BaseSelect.ItemIndicator className="absolute left-1.5 flex text-accent-text">
         <Check size={13} strokeWidth={2.5} aria-hidden />
       </BaseSelect.ItemIndicator>
       <BaseSelect.ItemText className="truncate">{children}</BaseSelect.ItemText>
@@ -113,17 +118,23 @@ function SelectItem({ className, children, ...props }: SelectItemProps) {
   )
 }
 
-function SelectGroupLabel({ className, ...props }: ComponentPropsWithRef<typeof BaseSelect.GroupLabel>) {
+function SelectGroupLabel({
+  className,
+  ...props
+}: ComponentPropsWithRef<typeof BaseSelect.GroupLabel>) {
   return (
     <BaseSelect.GroupLabel
       {...props}
-      className={cn('text-fg-subtle px-2 pt-2 pb-1 text-2xs font-medium uppercase', className)}
+      className={cn('px-2 pt-2 pb-1 text-2xs font-medium text-fg-subtle uppercase', className)}
     />
   )
 }
 
-function SelectSeparator({ className, ...props }: ComponentPropsWithRef<typeof BaseSelect.Separator>) {
-  return <BaseSelect.Separator {...props} className={cn('bg-line my-1 h-px', className)} />
+function SelectSeparator({
+  className,
+  ...props
+}: ComponentPropsWithRef<typeof BaseSelect.Separator>) {
+  return <BaseSelect.Separator {...props} className={cn('my-1 h-px bg-line', className)} />
 }
 
 export const Select = Object.assign(SelectRoot, {

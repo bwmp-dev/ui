@@ -86,5 +86,10 @@ export { SplitPane } from './app/split-pane'
 export type { SplitPaneProps } from './app/split-pane'
 
 // Theming
-export { ThemeProvider, useTheme, useAppearanceToggle, themeInitScript } from './theme/theme-provider'
+export {
+  ThemeProvider,
+  useTheme,
+  useAppearanceToggle,
+  themeInitScript,
+} from './theme/theme-provider'
 export type { ThemeProviderProps, ThemeState, AppearanceSetting } from './theme/theme-provider'

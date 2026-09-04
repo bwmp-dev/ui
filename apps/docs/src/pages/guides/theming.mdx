@@ -1,0 +1,143 @@
+---
+layout: ~/layouts/GuideLayout.astro
+title: Theming
+description: Three independent axes — appearance, brand and density — and none of them require forking a component.
+---
+
+Use the controls in the header to see all three on this page.
+
+## Three attributes
+
+| Attribute         | Values                   | Changes                                       |
+| ----------------- | ------------------------ | --------------------------------------------- |
+| `data-appearance` | `light`, `dark`          | Colour scheme                                 |
+| `data-theme`      | any brand name           | Accent, and anything else the brand overrides |
+| `data-density`    | `comfortable`, `compact` | Control heights, padding, row heights         |
+
+They are independent. Compact dark Provenance is a valid combination, and so is
+every other one, because each axis touches a different set of tokens.
+
+## Brand
+
+Overriding a handful of custom properties rebrands every component. There is
+never a reason to fork `@stack/ui`.
+
+```css
+/* src/styles.css, after the token import so it wins */
+:root {
+  --accent: light-dark(oklch(0.52 0.14 44), oklch(0.72 0.14 55));
+  --accent-hover: light-dark(oklch(0.46 0.14 44), oklch(0.78 0.13 55));
+  --accent-active: light-dark(oklch(0.41 0.13 44), oklch(0.83 0.11 55));
+  --accent-fg: light-dark(oklch(1 0 0), oklch(0.19 0.03 55));
+  --accent-text: light-dark(oklch(0.48 0.14 44), oklch(0.79 0.12 55));
+  --radius-base: 0.25rem;
+}
+```
+
+Five colours and one radius. `--accent-subtle` and `--accent-line` are derived
+with `color-mix`, and `--selected` is derived from the accent too, so the
+selected-row tint follows the brand without being set anywhere.
+
+Most projects stop there. A product with its own identity can go further:
+
+```css
+:root {
+  --canvas: light-dark(oklch(0.99 0.004 20), oklch(0.175 0.008 20));
+  --surface: light-dark(oklch(1 0 0), oklch(0.213 0.009 20));
+  --font-ui: 'Satoshi', ui-sans-serif, system-ui, sans-serif;
+  --radius-base: 0.625rem;
+}
+```
+
+### More than one brand
+
+Scope the block to an attribute:
+
+```css
+:root[data-theme='provenance'] {
+  --accent: …;
+}
+:root[data-theme='summa'] {
+  --accent: …;
+}
+```
+
+Use `:root[data-theme]` rather than `[data-theme]` alone. Both are the same
+specificity as the project's own `:root` block, and the extra `:root` is what
+makes the brand win when the attribute is on `<html>`. A bare `[data-theme]`
+still works for theming a subtree, where it is the only rule that matches.
+
+`@stack/tokens/themes/brands.css` has four worked examples. It exists for the
+docs and the playground; a real project ships one block of its own.
+
+## Appearance
+
+Every colour is declared once, with `light-dark()`:
+
+```css
+--accent: light-dark(oklch(0.55 0.16 254), oklch(0.7 0.15 254));
+```
+
+The value resolves against `color-scheme`, which `data-appearance` sets. One
+declaration covers both schemes, and the whole system works with JavaScript
+disabled — a static site can ship a colour-scheme toggle that is six lines of
+inline script, which is exactly what the website template does.
+
+`dark:` still exists as a Tailwind variant for the rare case that cannot be
+expressed as a token — a different image, or a shadow that needs different
+geometry rather than a different colour. Reach for a token first.
+
+### Avoiding the flash
+
+The attribute has to be on `<html>` before the first paint. That means a
+blocking inline script in `<head>`; a module script is deferred and runs after
+the browser has painted.
+
+```tsx
+import { themeInitScript } from '@stack/ui'
+
+;<script dangerouslySetInnerHTML={{ __html: themeInitScript() }} />
+```
+
+The Vite templates inline the equivalent directly in `index.html`, since there
+is no server render to hook into.
+
+## Density
+
+`comfortable` and `compact`. Density changes **geometry only** — control
+heights, horizontal padding, row heights, gaps, the sidebar width and the UI
+text size. Colour, brand and the type scale do not move.
+
+That restraint is deliberate. If density also changed colours or font family,
+every combination would need designing separately; keeping it to geometry means
+compact mode is a predictable transformation of any brand.
+
+```tsx
+const { density, setDensity } = useTheme()
+```
+
+Compact is worth offering in anything data-dense. It fits roughly four more
+table rows per screen without making anything smaller than it should be.
+
+## In React
+
+`ThemeProvider` persists the choice, resolves `system` against the OS, and
+writes the attributes:
+
+```tsx
+<ThemeProvider defaultAppearance="system" storageKey="provenance:theme">
+  <App />
+</ThemeProvider>
+```
+
+```tsx
+const { appearance, resolvedAppearance, setAppearance, density, setDensity, theme, setTheme } =
+  useTheme()
+```
+
+Set `storageKey` per project. Two apps on the same origin sharing
+`stack:theme` will fight over it.
+
+None of this is required. The tokens key off attributes precisely so that a
+static site, or a page with no React at all, can do the same thing with a
+`setAttribute` call.

@@ -1,0 +1,56 @@
+---
+import DocsShell from '~/components/DocsShell.astro'
+import Preview from '~/components/Preview.astro'
+import PropsTable from '~/components/PropsTable.astro'
+import OverlaysDemo from '~/demos/overlays-demo'
+import CommandMenuDemo from '~/demos/command-menu-demo'
+---
+
+<DocsShell
+  title="Overlays"
+  description="Dialogs, drawers, menus, popovers and the command palette."
+>
+  <p>
+    These are built on Base UI, which supplies focus trapping, focus restoration, Escape handling,
+    scroll locking and the ARIA wiring. Reimplementing that correctly is a project in itself, and
+    getting it wrong is invisible until someone tries to use the app without a mouse.
+  </p>
+
+  <Preview demo="overlays-demo" title="Every overlay" contained={false}>
+    <OverlaysDemo client:visible />
+  </Preview>
+
+  <h2 id="dialog">Dialog and AlertDialog</h2>
+  <p>
+    A <code>Dialog</code> can be dismissed by clicking outside or pressing Escape. An
+    <code>AlertDialog</code> ignores an outside press, for decisions where an accidental dismissal would
+    lose work — but it still closes on Escape, because a modal that traps focus and cannot be escaped
+    is an accessibility failure. Treat that dismissal as a cancel.
+  </p>
+  <PropsTable type="DialogContentProps" element="div" />
+
+  <h2 id="command-menu">CommandMenu</h2>
+  <p>
+    A keyboard-first palette. Open state belongs to the application, so a hotkey, a menu item and a
+    button can all drive it. Matching includes each action's <code>keywords</code>, so "ship" can
+    find "Deploy latest build".
+  </p>
+  <Preview
+    demo="command-menu-demo"
+    title="Command palette"
+    description="Press Command-K or Control-K anywhere on this page."
+  >
+    <CommandMenuDemo client:visible />
+  </Preview>
+  <PropsTable type="CommandMenuProps" />
+
+  <h3>Accessibility notes</h3>
+  <ul>
+    <li>Tab is trapped inside an open modal, and focus returns to the trigger on close.</li>
+    <li>The page behind a modal is removed from the accessibility tree.</li>
+    <li>
+      Tooltips label; they never hold instructions or interactive content, and they are not
+      announced on touch. An icon button still needs its own <code>label</code>.
+    </li>
+  </ul>
+</DocsShell>

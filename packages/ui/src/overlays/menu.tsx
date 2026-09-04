@@ -25,7 +25,14 @@ export type MenuItemProps = ComponentPropsWithRef<typeof BaseMenu.Item> & {
   destructive?: boolean
 }
 
-function MenuItem({ icon: Icon, shortcut, destructive, className, children, ...props }: MenuItemProps) {
+function MenuItem({
+  icon: Icon,
+  shortcut,
+  destructive,
+  className,
+  children,
+  ...props
+}: MenuItemProps) {
   return (
     <BaseMenu.Item
       {...props}
@@ -49,7 +56,7 @@ function MenuCheckboxItem({
 }: ComponentPropsWithRef<typeof BaseMenu.CheckboxItem>) {
   return (
     <BaseMenu.CheckboxItem {...props} className={cn(itemClass, 'pl-6', className)}>
-      <BaseMenu.CheckboxItemIndicator className="text-accent-text absolute left-1.5 flex">
+      <BaseMenu.CheckboxItemIndicator className="absolute left-1.5 flex text-accent-text">
         <Check size={13} strokeWidth={2.5} aria-hidden />
       </BaseMenu.CheckboxItemIndicator>
       <span className="flex-1 truncate">{children}</span>
@@ -64,25 +71,28 @@ function MenuRadioItem({
 }: ComponentPropsWithRef<typeof BaseMenu.RadioItem>) {
   return (
     <BaseMenu.RadioItem {...props} className={cn(itemClass, 'pl-6', className)}>
-      <BaseMenu.RadioItemIndicator className="text-accent-text absolute left-2.5 flex">
-        <span className="bg-current size-1.5 rounded-full" />
+      <BaseMenu.RadioItemIndicator className="absolute left-2.5 flex text-accent-text">
+        <span className="size-1.5 rounded-full bg-current" />
       </BaseMenu.RadioItemIndicator>
       <span className="flex-1 truncate">{children}</span>
     </BaseMenu.RadioItem>
   )
 }
 
-function MenuGroupLabel({ className, ...props }: ComponentPropsWithRef<typeof BaseMenu.GroupLabel>) {
+function MenuGroupLabel({
+  className,
+  ...props
+}: ComponentPropsWithRef<typeof BaseMenu.GroupLabel>) {
   return (
     <BaseMenu.GroupLabel
       {...props}
-      className={cn('text-fg-subtle px-2 pt-1.5 pb-1 text-2xs font-medium uppercase', className)}
+      className={cn('px-2 pt-1.5 pb-1 text-2xs font-medium text-fg-subtle uppercase', className)}
     />
   )
 }
 
 function MenuSeparator({ className, ...props }: ComponentPropsWithRef<typeof BaseMenu.Separator>) {
-  return <BaseMenu.Separator {...props} className={cn('bg-line my-1 h-px', className)} />
+  return <BaseMenu.Separator {...props} className={cn('my-1 h-px bg-line', className)} />
 }
 
 export type MenuContentProps = ComponentPropsWithRef<typeof BaseMenu.Popup> & {
@@ -120,7 +130,7 @@ function MenuSubmenuTrigger({
   return (
     <BaseMenu.SubmenuTrigger {...props} className={cn(itemClass, className)}>
       <span className="flex-1 truncate">{children}</span>
-      <ChevronRight size={13} aria-hidden className="text-fg-subtle shrink-0" />
+      <ChevronRight size={13} aria-hidden className="shrink-0 text-fg-subtle" />
     </BaseMenu.SubmenuTrigger>
   )
 }

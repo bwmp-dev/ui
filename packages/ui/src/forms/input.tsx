@@ -12,9 +12,9 @@ export const controlVariants = cv({
   base: [
     'w-full min-w-0 rounded-md border bg-surface text-fg',
     'placeholder:text-fg-subtle',
-    'transition-control focus-ring',
+    'focus-ring transition-control',
     'disabled:cursor-not-allowed disabled:bg-surface-sunken disabled:text-fg-disabled',
-    'data-[invalid]:border-danger-line aria-invalid:border-danger-line',
+    'aria-invalid:border-danger-line data-[invalid]:border-danger-line',
   ],
   variants: {
     size: {
@@ -43,7 +43,14 @@ export type InputProps = Omit<ComponentPropsWithRef<typeof BaseInput>, 'size'> &
 
 const iconInset = { sm: 'pl-7', md: 'pl-8', lg: 'pl-9' } as const
 
-export function Input({ icon: Icon, suffix, size = 'md', variant, className, ...props }: InputProps) {
+export function Input({
+  icon: Icon,
+  suffix,
+  size = 'md',
+  variant,
+  className,
+  ...props
+}: InputProps) {
   const field = (
     <BaseInput
       {...props}
@@ -65,12 +72,12 @@ export function Input({ icon: Icon, suffix, size = 'md', variant, className, ...
           width={14}
           height={14}
           aria-hidden
-          className="text-fg-subtle pointer-events-none absolute left-2.5"
+          className="pointer-events-none absolute left-2.5 text-fg-subtle"
         />
       ) : null}
       {field}
       {suffix ? (
-        <div className="text-fg-subtle absolute right-2 flex items-center text-xs">{suffix}</div>
+        <div className="absolute right-2 flex items-center text-xs text-fg-subtle">{suffix}</div>
       ) : null}
     </div>
   )
@@ -89,7 +96,7 @@ export function Textarea({ variant, rows = 4, className, ...props }: TextareaPro
       rows={rows}
       className={cn(
         controlVariants({ variant }),
-        'text-ui h-auto resize-y px-gutter-md py-1.5 leading-relaxed',
+        'h-auto resize-y px-gutter-md py-1.5 text-ui leading-relaxed',
         className,
       )}
     />

@@ -70,11 +70,16 @@ export function Alert({
       className={alertVariants({ tone, className })}
     >
       {Icon ? (
-        <Icon width={15} height={15} aria-hidden className={cn('mt-0.5 shrink-0', toneIconClass[tone])} />
+        <Icon
+          width={15}
+          height={15}
+          aria-hidden
+          className={cn('mt-0.5 shrink-0', toneIconClass[tone])}
+        />
       ) : null}
 
       <div className="min-w-0 flex-1">
-        {title ? <p className="text-fg font-semibold">{title}</p> : null}
+        {title ? <p className="font-semibold text-fg">{title}</p> : null}
         {children ? (
           <div className={cn('text-fg-muted', title && 'mt-0.5', 'text-xs')}>{children}</div>
         ) : null}

@@ -54,7 +54,7 @@ function FieldLabel({ className, children, required, ...props }: FieldLabelProps
     <BaseField.Label
       {...props}
       className={cn(
-        'text-fg flex items-center gap-1 text-xs font-medium',
+        'flex items-center gap-1 text-xs font-medium text-fg',
         'data-[disabled]:text-fg-disabled',
         className,
       )}
@@ -73,7 +73,7 @@ function FieldDescription({
   className,
   ...props
 }: ComponentPropsWithRef<typeof BaseField.Description>) {
-  return <BaseField.Description {...props} className={cn('text-fg-muted text-xs', className)} />
+  return <BaseField.Description {...props} className={cn('text-xs text-fg-muted', className)} />
 }
 
 /**
@@ -81,7 +81,7 @@ function FieldDescription({
  * message, or leave it empty to show the browser's own validation message.
  */
 function FieldError({ className, ...props }: ComponentPropsWithRef<typeof BaseField.Error>) {
-  return <BaseField.Error {...props} className={cn('text-danger-text text-xs', className)} />
+  return <BaseField.Error {...props} className={cn('text-xs text-danger-text', className)} />
 }
 
 export const Field = Object.assign(FieldRoot, {
@@ -114,10 +114,10 @@ export function FormSection({
 }: FormSectionProps) {
   return (
     <section {...props} className={cn('flex flex-col gap-stack', className)}>
-      <header className="border-line-muted flex items-start justify-between gap-4 border-b pb-2">
+      <header className="flex items-start justify-between gap-4 border-b border-line-muted pb-2">
         <div className="min-w-0">
-          <h3 className="text-ui text-fg font-semibold">{title}</h3>
-          {description ? <p className="text-fg-muted mt-0.5 text-xs">{description}</p> : null}
+          <h3 className="text-ui font-semibold text-fg">{title}</h3>
+          {description ? <p className="mt-0.5 text-xs text-fg-muted">{description}</p> : null}
         </div>
         {actions ? <div className="flex shrink-0 items-center gap-2">{actions}</div> : null}
       </header>

@@ -1,0 +1,107 @@
+---
+import DocsShell from '~/components/DocsShell.astro'
+import { colorTokens, scaleTokens } from '@stack/tokens'
+
+const tokensExample = `:root {
+  --accent: light-dark(oklch(0.55 0.16 254), oklch(0.7 0.15 254));
+}`
+---
+
+<DocsShell
+  title="Tokens"
+  description="Plain CSS custom properties. No framework, no React, and one declaration per value."
+>
+  <p>
+    Every token is a CSS custom property in <code>@stack/tokens</code>. That package has no
+    dependencies and no JavaScript in its critical path, so the same values work in React, in Astro
+    markup, in a stylesheet, or in something that is not JavaScript at all.
+  </p>
+
+  <p>
+    Colours are declared once with <code>light-dark()</code>, which resolves against
+    <code>color-scheme</code>:
+  </p>
+  <pre><code>{tokensExample}</code></pre>
+  <p>
+    One line covers both schemes. It also means the whole system works with JavaScript disabled —
+    the appearance toggle only sets an attribute that changes <code>color-scheme</code>.
+  </p>
+
+  <h2>Colour</h2>
+  <p>
+    Tokens are named for their role, not their value. There is no <code>--blue-500</code>, because a
+    component that asks for blue cannot be rebranded; one that asks for <code>--accent</code> can.
+  </p>
+
+  {
+    colorTokens.map((group) => (
+      <section class="not-prose mt-8">
+        <h3 class="text-lg font-semibold text-fg">{group.title}</h3>
+        <p class="mt-1 max-w-prose text-sm text-fg-muted">{group.description}</p>
+        <div class="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {group.tokens.map((token) => (
+            <div class="flex items-center gap-3 rounded-md border border-line p-2">
+              <span
+                class="size-9 shrink-0 rounded-sm border border-line-muted"
+                style={`background: var(--${token})`}
+              />
+              <code class="font-mono text-xs break-all text-fg">--{token}</code>
+            </div>
+          ))}
+        </div>
+      </section>
+    ))
+  }
+
+  <h2>Scales</h2>
+  <p>
+    Everything else: typography, shape, elevation, motion, layering, density and layout. Density
+    tokens change with <code>data-density</code>; nothing else does.
+  </p>
+
+  {
+    scaleTokens.map((group) => (
+      <section class="not-prose mt-8">
+        <h3 class="text-lg font-semibold text-fg">{group.title}</h3>
+        <p class="mt-1 max-w-prose text-sm text-fg-muted">{group.description}</p>
+        <div class="mt-3 overflow-hidden rounded-md border border-line">
+          {group.tokens.map((token, index) => (
+            <div
+              class:list={[
+                'flex flex-wrap items-baseline gap-x-4 px-3 py-2',
+                index !== group.tokens.length - 1 && 'border-b border-line-muted',
+              ]}
+            >
+              <code class="w-56 shrink-0 font-mono text-xs text-fg">--{token}</code>
+              <code class="font-mono text-xs text-fg-muted" data-token-value={token} />
+            </div>
+          ))}
+        </div>
+      </section>
+    ))
+  }
+
+  <p class="mt-8 text-sm text-fg-subtle">
+    Values above are read from the live stylesheet, so they follow the appearance, density and brand
+    selected in the header.
+  </p>
+</DocsShell>
+
+<script>
+  // Read the computed values rather than duplicating them into the docs, so a
+  // token change shows up here without anyone remembering to update a table.
+  function render() {
+    const styles = getComputedStyle(document.documentElement)
+    for (const node of document.querySelectorAll<HTMLElement>('[data-token-value]')) {
+      const name = node.dataset.tokenValue
+      if (!name) continue
+      node.textContent = styles.getPropertyValue(`--${name}`).trim() || '—'
+    }
+  }
+
+  render()
+  new MutationObserver(render).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-appearance', 'data-density', 'data-theme'],
+  })
+</script>

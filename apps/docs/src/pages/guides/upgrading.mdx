@@ -1,0 +1,86 @@
+---
+layout: ~/layouts/GuideLayout.astro
+title: Upgrading
+description: How to move a project forward, and how to move the stack forward without stranding the projects on it.
+---
+
+## Upgrading a project
+
+```bash
+pnpm up '@stack/*' --latest
+pnpm typecheck && pnpm lint && pnpm test && pnpm build
+```
+
+In that order. The type checker catches renamed props and removed exports before
+anything is running, which is most of what a major bump actually changes.
+
+Read the changelogs for anything with a `minor` or `major` bump. `minor` on this
+stack often means a changed visual default — not a compile error, but something
+that will show up in screenshots.
+
+Then look at the app for real. Type checking does not catch a shadow that got
+heavier or a control that got two pixels shorter.
+
+## Upgrading the dependencies underneath
+
+The versions live in one place — the `catalog:` block in `pnpm-workspace.yaml`
+— so every package and template moves together and nothing drifts.
+
+```yaml
+catalog:
+  react: 19.2.8
+  '@base-ui/react': 1.7.0
+  '@tanstack/react-router': 1.170.32
+```
+
+Change it there, run `pnpm install`, then `pnpm build && pnpm test && pnpm test:e2e`.
+
+The end-to-end suite is the one that matters for a Base UI or TanStack bump.
+Focus trapping, Escape handling and keyboard selection are exactly the
+behaviours that regress silently, and they are pinned against a real browser
+for that reason.
+
+Two compatibility constraints worth knowing before reaching for `--latest`:
+
+- **TypeScript** is on the 6.x line rather than 7.x, because typescript-eslint
+  supports `>=4.8.4 <6.1.0`. Moving to 7 means losing type-aware linting until
+  it catches up.
+- **`@base-ui/react`** is the current package. `@base-ui-components/react` is
+  the deprecated old name; if you see it in a search result, it is out of date.
+
+## Changing the stack without breaking projects
+
+**Additive first.** A new variant, a new optional prop or a new token costs
+nobody anything. Prefer it to changing what exists.
+
+**Deprecate before removing.** Mark it `@deprecated` with the replacement in the
+message, ship that as a `minor`, and remove it in the next `major`. The IDE then
+tells everyone before the compiler does.
+
+**Tokens are the most dangerous thing to rename.** They are strings in CSS, so
+nothing type-checks. `packages/ui/src/styles.test.ts` compiles the real
+stylesheet and asserts the utilities exist — that test is the only thing
+standing between a rename and silently unstyled components everywhere.
+
+**Templates are the canary.** They are workspace packages that CI builds, lints
+and tests. A change that breaks the templates is a change that would have broken
+every project generated from them.
+
+## When something has to break
+
+State what changed, what it changed to, and what to run. A changelog entry that
+says "improved theming" costs every reader an afternoon.
+
+```md
+---
+'@stack/ui': major
+---
+
+`Button` no longer accepts `color`. Use `variant` instead:
+
+    - <Button color="red" />
+    + <Button variant="danger" />
+```
+
+If a change is mechanical, ship a codemod. If it is not mechanical, it probably
+needs a better migration path than a changelog entry.

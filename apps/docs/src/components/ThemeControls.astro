@@ -1,0 +1,75 @@
+---
+/**
+ * Appearance, density and brand switchers for the documentation itself.
+ *
+ * Plain selects with a few lines of script. The docs are static pages, and the
+ * whole point of driving the tokens from attributes is that no framework is
+ * needed to change them — including here.
+ */
+const controls = [
+  { id: 'appearance', label: 'Appearance', options: ['dark', 'light', 'system'] },
+  { id: 'density', label: 'Density', options: ['comfortable', 'compact'] },
+  { id: 'theme', label: 'Brand', options: ['default', 'provenance', 'summa', 'mochi', 'luma'] },
+]
+---
+
+<div class="flex items-center gap-1.5">
+  {
+    controls.map((control) => (
+      <label>
+        <span class="sr-only">{control.label}</span>
+        <select
+          data-theme-control={control.id}
+          class="h-control-sm rounded-md border border-line bg-surface px-1.5 text-xs text-fg-muted focus-ring hover:text-fg"
+        >
+          {control.options.map((option) => (
+            <option value={option}>{option}</option>
+          ))}
+        </select>
+      </label>
+    ))
+  }
+</div>
+
+<script>
+  const STORAGE_KEY = 'stack:docs'
+  const root = document.documentElement
+
+  function read(): Record<string, string> {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')
+    } catch {
+      return {}
+    }
+  }
+
+  function apply(key: string, value: string) {
+    const stored = read()
+    stored[key] = value
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored))
+    } catch {
+      // Storage disabled; the choice simply does not persist.
+    }
+
+    if (key === 'theme') {
+      if (value === 'default') root.removeAttribute('data-theme')
+      else root.setAttribute('data-theme', value)
+      return
+    }
+
+    let resolved = value
+    if (key === 'appearance' && value === 'system') {
+      resolved = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    }
+    root.setAttribute(`data-${key}`, resolved)
+  }
+
+  const stored = read()
+  for (const select of document.querySelectorAll<HTMLSelectElement>('[data-theme-control]')) {
+    const key = select.dataset.themeControl
+    if (!key) continue
+    if (stored[key]) select.value = stored[key]
+    select.addEventListener('change', () => apply(key, select.value))
+  }
+</script>

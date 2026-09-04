@@ -48,14 +48,14 @@ function ComboboxInput({
         {clearable ? (
           <BaseCombobox.Clear
             aria-label="Clear"
-            className="text-fg-subtle hover:text-fg hover:bg-hover focus-ring grid size-5 place-items-center rounded-xs"
+            className="grid size-5 place-items-center rounded-xs text-fg-subtle focus-ring hover:bg-hover hover:text-fg"
           >
             <X size={12} aria-hidden />
           </BaseCombobox.Clear>
         ) : null}
         <BaseCombobox.Trigger
           aria-label="Open"
-          className="text-fg-subtle hover:text-fg hover:bg-hover focus-ring grid size-5 place-items-center rounded-xs"
+          className="grid size-5 place-items-center rounded-xs text-fg-subtle focus-ring hover:bg-hover hover:text-fg"
         >
           <ChevronsUpDown size={12} aria-hidden />
         </BaseCombobox.Trigger>
@@ -75,7 +75,7 @@ function ComboboxContent({ className, sideOffset = 4, children, ...props }: Comb
         <BaseCombobox.Popup
           {...props}
           className={cn(
-            'surface-panel popup-motion',
+            'popup-motion surface-panel',
             'max-h-[min(20rem,var(--available-height))] w-[var(--anchor-width)] overflow-y-auto p-1',
             'origin-[var(--transform-origin)]',
             className,
@@ -88,18 +88,22 @@ function ComboboxContent({ className, sideOffset = 4, children, ...props }: Comb
   )
 }
 
-function ComboboxItem({ className, children, ...props }: ComponentPropsWithRef<typeof BaseCombobox.Item>) {
+function ComboboxItem({
+  className,
+  children,
+  ...props
+}: ComponentPropsWithRef<typeof BaseCombobox.Item>) {
   return (
     <BaseCombobox.Item
       {...props}
       className={cn(
-        'text-ui text-fg relative flex cursor-default items-center gap-2 rounded-sm py-1 pr-2 pl-6 select-none',
+        'relative flex cursor-default items-center gap-2 rounded-sm py-1 pr-2 pl-6 text-ui text-fg select-none',
         'data-[highlighted]:bg-hover',
-        'data-[disabled]:text-fg-disabled data-[disabled]:pointer-events-none',
+        'data-[disabled]:pointer-events-none data-[disabled]:text-fg-disabled',
         className,
       )}
     >
-      <BaseCombobox.ItemIndicator className="text-accent-text absolute left-1.5 flex">
+      <BaseCombobox.ItemIndicator className="absolute left-1.5 flex text-accent-text">
         <Check size={13} strokeWidth={2.5} aria-hidden />
       </BaseCombobox.ItemIndicator>
       <span className="truncate">{children}</span>
@@ -119,7 +123,7 @@ function ComboboxEmpty({
 }: ComponentPropsWithRef<typeof BaseCombobox.Empty>) {
   return (
     <BaseCombobox.Empty {...props}>
-      <p className={cn('text-fg-muted px-2 py-3 text-center text-xs', className)}>
+      <p className={cn('px-2 py-3 text-center text-xs text-fg-muted', className)}>
         {children ?? 'No results.'}
       </p>
     </BaseCombobox.Empty>
@@ -133,7 +137,7 @@ function ComboboxGroupLabel({
   return (
     <BaseCombobox.GroupLabel
       {...props}
-      className={cn('text-fg-subtle px-2 pt-2 pb-1 text-2xs font-medium uppercase', className)}
+      className={cn('px-2 pt-2 pb-1 text-2xs font-medium text-fg-subtle uppercase', className)}
     />
   )
 }
@@ -149,19 +153,23 @@ function ComboboxChips({ className, children }: ComboboxChipsProps) {
   )
 }
 
-function ComboboxChip({ className, children, ...props }: ComponentPropsWithRef<typeof BaseCombobox.Chip>) {
+function ComboboxChip({
+  className,
+  children,
+  ...props
+}: ComponentPropsWithRef<typeof BaseCombobox.Chip>) {
   return (
     <BaseCombobox.Chip
       {...props}
       className={cn(
-        'bg-surface-sunken text-fg text-2xs flex h-5 items-center gap-1 rounded-sm pr-0.5 pl-1.5',
+        'flex h-5 items-center gap-1 rounded-sm bg-surface-sunken pr-0.5 pl-1.5 text-2xs text-fg',
         className,
       )}
     >
       {children}
       <BaseCombobox.ChipRemove
         aria-label="Remove"
-        className="text-fg-subtle hover:text-fg grid size-4 place-items-center rounded-xs"
+        className="grid size-4 place-items-center rounded-xs text-fg-subtle hover:text-fg"
       >
         <X size={10} aria-hidden />
       </BaseCombobox.ChipRemove>

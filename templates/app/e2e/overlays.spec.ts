@@ -29,7 +29,10 @@ test.describe('overlay keyboard behaviour', () => {
 
   test('a destructive confirmation ignores an outside click', async ({ signedIn: page }) => {
     await page.getByRole('table', { name: 'Devices' }).getByRole('row').nth(1).click()
-    await page.getByRole('complementary').getByRole('button', { name: /^Delete/ }).click()
+    await page
+      .getByRole('complementary')
+      .getByRole('button', { name: /^Delete/ })
+      .click()
 
     const confirm = page.getByRole('alertdialog')
     await expect(confirm).toBeVisible()

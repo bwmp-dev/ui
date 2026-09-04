@@ -31,7 +31,8 @@ export function useAddNote() {
 export function useEditNote() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: (variables: { id: string; input: Partial<NoteInput> }) => editNote({ data: variables }),
+    mutationFn: (variables: { id: string; input: Partial<NoteInput> }) =>
+      editNote({ data: variables }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: noteKeys.all }),
   })
 }

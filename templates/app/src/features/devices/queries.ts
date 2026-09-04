@@ -1,9 +1,4 @@
-import {
-  queryOptions,
-  useMutation,
-  useQueryClient,
-  type QueryClient,
-} from '@tanstack/react-query'
+import { queryOptions, useMutation, useQueryClient, type QueryClient } from '@tanstack/react-query'
 import * as devicesApi from './api'
 import type { DeviceListParams } from './api'
 import type { Device, DeviceInput } from './schema'

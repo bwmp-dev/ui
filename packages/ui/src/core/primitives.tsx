@@ -14,7 +14,7 @@ export function Separator({ className, orientation = 'horizontal', ...props }: S
       {...props}
       orientation={orientation}
       className={cn(
-        'bg-line shrink-0',
+        'shrink-0 bg-line',
         orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
         className,
       )}
@@ -36,7 +36,7 @@ export function Skeleton({ className, ...props }: SkeletonProps) {
     <div
       aria-hidden
       {...props}
-      className={cn('bg-surface-sunken animate-pulse-subtle rounded-sm', className)}
+      className={cn('animate-pulse-subtle rounded-sm bg-surface-sunken', className)}
     />
   )
 }
@@ -71,7 +71,7 @@ export function Code({ block = false, className, ...props }: CodeProps) {
         'font-mono text-[0.9em]',
         block
           ? 'block whitespace-pre'
-          : 'bg-surface-sunken border-line-muted rounded-xs border px-1 py-px',
+          : 'rounded-xs border border-line-muted bg-surface-sunken px-1 py-px',
         className,
       )}
     />
@@ -79,7 +79,7 @@ export function Code({ block = false, className, ...props }: CodeProps) {
 
   if (!block) return code
   return (
-    <pre className="border-line bg-surface-sunken overflow-x-auto rounded-md border p-3 text-xs">
+    <pre className="overflow-x-auto rounded-md border border-line bg-surface-sunken p-3 text-xs">
       {code}
     </pre>
   )

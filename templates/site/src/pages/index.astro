@@ -32,12 +32,16 @@ import { Code } from '@stack/ui'
     </p>
 
     <div slot="media">
-      <Code block>{`select service, count(*) as errors
+      <Code block
+        >{
+          `select service, count(*) as errors
 from logs
 where level = 'error'
   and ts > now() - interval '1 hour'
 group by service
-order by errors desc`}</Code>
+order by errors desc`
+        }</Code
+      >
     </div>
   </FeatureSection>
 
@@ -52,11 +56,15 @@ order by errors desc`}</Code>
     </p>
 
     <div slot="media">
-      <Code block>{`$ meridian index ./logs/*.jsonl
+      <Code block
+        >{
+          `$ meridian index ./logs/*.jsonl
   indexed 4.2 GB · 11.8M lines · 38s
 
 $ meridian query "level = 'error' and service = 'checkout'"
-  1,204 matches · 0.04s`}</Code>
+  1,204 matches · 0.04s`
+        }</Code
+      >
     </div>
   </FeatureSection>
 

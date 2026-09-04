@@ -15,7 +15,8 @@
     ".": "./src/index.ts",
     "./tokens.css": "./src/tokens.css",
     "./theme.css": "./src/theme.css",
-    "./themes/brands.css": "./src/themes/brands.css"
+    "./themes/brands.css": "./src/themes/brands.css",
+    "./tailwind-intellisense.css": "./src/tailwind-intellisense.css"
   },
   "publishConfig": {
     "access": "restricted",
@@ -26,7 +27,8 @@
       },
       "./tokens.css": "./src/tokens.css",
       "./theme.css": "./src/theme.css",
-      "./themes/brands.css": "./src/themes/brands.css"
+      "./themes/brands.css": "./src/themes/brands.css",
+      "./tailwind-intellisense.css": "./src/tailwind-intellisense.css"
     }
   },
   "scripts": {
@@ -41,6 +43,7 @@
     "@stack/config-typescript": "workspace:*",
     "eslint": "catalog:",
     "rimraf": "^6.1.2",
+    "tailwindcss": "catalog:",
     "tsdown": "^0.23.0",
     "typescript": "catalog:"
   }

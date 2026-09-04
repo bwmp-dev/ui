@@ -40,20 +40,20 @@ export function NumberInput({
         className={cn(
           controlVariants({ size, variant }),
           'flex items-stretch overflow-hidden p-0',
-          'focus-within:outline-ring focus-within:outline-[var(--ring-width)]',
+          'focus-within:outline-[var(--ring-width)] focus-within:outline-ring',
         )}
       >
         {hideStepper ? null : (
-          <NumberField.Decrement className={cn(stepperButton, 'border-line border-r')}>
+          <NumberField.Decrement className={cn(stepperButton, 'border-r border-line')}>
             <Minus size={12} aria-hidden />
           </NumberField.Decrement>
         )}
         <NumberField.Input
           placeholder={placeholder}
-          className="text-ui min-w-0 flex-1 bg-transparent px-2 text-center tabular-nums outline-none"
+          className="min-w-0 flex-1 bg-transparent px-2 text-center text-ui tabular-nums outline-none"
         />
         {hideStepper ? null : (
-          <NumberField.Increment className={cn(stepperButton, 'border-line border-l')}>
+          <NumberField.Increment className={cn(stepperButton, 'border-l border-line')}>
             <Plus size={12} aria-hidden />
           </NumberField.Increment>
         )}

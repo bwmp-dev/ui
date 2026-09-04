@@ -7,21 +7,21 @@ export const tabsListVariants = cv({
   variants: {
     variant: {
       /** Underlined tabs for page-level sections. */
-      line: 'border-line gap-4 border-b',
+      line: 'gap-4 border-b border-line',
       /** Segmented control for switching a view in place. */
-      segmented: 'bg-surface-sunken border-line gap-0.5 rounded-md border p-0.5',
+      segmented: 'gap-0.5 rounded-md border border-line bg-surface-sunken p-0.5',
     },
   },
   defaultVariants: { variant: 'line' },
 })
 
 const tabVariants = cv({
-  base: 'text-ui focus-ring transition-control relative font-medium whitespace-nowrap data-[disabled]:opacity-50',
+  base: 'relative text-ui font-medium whitespace-nowrap focus-ring transition-control data-[disabled]:opacity-50',
   variants: {
     variant: {
-      line: 'text-fg-muted hover:text-fg data-[selected]:text-fg data-[selected]:border-accent -mb-px border-b-2 border-transparent py-1.5',
+      line: '-mb-px border-b-2 border-transparent py-1.5 text-fg-muted hover:text-fg data-[selected]:border-accent data-[selected]:text-fg',
       segmented:
-        'text-fg-muted hover:text-fg data-[selected]:text-fg data-[selected]:bg-surface rounded-sm px-2.5 py-1 data-[selected]:shadow-xs',
+        'rounded-sm px-2.5 py-1 text-fg-muted hover:text-fg data-[selected]:bg-surface data-[selected]:text-fg data-[selected]:shadow-xs',
     },
   },
   defaultVariants: { variant: 'line' },
@@ -54,7 +54,7 @@ function Tab({ className, ...props }: TabProps) {
 
 function TabsPanel({ className, ...props }: ComponentPropsWithRef<typeof BaseTabs.Panel>) {
   return (
-    <BaseTabs.Panel {...props} className={cn('focus-ring rounded-sm outline-none', className)} />
+    <BaseTabs.Panel {...props} className={cn('rounded-sm focus-ring outline-none', className)} />
   )
 }
 

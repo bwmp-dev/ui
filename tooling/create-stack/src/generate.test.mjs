@@ -67,7 +67,13 @@ describe('parseArgs', () => {
 describe('generate', () => {
   it('produces a renamed project with published dependency ranges', async () => {
     const target = await scratch()
-    await generate({ type: 'app', projectName: 'provenance', target, playwright: true, example: true })
+    await generate({
+      type: 'app',
+      projectName: 'provenance',
+      target,
+      playwright: true,
+      example: true,
+    })
 
     const pkg = JSON.parse(await readFile(join(target, 'package.json'), 'utf8'))
     assert.equal(pkg.name, 'provenance')
@@ -118,7 +124,13 @@ describe('generate', () => {
 
   it('refuses to overwrite a non-empty directory', async () => {
     const target = await scratch()
-    await generate({ type: 'site', projectName: 'a-site', target, playwright: false, example: true })
+    await generate({
+      type: 'site',
+      projectName: 'a-site',
+      target,
+      playwright: false,
+      example: true,
+    })
     await assert.rejects(
       generate({ type: 'site', projectName: 'a-site', target, playwright: false, example: true }),
       /already exists/,

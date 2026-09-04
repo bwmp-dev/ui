@@ -22,8 +22,8 @@ function ToolbarRoot({ bordered = true, className, ...props }: ToolbarProps) {
     <BaseToolbar.Root
       {...props}
       className={cn(
-        'bg-surface flex h-navbar shrink-0 items-center gap-2 px-3',
-        bordered && 'border-line border-b',
+        'flex h-navbar shrink-0 items-center gap-2 bg-surface px-3',
+        bordered && 'border-b border-line',
         className,
       )}
     />
@@ -38,8 +38,11 @@ function ToolbarSpacer(props: ComponentPropsWithRef<'div'>) {
   return <div aria-hidden {...props} className={cn('flex-1', props.className)} />
 }
 
-function ToolbarSeparator({ className, ...props }: ComponentPropsWithRef<typeof BaseToolbar.Separator>) {
-  return <BaseToolbar.Separator {...props} className={cn('bg-line mx-1 h-4 w-px', className)} />
+function ToolbarSeparator({
+  className,
+  ...props
+}: ComponentPropsWithRef<typeof BaseToolbar.Separator>) {
+  return <BaseToolbar.Separator {...props} className={cn('mx-1 h-4 w-px bg-line', className)} />
 }
 
 export const Toolbar = Object.assign(ToolbarRoot, {
@@ -96,7 +99,7 @@ export function SearchInput({
           type="button"
           onClick={() => onValueChange('')}
           aria-label="Clear search"
-          className="text-fg-subtle hover:text-fg hover:bg-hover focus-ring absolute right-1.5 grid size-5 place-items-center rounded-xs"
+          className="absolute right-1.5 grid size-5 place-items-center rounded-xs text-fg-subtle focus-ring hover:bg-hover hover:text-fg"
         >
           <X size={12} aria-hidden />
         </button>
@@ -141,7 +144,7 @@ export function FilterBar({
           <button
             type="button"
             onClick={onClear}
-            className="text-fg-muted hover:text-fg focus-ring rounded-xs text-xs font-medium"
+            className="rounded-xs text-xs font-medium text-fg-muted focus-ring hover:text-fg"
           >
             Clear {activeCount} {activeCount === 1 ? 'filter' : 'filters'}
           </button>

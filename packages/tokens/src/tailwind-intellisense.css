@@ -1,0 +1,10 @@
+/*
+ * Entry point for editor tooling only — the Tailwind IntelliSense extension and
+ * prettier-plugin-tailwindcss both need a stylesheet that imports Tailwind in
+ * order to know which class names exist and how to sort them.
+ *
+ * Applications import `theme.css` directly; this file is never part of a build,
+ * which is why `tailwindcss` is only a devDependency of this package.
+ */
+@import 'tailwindcss';
+@import './theme.css';

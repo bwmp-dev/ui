@@ -39,7 +39,7 @@ function AlertDialogContent({
 }: Omit<DialogContentProps, 'showCloseButton'>) {
   return (
     <BaseAlertDialog.Portal>
-      <BaseAlertDialog.Backdrop className="bg-overlay overlay-motion fixed inset-0 z-[var(--z-overlay)]" />
+      <BaseAlertDialog.Backdrop className="fixed inset-0 z-[var(--z-overlay)] bg-overlay overlay-motion" />
       <BaseAlertDialog.Viewport className="fixed inset-0 z-[var(--z-dialog)] grid place-items-center overflow-y-auto p-8">
         <BaseAlertDialog.Popup {...props} className={dialogContentVariants({ size, className })}>
           {children}
@@ -58,7 +58,7 @@ function AlertDialogTitle({
   ...props
 }: ComponentPropsWithRef<typeof BaseAlertDialog.Title>) {
   return (
-    <BaseAlertDialog.Title {...props} className={cn('text-ui text-fg font-semibold', className)} />
+    <BaseAlertDialog.Title {...props} className={cn('text-ui font-semibold text-fg', className)} />
   )
 }
 
@@ -69,7 +69,7 @@ function AlertDialogDescription({
   return (
     <BaseAlertDialog.Description
       {...props}
-      className={cn('text-fg-muted mt-1.5 text-xs', className)}
+      className={cn('mt-1.5 text-xs text-fg-muted', className)}
     />
   )
 }

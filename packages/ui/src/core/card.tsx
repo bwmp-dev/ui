@@ -18,7 +18,7 @@ export const cardVariants = cv({
       ghost: 'border-transparent bg-transparent',
     },
     interactive: {
-      true: 'transition-control focus-ring hover:border-line-strong hover:bg-hover cursor-pointer text-left',
+      true: 'cursor-pointer text-left focus-ring transition-control hover:border-line-strong hover:bg-hover',
     },
   },
   defaultVariants: { variant: 'surface' },
@@ -41,14 +41,14 @@ function CardHeader({ className, ...props }: ComponentPropsWithRef<'div'>) {
 
 function CardTitle({ className, children, ...props }: ComponentPropsWithRef<'h3'>) {
   return (
-    <h3 {...props} className={cn('text-ui text-fg font-semibold', className)}>
+    <h3 {...props} className={cn('text-ui font-semibold text-fg', className)}>
       {children}
     </h3>
   )
 }
 
 function CardDescription({ className, ...props }: ComponentPropsWithRef<'p'>) {
-  return <p {...props} className={cn('text-fg-muted mt-0.5 text-xs', className)} />
+  return <p {...props} className={cn('mt-0.5 text-xs text-fg-muted', className)} />
 }
 
 function CardContent({ className, ...props }: ComponentPropsWithRef<'div'>) {
@@ -60,7 +60,7 @@ function CardFooter({ className, ...props }: ComponentPropsWithRef<'div'>) {
     <div
       {...props}
       className={cn(
-        'border-line-muted flex items-center justify-end gap-2 border-t px-4 py-2.5',
+        'flex items-center justify-end gap-2 border-t border-line-muted px-4 py-2.5',
         className,
       )}
     />

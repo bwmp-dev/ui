@@ -106,7 +106,11 @@ export function SplitPane({
       ref={containerRef}
       className={cn('flex min-h-0 min-w-0', isHorizontal ? 'flex-row' : 'flex-col', className)}
     >
-      <div id={startPanelId} className="min-h-0 min-w-0 overflow-hidden" style={{ flexBasis: `${value}%` }}>
+      <div
+        id={startPanelId}
+        className="min-h-0 min-w-0 overflow-hidden"
+        style={{ flexBasis: `${value}%` }}
+      >
         {start}
       </div>
 
@@ -130,10 +134,10 @@ export function SplitPane({
         onPointerMove={handlePointerMove}
         onKeyDown={handleKeyDown}
         className={cn(
-          'bg-line hover:bg-accent focus-visible:bg-accent relative shrink-0 touch-none',
+          'relative shrink-0 touch-none bg-line hover:bg-accent focus-visible:bg-accent',
           'transition-colors duration-[var(--duration-fast)] outline-none',
           isHorizontal
-            ? 'w-px cursor-col-resize before:absolute before:inset-y-0 before:-inset-x-1'
+            ? 'w-px cursor-col-resize before:absolute before:-inset-x-1 before:inset-y-0'
             : 'h-px cursor-row-resize before:absolute before:inset-x-0 before:-inset-y-1',
         )}
       />

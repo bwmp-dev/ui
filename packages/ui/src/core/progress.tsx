@@ -36,19 +36,17 @@ export function Progress({
       {label || showValue ? (
         <div className="flex items-baseline justify-between gap-2">
           {label ? (
-            <BaseProgress.Label className="text-fg text-xs font-medium">{label}</BaseProgress.Label>
+            <BaseProgress.Label className="text-xs font-medium text-fg">{label}</BaseProgress.Label>
           ) : (
             <span />
           )}
-          {showValue ? (
-            <BaseProgress.Value className="text-fg-muted font-mono text-2xs" />
-          ) : null}
+          {showValue ? <BaseProgress.Value className="font-mono text-2xs text-fg-muted" /> : null}
         </div>
       ) : null}
 
       <BaseProgress.Track
         className={cn(
-          'bg-surface-sunken w-full overflow-hidden rounded-full',
+          'w-full overflow-hidden rounded-full bg-surface-sunken',
           size === 'sm' ? 'h-1' : 'h-1.5',
         )}
       >
@@ -57,7 +55,7 @@ export function Progress({
             'h-full rounded-full transition-[width] duration-[var(--duration-normal)] ease-standard',
             toneClass[tone],
             // Base UI reports an indeterminate bar via data-indeterminate.
-            'data-[indeterminate]:animate-pulse-subtle data-[indeterminate]:w-full',
+            'data-[indeterminate]:w-full data-[indeterminate]:animate-pulse-subtle',
           )}
         />
       </BaseProgress.Track>

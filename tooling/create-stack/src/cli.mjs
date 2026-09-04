@@ -145,7 +145,11 @@ async function promptYesNo(rl, question, fallback) {
 }
 
 function run(command, args, cwd) {
-  const result = spawnSync(command, args, { cwd, stdio: 'inherit', shell: process.platform === 'win32' })
+  const result = spawnSync(command, args, {
+    cwd,
+    stdio: 'inherit',
+    shell: process.platform === 'win32',
+  })
   return result.status === 0
 }
 
@@ -190,7 +194,9 @@ export async function main(argv) {
 
     let type = options.type
     if (type && !TEMPLATE_IDS.includes(type)) {
-      console.error(style.error(`Unknown type "${type}". Expected one of: ${TEMPLATE_IDS.join(', ')}`))
+      console.error(
+        style.error(`Unknown type "${type}". Expected one of: ${TEMPLATE_IDS.join(', ')}`),
+      )
       return 1
     }
     if (!type) {
@@ -222,7 +228,9 @@ export async function main(argv) {
     rl?.close()
 
     console.log()
-    console.log(`Creating ${style.bold(name)} in ${style.dim(relative(process.cwd(), target) || '.')}`)
+    console.log(
+      `Creating ${style.bold(name)} in ${style.dim(relative(process.cwd(), target) || '.')}`,
+    )
 
     const { external } = await generate({ type, projectName: name, target, playwright, example })
 

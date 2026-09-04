@@ -15,10 +15,10 @@ export function AppSidebar({ onOpenCommandMenu }: AppSidebarProps) {
   return (
     <Sidebar label="Primary">
       <Sidebar.Header>
-        <span className="bg-accent text-accent-fg grid size-5 shrink-0 place-items-center rounded-sm text-2xs font-bold">
+        <span className="grid size-5 shrink-0 place-items-center rounded-sm bg-accent text-2xs font-bold text-accent-fg">
           {env.appName.slice(0, 1).toUpperCase()}
         </span>
-        <span className="text-ui text-fg truncate font-semibold">{env.appName}</span>
+        <span className="truncate text-ui font-semibold text-fg">{env.appName}</span>
       </Sidebar.Header>
 
       <Sidebar.Nav>
@@ -53,14 +53,14 @@ export function AppSidebar({ onOpenCommandMenu }: AppSidebarProps) {
             render={
               <button
                 type="button"
-                className="hover:bg-hover focus-ring flex w-full items-center gap-2 rounded-md p-1.5 text-left"
+                className="flex w-full items-center gap-2 rounded-md p-1.5 text-left focus-ring hover:bg-hover"
               />
             }
           >
             <Avatar size="sm" name={user?.name} shape="circle" />
             <span className="min-w-0 flex-1">
-              <span className="text-ui text-fg block truncate">{user?.name ?? 'Signed out'}</span>
-              <span className="text-fg-subtle text-2xs block truncate">{user?.email}</span>
+              <span className="block truncate text-ui text-fg">{user?.name ?? 'Signed out'}</span>
+              <span className="block truncate text-2xs text-fg-subtle">{user?.email}</span>
             </span>
           </DropdownMenu.Trigger>
 

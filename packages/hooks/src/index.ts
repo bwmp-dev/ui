@@ -1,9 +1,5 @@
 export { useMediaQuery, usePrefersReducedMotion } from './use-media-query'
-export {
-  useDebouncedValue,
-  useDebouncedCallback,
-  type DebouncedCallback,
-} from './use-debounce'
+export { useDebouncedValue, useDebouncedCallback, type DebouncedCallback } from './use-debounce'
 export { useClipboard, type UseClipboardResult } from './use-clipboard'
 export { useLocalStorage, type UseLocalStorageOptions } from './use-local-storage'
 export { useEventListener } from './use-event-listener'

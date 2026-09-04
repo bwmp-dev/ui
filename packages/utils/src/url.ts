@@ -1,10 +1,5 @@
 export type QueryValue =
-  | string
-  | number
-  | boolean
-  | null
-  | undefined
-  | ReadonlyArray<string | number | boolean>
+  string | number | boolean | null | undefined | ReadonlyArray<string | number | boolean>
 
 /**
  * Serialise a query object.

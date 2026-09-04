@@ -57,7 +57,9 @@ function seedDevices(count: number): Device[] {
       status,
       region: REGIONS[Math.floor(random() * REGIONS.length)] ?? 'eu-west-1',
       firmware: `2.${Math.floor(random() * 6)}.${Math.floor(random() * 12)}`,
-      lastSeen: new Date(Date.UTC(2026, 8, 3, 9, 0) - Math.floor(random() * 86_400_000 * 6)).toISOString(),
+      lastSeen: new Date(
+        Date.UTC(2026, 8, 3, 9, 0) - Math.floor(random() * 86_400_000 * 6),
+      ).toISOString(),
       throughputKbps: Math.round(random() * 4800) + 120,
       notes: '',
     }
@@ -176,7 +178,8 @@ export async function mockFetch(input: string, init: RequestInit = {}): Promise<
 
   if (path === '/auth/login' && method === 'POST') {
     const email = String(body?.email ?? '')
-    if (!email.includes('@')) return json({ errors: { email: 'Enter a valid email address.' } }, 422)
+    if (!email.includes('@'))
+      return json({ errors: { email: 'Enter a valid email address.' } }, 422)
     if (body?.password !== 'password') {
       return json({ message: 'Those credentials did not match.' }, 401)
     }
@@ -227,7 +230,11 @@ export async function mockFetch(input: string, init: RequestInit = {}): Promise<
     if (method === 'PATCH') {
       const errors = validateDevice({ ...state.devices[index], ...body })
       if (errors) return json({ errors }, 422)
-      const updated = { ...state.devices[index]!, ...body, name: body.name?.trim() ?? state.devices[index]!.name }
+      const updated = {
+        ...state.devices[index]!,
+        ...body,
+        name: body.name?.trim() ?? state.devices[index]!.name,
+      }
       state.devices = state.devices.map((device, at) => (at === index ? updated : device))
       persist()
       return json(updated)

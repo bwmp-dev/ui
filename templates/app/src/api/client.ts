@@ -89,7 +89,7 @@ function extractFields(body: unknown): Record<string, string> | undefined {
 function messageOf(body: unknown, fallback: string): string {
   if (typeof body === 'string' && body.trim()) return body
   if (typeof body === 'object' && body !== null) {
-    const candidate = (body as { message?: unknown; detail?: unknown; title?: unknown })
+    const candidate = body as { message?: unknown; detail?: unknown; title?: unknown }
     for (const value of [candidate.message, candidate.detail, candidate.title]) {
       if (typeof value === 'string' && value.trim()) return value
     }

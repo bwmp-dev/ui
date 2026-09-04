@@ -27,7 +27,7 @@ function PopoverContent({
         <BasePopover.Popup
           {...props}
           className={cn(
-            'surface-panel popup-motion',
+            'popup-motion surface-panel',
             'max-w-[min(20rem,var(--available-width))] p-3 text-ui',
             'origin-[var(--transform-origin)]',
             className,
@@ -53,7 +53,7 @@ export const Popover = Object.assign(BasePopover.Root, {
     ...props
   }: ComponentPropsWithRef<typeof BasePopover.Title>) {
     return (
-      <BasePopover.Title {...props} className={cn('text-ui text-fg font-semibold', className)} />
+      <BasePopover.Title {...props} className={cn('text-ui font-semibold text-fg', className)} />
     )
   },
   Description: function PopoverDescription({
@@ -61,7 +61,7 @@ export const Popover = Object.assign(BasePopover.Root, {
     ...props
   }: ComponentPropsWithRef<typeof BasePopover.Description>) {
     return (
-      <BasePopover.Description {...props} className={cn('text-fg-muted mt-1 text-xs', className)} />
+      <BasePopover.Description {...props} className={cn('mt-1 text-xs text-fg-muted', className)} />
     )
   },
 })
@@ -86,7 +86,13 @@ export type TooltipProps = ComponentPropsWithRef<typeof BaseTooltip.Root> & {
  * </Tooltip>
  * ```
  */
-export function Tooltip({ content, side = 'top', sideOffset = 6, children, ...props }: TooltipProps) {
+export function Tooltip({
+  content,
+  side = 'top',
+  sideOffset = 6,
+  children,
+  ...props
+}: TooltipProps) {
   return (
     <BaseTooltip.Root {...props}>
       <BaseTooltip.Trigger render={children as React.ReactElement} />
@@ -98,8 +104,8 @@ export function Tooltip({ content, side = 'top', sideOffset = 6, children, ...pr
         >
           <BaseTooltip.Popup
             className={cn(
-              'popup-motion origin-[var(--transform-origin)]',
-              'bg-fg text-canvas rounded-sm px-1.5 py-1 text-2xs font-medium shadow-md',
+              'origin-[var(--transform-origin)] popup-motion',
+              'rounded-sm bg-fg px-1.5 py-1 text-2xs font-medium text-canvas shadow-md',
             )}
           >
             {content}

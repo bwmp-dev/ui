@@ -1,0 +1,101 @@
+---
+layout: ~/layouts/GuideLayout.astro
+title: Templates
+description: Three starting points, and how to tell which one a project needs.
+---
+
+## Choosing
+
+**Application** — a dashboard, an internal tool, an admin panel. It talks to an
+API over HTTP and does not care what wrote it. This is the default.
+
+**Website** — a project or marketing site. Mostly static text and images, where
+shipping a React bundle for a page that never changes is the wrong trade.
+
+**Full-stack** — only when a JavaScript server genuinely belongs to the same
+team as the UI. If the API is Go or .NET, use the application template; adding a
+Node server in front of an existing API buys a second deployment and a second
+place for bugs.
+
+## Templates are the examples
+
+There is no separate `examples/` directory. The templates _are_ the worked
+examples, because a template nobody runs rots, and an example nobody generates
+from drifts from the template it was copied out of.
+
+They are ordinary workspace packages. CI builds, lints, type-checks and tests
+them on every change, and the application template's end-to-end suite runs
+against a real browser. When one breaks, it breaks in CI rather than in the
+first project generated from it that month.
+
+The generator copies a template and makes a small, explicit set of edits — it
+never patches template source.
+
+## Application
+
+```
+src/
+├── routes/            file-based, code-split per route
+├── features/devices/  a complete feature: components, schema, api, queries
+├── features/auth/     provider, context, server calls
+├── api/               client, errors, types
+├── components/        shared across features
+├── config/            navigation
+├── lib/               env, query client
+└── mocks/             an in-memory backend so it runs before yours exists
+```
+
+What it demonstrates: nested layouts, protected routes guarded in `beforeLoad`,
+route-level code splitting, loaders that prefetch into the query cache, a
+server-driven table with URL state, a details panel, a form with server-side
+validation, a command palette, a settings page, error boundaries, empty and
+loading states, and a 404.
+
+`pnpm dev` works immediately: `VITE_API_MOCK=true` routes every request through
+`src/mocks`, which implements the same HTTP contract as a real backend — so the
+API client is exercised for real and only the network call is swapped.
+
+`--no-example` removes the sample feature and leaves the wiring.
+
+## Website
+
+Astro with React islands. Every section is rendered on the server; JavaScript
+ships only for components explicitly marked as islands.
+
+The header's colour-scheme toggle and mobile menu are plain Astro with a few
+lines of inline script — the menu uses the native `<dialog>` element, which
+supplies focus trapping and Escape for free. The one React island is the
+screenshot gallery, on `client:visible`, and it uses `@stack/ui`'s `Tabs` to
+show the shared system working client-side.
+
+That is the lesson worth taking: reaching for an island is a decision. Check
+`dist/_astro/*.js` after a build before adding one.
+
+Includes SEO metadata, OpenGraph, a sitemap, `robots.txt`, favicon and social
+image setup, and a 404.
+
+## Full-stack
+
+TanStack Start. Server functions as the RPC layer, cookie sessions, a server
+route for anything that is not RPC, and TanStack Query dehydrated into the HTML
+so a page that loaded on the server does not refetch on hydration.
+
+Authorisation lives in server-function middleware rather than in each handler,
+so a new endpoint is authenticated by default. Environment access is wrapped in
+`createServerOnlyFn`, which makes the build fail if a secret is ever pulled into
+client code.
+
+The build emits a platform-neutral `{ fetch }` handler, so the same output runs
+on Node, Bun, Deno or Cloudflare Workers.
+
+## Shared conventions
+
+All three:
+
+- import the same three stylesheets, in the same order;
+- put project branding in one `:root` block in `src/styles.css`;
+- set the theme attributes before first paint;
+- organise application code by feature;
+- use the shared ESLint and TypeScript configs.
+
+Which means moving between them costs almost nothing.

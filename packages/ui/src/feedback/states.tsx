@@ -51,10 +51,8 @@ export function EmptyState({
       {Icon ? (
         <Icon width={20} height={20} aria-hidden className="text-fg-subtle" strokeWidth={1.5} />
       ) : null}
-      <p className="text-ui text-fg font-medium">{title}</p>
-      {description ? (
-        <p className="text-fg-muted max-w-prose text-xs">{description}</p>
-      ) : null}
+      <p className="text-ui font-medium text-fg">{title}</p>
+      {description ? <p className="max-w-prose text-xs text-fg-muted">{description}</p> : null}
       {action ? <div className="mt-1">{action}</div> : null}
     </StateShell>
   )
@@ -75,7 +73,7 @@ export function LoadingState({ label = 'Loading', size, ...props }: LoadingState
   return (
     <StateShell size={size} role="status" aria-live="polite" {...props}>
       <Spinner size="lg" className="text-fg-subtle" />
-      <p className="text-fg-muted text-xs">{label}</p>
+      <p className="text-xs text-fg-muted">{label}</p>
     </StateShell>
   )
 }
@@ -130,8 +128,8 @@ export function ErrorState({
 
   return (
     <StateShell size={size} role="alert" {...props}>
-      <p className="text-ui text-fg font-medium">{title}</p>
-      {description ? <p className="text-fg-muted max-w-prose text-xs">{description}</p> : null}
+      <p className="text-ui font-medium text-fg">{title}</p>
+      {description ? <p className="max-w-prose text-xs text-fg-muted">{description}</p> : null}
 
       {onRetry ? (
         <Button size="sm" onClick={onRetry} className="mt-1">
@@ -145,7 +143,7 @@ export function ErrorState({
             type="button"
             onClick={() => setExpanded((open) => !open)}
             aria-expanded={expanded}
-            className="text-fg-subtle hover:text-fg focus-ring flex items-center gap-1 rounded-xs text-2xs font-medium"
+            className="flex items-center gap-1 rounded-xs text-2xs font-medium text-fg-subtle focus-ring hover:text-fg"
           >
             <ChevronDown
               size={12}
@@ -155,7 +153,7 @@ export function ErrorState({
             Error details
           </button>
           {expanded ? (
-            <pre className="border-line bg-surface-sunken text-fg-muted mt-1.5 max-h-64 overflow-auto rounded-md border p-3 font-mono text-2xs whitespace-pre-wrap">
+            <pre className="mt-1.5 max-h-64 overflow-auto rounded-md border border-line bg-surface-sunken p-3 font-mono text-2xs whitespace-pre-wrap text-fg-muted">
               {detail.stack ?? detail.message}
             </pre>
           ) : null}

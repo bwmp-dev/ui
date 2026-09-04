@@ -54,11 +54,8 @@ export function Pagination({
   const slots = pageSlots(page, pageCount, siblings)
 
   return (
-    <nav
-      aria-label={label}
-      className={cn('flex items-center justify-between gap-4', className)}
-    >
-      <p className="text-fg-muted text-xs">{summary}</p>
+    <nav aria-label={label} className={cn('flex items-center justify-between gap-4', className)}>
+      <p className="text-xs text-fg-muted">{summary}</p>
 
       <div className="flex items-center gap-1">
         <IconButton
@@ -75,7 +72,7 @@ export function Pagination({
             <span
               key={`gap-${index}`}
               aria-hidden
-              className="text-fg-subtle px-1 text-xs select-none"
+              className="px-1 text-xs text-fg-subtle select-none"
             >
               …
             </span>

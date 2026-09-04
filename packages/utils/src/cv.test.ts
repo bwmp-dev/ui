@@ -48,7 +48,10 @@ describe('cv', () => {
   it('exposes the variant map so projects can extend rather than fork', () => {
     const extended = cv({
       base: 'inline-flex rounded-md',
-      variants: { ...button.variants, variant: { ...button.variants.variant, danger: 'bg-danger' } },
+      variants: {
+        ...button.variants,
+        variant: { ...button.variants.variant, danger: 'bg-danger' },
+      },
       defaultVariants: { variant: 'danger', size: 'md' },
     })
     expect(extended()).toContain('bg-danger')

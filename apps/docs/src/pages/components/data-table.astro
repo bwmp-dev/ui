@@ -1,0 +1,99 @@
+---
+import DocsShell from '~/components/DocsShell.astro'
+import Preview from '~/components/Preview.astro'
+import PropsTable from '~/components/PropsTable.astro'
+import DataTableDemo from '~/demos/data-table-demo'
+
+const featuresExample = `import {
+  rowSortingFeature,
+  createSortedRowModel,
+  sortFn_alphanumeric,
+  tableFeatures,
+} from '@tanstack/react-table'
+import type { StackColumnMeta } from '@stack/ui/table'
+
+// Only what this table uses, so nothing else is bundled.
+export const features = tableFeatures({
+  rowSortingFeature,
+  sortedRowModel: createSortedRowModel(),
+  sortFns: { alphanumeric: sortFn_alphanumeric },
+  columnMeta: {} as StackColumnMeta,
+})`
+
+const serverExample = `const table = useTable({
+  features: defaultTableFeatures,
+  columns,
+  data: query.data?.items ?? [],
+  manualSorting: true,
+  manualPagination: true,
+  rowCount: query.data?.total ?? 0,
+  state: { sorting, pagination },
+  onSortingChange: setSorting,
+})`
+---
+
+<DocsShell
+  title="DataTable"
+  description="Styling, sorting affordances and states over a TanStack Table instance you own."
+>
+  <p>
+    <code>DataTable</code> deliberately does not create the table. You call <code>useTable</code>
+    yourself, so every TanStack capability — faceting, grouping, virtualisation, manual server-side state
+    — stays directly reachable. What the component provides is the markup, the sorting affordances, selection
+    styling, the loading skeleton and the empty state.
+  </p>
+  <p>
+    It lives behind <code>@stack/ui/table</code> because <code>@tanstack/react-table</code> is an optional
+    peer dependency. Nothing in the main entry point imports it.
+  </p>
+
+  <Preview
+    demo="data-table-demo"
+    title="Sorting, selection, filtering and pagination"
+    contained={false}
+  >
+    <DataTableDemo client:visible />
+  </Preview>
+
+  <h2>Features are opt-in</h2>
+  <p>
+    TanStack Table v9 only ships the features you register. <code>defaultTableFeatures</code> covers what
+    a typical dashboard table needs, but a table that only sorts should compose a smaller set and keep
+    the rest out of the bundle:
+  </p>
+  <pre><code>{featuresExample}</code></pre>
+  <p>
+    <code>DataTable</code> detects what the instance actually registered, so sorting, selection and column
+    visibility are all optional.
+  </p>
+
+  <h2>Server-driven tables</h2>
+  <p>
+    When the server does the sorting and paging, tell the table so and hand it the page it should
+    render. Nothing about the component changes:
+  </p>
+  <pre><code>{serverExample}</code></pre>
+  <p>
+    In the application template, that state lives in the URL, so a sorted, filtered, paged view is
+    linkable and survives a reload.
+  </p>
+
+  <h2>Column meta</h2>
+  <p>
+    <code>DataTable</code> reads three display hints from <code>columnDef.meta</code>:
+    <code>align</code>, <code>className</code> and <code>hideBelowMd</code>. They are typed, because
+    <code>defaultTableFeatures</code> registers <code>StackColumnMeta</code> in its
+    <code>columnMeta</code> slot.
+  </p>
+
+  <h2>Selection</h2>
+  <p>
+    <code>selectionColumn()</code> is a plain column definition rather than a prop, so it sits in your
+    <code>columns</code> array where you can reorder, pin or omit it. Pass it through the column helper:
+    <code>helper.display(selectionColumn())</code>.
+  </p>
+
+  <h3>API</h3>
+  <PropsTable type="DataTableProps" />
+  <PropsTable type="DataTablePaginationProps" />
+</DocsShell>

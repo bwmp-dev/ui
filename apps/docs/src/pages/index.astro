@@ -1,0 +1,78 @@
+---
+import DocsShell from '~/components/DocsShell.astro'
+import { NAVIGATION } from '~/lib/navigation'
+import { Code } from 'astro:components'
+
+const start = `pnpm stack create provenance --type app
+cd provenance
+pnpm install
+pnpm dev`
+
+const layers = [
+  { name: 'Project code', detail: 'Whatever this product actually is.' },
+  { name: 'Features', detail: 'A feature owns its components, queries, API calls and schema.' },
+  { name: 'Template', detail: 'Routing, auth, the API client, error handling, the app shell.' },
+  { name: '@stack/ui', detail: 'The component system. Composition, variants, escape hatches.' },
+  { name: 'Base UI', detail: 'Focus management, ARIA and keyboard behaviour worth not rewriting.' },
+  { name: '@stack/tokens', detail: 'CSS custom properties. No framework, no React.' },
+]
+---
+
+<DocsShell
+  title="Stack"
+  description="A React design system and three project templates, so a new project starts at the interesting part."
+>
+  <p>
+    Three things live here: design tokens as plain CSS custom properties, a React component system
+    built on them, and templates that wire those into a working application, website or
+    server-rendered app. Everything is a normal package — nothing depends on a meta-framework.
+  </p>
+
+  <Code code={start} lang="bash" themes={{ light: 'github-light', dark: 'github-dark-dimmed' }} />
+
+  <h2>The layers</h2>
+  <p>
+    The lower something sits, the more stable and generic it is. Things move down only when they
+    have earned it — not because they might be reusable one day.
+  </p>
+
+  <div class="not-prose my-6 overflow-hidden rounded-md border border-line">
+    {
+      layers.map((layer, index) => (
+        <div
+          class:list={[
+            'flex flex-wrap items-baseline gap-x-4 gap-y-1 px-4 py-3',
+            index !== layers.length - 1 && 'border-b border-line-muted',
+            index >= layers.length - 3 ? 'bg-surface' : 'bg-surface-sunken',
+          ]}
+        >
+          <span class="w-36 shrink-0 font-mono text-xs text-fg">{layer.name}</span>
+          <span class="text-sm text-fg-muted">{layer.detail}</span>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2>Where to go</h2>
+  <div class="not-prose my-6 grid gap-3 sm:grid-cols-2">
+    {
+      NAVIGATION.slice(1).map((section) => (
+        <div class="rounded-md border border-line p-4">
+          <p class="text-2xs font-medium tracking-wide text-fg-subtle uppercase">{section.title}</p>
+          <ul class="mt-2 flex flex-col gap-1">
+            {section.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="rounded-sm text-sm text-accent-text focus-ring hover:underline"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</DocsShell>

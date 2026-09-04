@@ -52,10 +52,10 @@ function LoginPage() {
     <main className="grid min-h-dvh place-items-center p-6">
       <div className="w-full max-w-narrow">
         <div className="mb-5 flex items-center gap-2">
-          <span className="bg-accent text-accent-fg grid size-6 place-items-center rounded-sm text-xs font-bold">
+          <span className="grid size-6 place-items-center rounded-sm bg-accent text-xs font-bold text-accent-fg">
             {env.appName.slice(0, 1).toUpperCase()}
           </span>
-          <span className="text-fg text-ui font-semibold">{env.appName}</span>
+          <span className="text-ui font-semibold text-fg">{env.appName}</span>
         </div>
 
         <Card variant="raised">
@@ -100,7 +100,7 @@ function LoginPage() {
             <Card.Footer className="justify-between">
               <Link
                 to="/login"
-                className="text-fg-muted hover:text-fg focus-ring rounded-xs text-xs"
+                className="rounded-xs text-xs text-fg-muted focus-ring hover:text-fg"
               >
                 Forgot password?
               </Link>
@@ -112,7 +112,7 @@ function LoginPage() {
         </Card>
 
         {env.useMockApi ? (
-          <p className="text-fg-subtle mt-3 text-center text-2xs">
+          <p className="mt-3 text-center text-2xs text-fg-subtle">
             Mock API: any email works with the password <code className="font-mono">password</code>.
           </p>
         ) : null}

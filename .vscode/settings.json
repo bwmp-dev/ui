@@ -1,0 +1,28 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit" },
+
+  // Use the workspace TypeScript, so the editor and the build agree.
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+
+  // Tailwind IntelliSense inside cn() and cv(), where most classes are written.
+  "tailwindCSS.experimental.configFile": "packages/tokens/src/tailwind-intellisense.css",
+  "tailwindCSS.experimental.classRegex": [
+    ["cv\(([^)]*)\)", "[\"'`]([^\"'`]*)[\"'`]"],
+    ["cn\(([^)]*)\)", "[\"'`]([^\"'`]*)[\"'`]"]
+  ],
+  "tailwindCSS.classAttributes": ["class", "className", "base", "class:list"],
+
+  "files.associations": { "*.css": "tailwindcss" },
+  "search.exclude": {
+    "**/dist": true,
+    "**/.astro": true,
+    "**/.turbo": true,
+    "**/routeTree.gen.ts": true,
+    "**/src/generated": true,
+    "pnpm-lock.yaml": true
+  }
+}

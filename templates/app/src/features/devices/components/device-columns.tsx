@@ -17,7 +17,7 @@ export const deviceColumns = helper.columns([
 
   helper.accessor('name', {
     header: 'Name',
-    cell: (info) => <span className="text-fg font-medium">{info.getValue()}</span>,
+    cell: (info) => <span className="font-medium text-fg">{info.getValue()}</span>,
   }),
 
   helper.accessor('status', {
@@ -59,7 +59,7 @@ export const deviceColumns = helper.columns([
     meta: { align: 'right' },
     // The absolute time goes in the title so hovering gives the exact value.
     cell: (info) => (
-      <span className="text-fg-muted whitespace-nowrap" title={info.getValue()}>
+      <span className="whitespace-nowrap text-fg-muted" title={info.getValue()}>
         {formatRelativeTime(info.getValue())}
       </span>
     ),

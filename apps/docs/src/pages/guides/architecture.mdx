@@ -1,0 +1,132 @@
+---
+layout: ~/layouts/GuideLayout.astro
+title: Architecture
+description: A small stable core, and progressively more opinionated layers on top of it.
+---
+
+## The shape
+
+```
+                 project code
+                       ↑
+                  app features
+                       ↑
+                    template
+                       ↑
+                   @stack/ui
+                       ↑
+                    Base UI
+                       ↑
+                 @stack/tokens
+```
+
+The lower something sits, the more stable and generic it has to be, and the more
+expensive it is to change. That is the whole design: `@stack/tokens` is CSS
+custom properties with no dependencies, and by the time you reach the top you
+are writing whatever this particular product actually is.
+
+The rule that keeps it honest: **things move down only when they have earned
+it.** A component used by two features stays in the app. A pattern used by three
+projects might belong in `@stack/ui`. Moving an abstraction down because it
+might be reusable one day is how a shared library becomes a place where nobody
+wants to make changes.
+
+## Dependency direction
+
+```
+tokens  ←  utils  ←  hooks  ←  ui  ←  templates  ←  projects
+```
+
+Enforced by what each package is allowed to import:
+
+- **`@stack/tokens`** has no dependencies at all, and no React. It is CSS plus a
+  small data file describing itself, so it works outside React entirely.
+- **`@stack/utils`** is framework-independent. It imports tokens only to
+  configure tailwind-merge with the theme's namespaces.
+- **`@stack/hooks`** is React, and nothing else. No design system, no styling.
+- **`@stack/ui`** may use all of the above. It never imports an application, a
+  router, or a data-fetching library.
+- **Templates and projects** use everything.
+
+Nothing points back up the chain. If `@stack/ui` ever needs something from an
+application, the design is wrong somewhere below it.
+
+## Packages
+
+| Package                    | What it is                                                            |
+| -------------------------- | --------------------------------------------------------------------- |
+| `@stack/tokens`            | Design tokens as CSS custom properties, and the Tailwind theme bridge |
+| `@stack/utils`             | `cn`, `cv`, assertions, object, URL, formatting and JSON helpers      |
+| `@stack/hooks`             | Reusable React hooks                                                  |
+| `@stack/icons`             | The icon contract, and the brand marks Lucide does not ship           |
+| `@stack/ui`                | The component system                                                  |
+| `@stack/config-eslint`     | Shared flat ESLint configurations                                     |
+| `@stack/config-typescript` | Shared `tsconfig` bases                                               |
+
+`@stack/icons` deliberately does **not** re-export Lucide. A barrel over 1500
+icons defeats tree shaking in some bundlers and buys nothing — import from
+`lucide-react` directly. What lives there is the `IconComponent` type that
+components accept, and a handful of brand marks.
+
+## Inside an application
+
+Organised by feature, not by file type:
+
+```
+src/
+├── routes/            route tree; thin, mostly composition
+├── features/
+│   └── devices/
+│       ├── components/
+│       ├── schema.ts     the contract with the API
+│       ├── api.ts        typed calls over the transport
+│       ├── queries.ts    caching, invalidation, optimistic updates
+│       └── filters.ts
+├── components/        shared across features
+├── api/               the single transport: client, errors, types
+├── lib/               env, query client
+└── config/            navigation and other app-level constants
+```
+
+A feature owns its components, its queries, its API calls and its schema.
+Deleting the folder deletes the feature. That matters more than it sounds:
+`components/`, `hooks/` and `services/` folders that span every feature turn
+into places where nobody can tell what is still used.
+
+Things move into `src/components` when a **second** feature needs them, not in
+anticipation of one.
+
+## Where the boundaries are
+
+**The transport.** Everything above `src/api/client.ts` speaks in typed
+functions and queries. Nothing above it sees `fetch`, a status code, or JSON
+parsing. That is what lets the backend be Go, .NET, Node or anything else
+without a single component caring, and it is where a generated OpenAPI client
+would slot in.
+
+**Query above transport.** `api.ts` fetches and parses; `queries.ts` decides
+caching and invalidation. Components see neither.
+
+**Base UI below `@stack/ui`.** We own the API, the styling, the variants and the
+composition. Base UI owns focus trapping, focus restoration, Escape, scroll
+locking, typeahead and roving focus — behaviour that is a project in itself to
+get right, and invisible when it is wrong.
+
+## Escape hatches
+
+The shared stack must never trap a project. In order of preference:
+
+1. **`className`** — every component merges it, and conflicts resolve in your
+   favour.
+2. **Extend the variants** — each component exports its `cv` function, and the
+   variant map is on it. Build a new one from `buttonVariants.variants`.
+3. **Wrap it** — a project-local component around a shared one, with the props
+   this project actually wants.
+4. **Compose the primitive** — Base UI's parts are re-exported; drop a level
+   when the wrapper is in the way.
+5. **Replace it locally** — write your own. Nothing depends on you using ours.
+6. **Skip the design system** — a canvas editor or a terminal emulator has no
+   business being expressed in `Button` and `Card`.
+
+Reaching for 5 or 6 is not failure. A shared component that has grown eleven
+props to serve one screen is worse than a local component that serves it well.

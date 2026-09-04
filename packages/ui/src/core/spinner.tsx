@@ -19,7 +19,7 @@ export function Spinner({ size = 'md', className, label }: SpinnerProps) {
     <Loader2
       size={sizes[size]}
       strokeWidth={2.25}
-      className={cn('animate-spin-slow shrink-0', className)}
+      className={cn('shrink-0 animate-spin-slow', className)}
       role={label ? 'status' : undefined}
       aria-label={label}
       aria-hidden={label ? undefined : true}

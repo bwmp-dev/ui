@@ -1,0 +1,82 @@
+---
+/**
+ * A live example beside the code that produced it.
+ *
+ * The example itself comes through the slot, because Astro can only generate a
+ * hydration script for a statically imported component — a dynamically resolved
+ * one renders to HTML but never wakes up. The `demo` prop names the file the
+ * source is read from with Vite's `?raw`, so the snippet is the file rather
+ * than a copy of it that quietly goes stale.
+ */
+import { Code } from 'astro:components'
+
+interface Props {
+  /** Path under `src/demos`, without the extension. */
+  demo: string
+  title?: string
+  description?: string
+  /** Give the preview a raised background instead of the page background. */
+  contained?: boolean
+}
+
+const { demo, title, description, contained = true } = Astro.props
+
+const sources = import.meta.glob('../demos/**/*.tsx', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+})
+
+const key = `../demos/${demo}.tsx`
+const raw = sources[key]
+if (typeof raw !== 'string') {
+  throw new Error(`Demo not found: src/demos/${demo}.tsx`)
+}
+
+const source = raw.trim()
+---
+
+<figure class="not-prose my-6 overflow-hidden rounded-md border border-line">
+  {
+    (title || description) && (
+      <figcaption class="border-b border-line-muted bg-surface-sunken px-4 py-2.5">
+        {title && <p class="text-sm font-medium text-fg">{title}</p>}
+        {description && <p class="mt-0.5 text-xs text-fg-muted">{description}</p>}
+      </figcaption>
+    )
+  }
+
+  <div class:list={['p-6', contained ? 'bg-surface' : 'bg-canvas']}>
+    <slot />
+  </div>
+
+  <details class="group border-t border-line-muted">
+    <summary
+      class="flex cursor-pointer list-none items-center gap-1.5 bg-surface-sunken px-4 py-2 text-xs text-fg-muted focus-ring marker:content-none hover:text-fg"
+    >
+      <svg
+        viewBox="0 0 16 16"
+        width="12"
+        height="12"
+        aria-hidden="true"
+        class="transition-transform group-open:rotate-90"
+      >
+        <path
+          d="M6 4l4 4-4 4"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"></path>
+      </svg>
+      Source
+      <code class="ml-auto font-mono text-2xs text-fg-subtle">src/demos/{demo}.tsx</code>
+    </summary>
+    <div class="border-t border-line-muted">
+      <Code
+        code={source}
+        lang="tsx"
+        themes={{ light: 'github-light', dark: 'github-dark-dimmed' }}
+      />
+    </div>
+  </details>
+</figure>

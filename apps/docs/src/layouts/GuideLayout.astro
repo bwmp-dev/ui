@@ -1,0 +1,10 @@
+---
+import DocsShell from '~/components/DocsShell.astro'
+
+/** Layout for the MDX guides; the title and description come from frontmatter. */
+const { frontmatter } = Astro.props
+---
+
+<DocsShell title={frontmatter.title} description={frontmatter.description}>
+  <slot />
+</DocsShell>

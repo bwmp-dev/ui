@@ -29,7 +29,7 @@ function AppLayout() {
     <div className="flex min-h-dvh flex-col">
       <Navbar sticky>
         <Navbar.Brand>
-          <span className="bg-accent text-accent-fg grid size-5 place-items-center rounded-sm text-2xs font-bold">
+          <span className="grid size-5 place-items-center rounded-sm bg-accent text-2xs font-bold text-accent-fg">
             {(import.meta.env.VITE_APP_NAME ?? 'S').slice(0, 1)}
           </span>
           {import.meta.env.VITE_APP_NAME ?? 'Stack Fullstack'}
@@ -42,7 +42,7 @@ function AppLayout() {
         <Navbar.Spacer />
 
         <Navbar.Actions>
-          <span className="text-fg-muted hidden text-xs sm:inline">{user.email}</span>
+          <span className="hidden text-xs text-fg-muted sm:inline">{user.email}</span>
           <Avatar size="sm" shape="circle" name={user.name} />
           <Button
             size="sm"

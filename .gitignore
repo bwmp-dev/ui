@@ -18,3 +18,4 @@ routeTree.gen.ts
 shot-*.png
 .output/
 tooling/create-stack/templates/
+apps/docs/src/generated/

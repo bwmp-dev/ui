@@ -13,9 +13,12 @@ export type PropertyGroupProps = ComponentPropsWithRef<'section'> & {
 
 function PropertyGroup({ title, className, children, ...props }: PropertyGroupProps) {
   return (
-    <section {...props} className={cn('border-line-muted border-b px-3 py-2.5 last:border-b-0', className)}>
+    <section
+      {...props}
+      className={cn('border-b border-line-muted px-3 py-2.5 last:border-b-0', className)}
+    >
       {title ? (
-        <h3 className="text-fg-subtle mb-1.5 text-2xs font-medium tracking-wide uppercase">
+        <h3 className="mb-1.5 text-2xs font-medium tracking-wide text-fg-subtle uppercase">
           {title}
         </h3>
       ) : null}
@@ -47,8 +50,8 @@ function Property({ label, children, stacked = false, className }: PropertyProps
         className,
       )}
     >
-      <dt className="text-fg-muted truncate">{label}</dt>
-      <dd className="text-fg min-w-0 break-words">{children}</dd>
+      <dt className="truncate text-fg-muted">{label}</dt>
+      <dd className="min-w-0 break-words text-fg">{children}</dd>
     </div>
   )
 }
@@ -98,14 +101,14 @@ export function SettingsSection({
     <section
       {...props}
       className={cn(
-        'border-line-muted grid gap-4 border-b pb-section last:border-b-0',
+        'grid gap-4 border-b border-line-muted pb-section last:border-b-0',
         'md:grid-cols-[minmax(0,16rem)_minmax(0,1fr)] md:gap-8',
         className,
       )}
     >
       <div className="min-w-0">
-        <h2 className="text-ui text-fg font-semibold">{title}</h2>
-        {description ? <p className="text-fg-muted mt-1 text-xs">{description}</p> : null}
+        <h2 className="text-ui font-semibold text-fg">{title}</h2>
+        {description ? <p className="mt-1 text-xs text-fg-muted">{description}</p> : null}
         {actions ? <div className="mt-2 flex items-center gap-2">{actions}</div> : null}
       </div>
 

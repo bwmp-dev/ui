@@ -129,8 +129,7 @@ function DevicesPage() {
   const setSelected = (id: string | undefined) =>
     void navigate({ search: (previous) => ({ ...previous, selected: id }) })
 
-  const filtersActive =
-    search.q !== '' || search.status.length > 0 || search.region.length > 0
+  const filtersActive = search.q !== '' || search.status.length > 0 || search.region.length > 0
 
   const tableArea = (
     <div className="flex h-full min-h-0 flex-col gap-3 p-4">
@@ -205,7 +204,12 @@ function DevicesPage() {
                   title="No devices yet"
                   description="Register your first device to start collecting telemetry."
                   action={
-                    <Button size="sm" variant="primary" icon={Plus} onClick={() => setCreating(true)}>
+                    <Button
+                      size="sm"
+                      variant="primary"
+                      icon={Plus}
+                      onClick={() => setCreating(true)}
+                    >
                       New device
                     </Button>
                   }
@@ -214,10 +218,7 @@ function DevicesPage() {
             }
           />
 
-          <DataTablePagination
-            table={table}
-            summary={`${devices.data?.total ?? 0} devices`}
-          />
+          <DataTablePagination table={table} summary={`${devices.data?.total ?? 0} devices`} />
         </>
       )}
     </div>
@@ -234,7 +235,7 @@ function DevicesPage() {
           label="Resize device details"
           start={tableArea}
           end={
-            <aside className="border-line h-full border-l">
+            <aside className="h-full border-l border-line">
               <DeviceDetails device={selectedDevice} onDeleted={() => setSelected(undefined)} />
             </aside>
           }

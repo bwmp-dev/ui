@@ -42,10 +42,10 @@ export function DeviceDetails({ device, onDeleted }: DeviceDetailsProps) {
 
   return (
     <div className="flex h-full flex-col">
-      <header className="border-line-muted flex items-start justify-between gap-3 border-b px-3 py-2.5">
+      <header className="flex items-start justify-between gap-3 border-b border-line-muted px-3 py-2.5">
         <div className="min-w-0">
-          <h2 className="text-ui text-fg truncate font-semibold">{device.name}</h2>
-          <p className="text-fg-subtle text-2xs mt-0.5">{device.id}</p>
+          <h2 className="truncate text-ui font-semibold text-fg">{device.name}</h2>
+          <p className="mt-0.5 text-2xs text-fg-subtle">{device.id}</p>
         </div>
         {editable ? (
           <div className="flex shrink-0 items-center gap-1">

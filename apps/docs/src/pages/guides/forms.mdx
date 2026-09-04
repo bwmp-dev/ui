@@ -1,0 +1,116 @@
+---
+layout: ~/layouts/GuideLayout.astro
+title: Forms
+description: Field primitives for every form, TanStack Form when the form has real state, and one schema shared with the API.
+---
+
+## Two levels
+
+**A simple form is just state.** Two fields and a submit do not need a form
+library, and adding one costs more than it saves:
+
+```tsx
+<Field name="email" invalid={Boolean(error)}>
+  <Field.Label required>Email</Field.Label>
+  <Input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+  {error ? <Field.Error match>{error}</Field.Error> : null}
+</Field>
+```
+
+`Field` generates the ids and the `aria-describedby` / `aria-invalid`
+relationships. That is the part that is easy to get subtly wrong by hand, and
+it is worth using even when nothing else is.
+
+**A real form gets TanStack Form.** Once there is per-field validation, touched
+state, async validation, array fields or a submit that can fail per-field, hand
+it over.
+
+## TanStack Form
+
+Chosen because it is headless, it does not own your markup, and its validators
+accept any Standard Schema — which means the Zod schema that describes the API
+contract is the same object that validates the form.
+
+```tsx
+const form = useForm({
+  defaultValues: { name: '', kind: 'sensor', region: '', notes: '' },
+  validators: { onSubmit: deviceInputSchema },
+  onSubmit: async ({ value, formApi }) => { … },
+})
+```
+
+`@stack/ui/form` is a thin binding, not a framework. It is a separate entry
+point because `@tanstack/react-form` is an optional peer dependency.
+
+```tsx
+<form.Field name="name">
+  {(field) => (
+    <FormField field={field} label="Name" required description="Lower-case and hyphens.">
+      {(f) => (
+        <Input
+          value={f.state.value}
+          required
+          onBlur={f.handleBlur}
+          onChange={(event) => f.handleChange(event.target.value)}
+        />
+      )}
+    </FormField>
+  )}
+</form.Field>
+```
+
+`FormField` renders the label, control, description and error, and shows the
+error only once the field has been touched — a pristine form should not open
+covered in red.
+
+`SubmitButton` subscribes to `canSubmit` and `isSubmitting` through the store,
+so typing in a field does not re-render the button.
+
+## Server errors belong on the fields
+
+A failed write usually comes back with a map of field paths to messages. Put
+them where the user is looking:
+
+```tsx
+catch (error) {
+  if (isApiError(error) && error.fields) {
+    const unmatched = applyServerErrors(formApi, error.fields)
+    if (unmatched.length === 0) return
+  }
+  toast.add({ title: userMessage(error), type: 'danger' })
+}
+```
+
+`applyServerErrors` returns anything it could not match to a field, so a
+server-side error about something the form does not show still reaches the user
+instead of vanishing.
+
+## Schemas
+
+Zod, and only where a schema is doing real work:
+
+- **API responses.** Parsing at the boundary catches contract drift where it
+  happens.
+- **Forms with non-trivial rules.** Length, pattern, dependencies between
+  fields.
+- **URL search params.** `validateSearch` turns a hand-edited query string into
+  typed, defaulted values instead of a crash.
+
+Not for a two-field local form where `value.trim() !== ''` says the same thing
+more clearly.
+
+The same schema being both the API contract and the form validator is the point.
+The server still validates independently — the client copy saves a round trip,
+it is not the rule.
+
+## Accessibility
+
+- Put `required` on the control, not only on the label. The asterisk is
+  decorative and hidden from assistive technology.
+- Error text is associated automatically by `Field`; do not also put it in a
+  `title`.
+- Controls in a group name themselves from their own label, so a radio group
+  announces "Light", not the field's name three times.
+- Give the form a real `method="post"`. If the JavaScript fails to load, the
+  browser falls back to a native submit, and a GET puts the password in the URL
+  and the history.

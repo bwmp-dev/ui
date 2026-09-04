@@ -1,0 +1,86 @@
+---
+layout: ~/layouts/GuideLayout.astro
+title: Getting started
+description: Create a project, or add the design system to one you already have.
+---
+
+## Create a project
+
+```bash
+pnpm stack create provenance --type app
+cd provenance
+pnpm install
+pnpm dev
+```
+
+That gives you React, TypeScript, TanStack Router, TanStack Query, the design
+tokens, the component library, an API layer, error handling, linting, tests and
+a sensible project structure — running, with a mock backend, before you have
+written anything.
+
+Three templates:
+
+| Type        | What it is                                    | When                                                                  |
+| ----------- | --------------------------------------------- | --------------------------------------------------------------------- |
+| `app`       | Vite + TanStack Router, Query, Table and Form | A dashboard or internal tool talking to an API                        |
+| `site`      | Astro with React islands                      | A project or marketing site                                           |
+| `fullstack` | TanStack Start with SSR and server functions  | When a JavaScript server genuinely belongs to the same team as the UI |
+
+The generator prompts for anything you leave out. With a name and `--type` it
+runs silently, which is what you want in a script.
+
+```bash
+pnpm stack create summa --type app --no-example   # wiring, no sample feature
+pnpm stack create summa-site --type site --no-install
+```
+
+## Add it to an existing project
+
+Install the packages and import three stylesheets, in this order:
+
+```bash
+pnpm add @stack/ui @stack/tokens @stack/utils @stack/hooks
+pnpm add -D tailwindcss @tailwindcss/vite
+```
+
+```css
+/* src/styles.css */
+@import 'tailwindcss';
+@import '@stack/tokens/theme.css';
+@import '@stack/ui/styles.css';
+```
+
+The third line is the one people forget. It tells Tailwind to scan
+`@stack/ui` for the class names its components use — without it, every
+component renders unstyled.
+
+Then set the appearance attribute on `<html>` before the page paints:
+
+```html
+<html data-appearance="dark" data-density="comfortable"></html>
+```
+
+In a client-rendered app, inline a small blocking script that reads the stored
+preference; a deferred module script runs after the browser has already painted,
+which is the flash you are trying to avoid. Both the application and site
+templates show it. Server-rendered apps can call `themeInitScript()` from
+`@stack/ui` instead.
+
+## What you get
+
+```tsx
+import { Button, Dialog, DataTable } from '@stack/ui'
+import { useHotkey } from '@stack/hooks'
+import { cn, formatBytes } from '@stack/utils'
+```
+
+`@stack/ui/table` and `@stack/ui/form` are separate entry points, because they
+carry TanStack Table and TanStack Form as optional peer dependencies. Nothing in
+the main entry point imports either, so a project that does not use them does
+not pay for them.
+
+## Next
+
+- [Architecture](/guides/architecture) — how the layers fit together and what belongs where.
+- [Theming](/guides/theming) — making it look like your project rather than this one.
+- [Tokens](/tokens) — everything you can override.

@@ -1,0 +1,113 @@
+---
+layout: ~/layouts/GuideLayout.astro
+title: Styling
+description: What the visual system is trying to be, and the Tailwind conventions that hold it together.
+---
+
+## The intent
+
+Deliberate, compact and precise. It should look like a tool someone built on
+purpose, not like a template with the colours changed.
+
+Concretely:
+
+- **Restraint over decoration.** Borders and spacing do the work that gradients
+  and shadows usually get asked to do.
+- **Density that respects the content.** A dashboard is for reading data.
+  Whitespace that pushes three rows off the screen is not generosity, it is a
+  cost.
+- **Type carries the hierarchy.** Size, weight and colour, in that order. If a
+  heading needs a coloured box to read as a heading, the type is wrong.
+- **One focal point per view.** Buttons default to the neutral variant so that
+  promoting one to `primary` still means something.
+- **Motion that explains.** Around 120ms, on state changes, and it collapses to
+  nothing under reduced motion. Nothing floats, bounces or fades in on scroll.
+
+Deliberately absent: gradient text, glassmorphism on ordinary content,
+pill-shaped everything, `rounded-xl` by default, decorative background shapes,
+and cards nested inside cards.
+
+## Semantic classes, not values
+
+Components use `bg-surface`, `text-fg-muted`, `border-line` — never
+`bg-slate-800`. Every one of those maps to a custom property, so a brand
+override reaches the whole system through the cascade. A component that asks for
+a specific colour cannot be rebranded.
+
+```tsx
+// Yes
+<div className="bg-surface border-line text-fg rounded-md border" />
+
+// No — invisible to theming, and wrong in light mode
+<div className="rounded-md border border-slate-700 bg-slate-900 text-white" />
+```
+
+The same applies to geometry: `h-control-md` and `px-gutter-md` respond to
+density; `h-8 px-3` does not.
+
+## Variants over class strings
+
+When a component has more than a couple of visual states, it gets a `cv`
+function rather than a growing ternary:
+
+```tsx
+export const badgeVariants = cv({
+  base: 'inline-flex items-center gap-1 border font-medium',
+  variants: {
+    tone: { neutral: '…', danger: '…' },
+    size: { sm: 'h-4 px-1 text-2xs', md: 'h-5 px-1.5 text-xs' },
+  },
+  defaultVariants: { tone: 'neutral', size: 'md' },
+})
+```
+
+Exported, so a project can extend it rather than fork. See [Utilities](/utils).
+
+## className always wins
+
+`cn` resolves Tailwind conflicts in favour of the later class, and every
+component passes its own classes through it before yours. So this does what it
+looks like it does:
+
+```tsx
+<Button variant="primary" className="bg-danger" /> // ends up bg-danger
+```
+
+That is what makes the first escape hatch real rather than theoretical.
+
+## Shared utilities
+
+Four things live in `@stack/tokens` as `@utility` rules rather than in component
+class strings, because they should change in one place:
+
+| Utility              | What it does                                                     |
+| -------------------- | ---------------------------------------------------------------- |
+| `focus-ring`         | The keyboard focus treatment. Pointer interaction never shows it |
+| `transition-control` | Colour and shadow transitions at the standard duration           |
+| `popup-motion`       | Enter and exit for anything Base UI positions                    |
+| `surface-panel`      | The raised panel: background, border, radius, shadow             |
+
+Motion lives there so that reduced motion — which only rewrites the duration
+tokens — actually reaches the components.
+
+## Borders
+
+Tailwind v4 defaults `border-color` to `currentColor`. The token layer sets it
+to `--line` instead, so `border` alone is correct and `border-accent-line` opts
+out. It is a small piece of magic, and it removes a class from roughly every
+bordered element in the system.
+
+## Where custom CSS is fine
+
+Utilities first. Then:
+
+- **`@utility`** for something used in many places, like the four above.
+- **A plain stylesheet** for long-form content — the `.prose` styles in these
+  docs are CSS, not fifty `[&_h2]:` selectors.
+- **Arbitrary values** when the design genuinely needs a value the theme does
+  not have. `h-[calc(100dvh-4rem)]` is honest; `h-[37px]` is a decision nobody
+  made.
+
+Avoid CSS-in-JS — there is no reason for the runtime cost here — and avoid
+`@apply`, which moves the styling into a stylesheet where you can no longer see
+what an element does by reading the element.

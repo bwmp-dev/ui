@@ -82,8 +82,8 @@ export function DataTable<
   const columnCount = headerGroups.at(-1)?.headers.length ?? 1
 
   return (
-    <div className={cn('border-line bg-surface overflow-auto rounded-md border', className)}>
-      <table className="text-ui w-full border-collapse" aria-label={label}>
+    <div className={cn('overflow-auto rounded-md border border-line bg-surface', className)}>
+      <table className="w-full border-collapse text-ui" aria-label={label}>
         <thead
           className={cn(
             'bg-surface-sunken text-fg-muted',
@@ -91,7 +91,7 @@ export function DataTable<
           )}
         >
           {headerGroups.map((headerGroup) => (
-            <tr key={headerGroup.id} className="border-line border-b">
+            <tr key={headerGroup.id} className="border-b border-line">
               {headerGroup.headers.map((header) => {
                 const { column } = header
                 const meta = metaOf(column.columnDef.meta)
@@ -116,17 +116,18 @@ export function DataTable<
                     }
                     style={width === undefined ? undefined : { width }}
                     className={cn(
-                      'text-2xs h-8 px-3 font-medium tracking-wide whitespace-nowrap uppercase',
+                      'h-8 px-3 text-2xs font-medium tracking-wide whitespace-nowrap uppercase',
                       alignClass[meta.align ?? 'left'],
                       meta.hideBelowMd && 'hidden md:table-cell',
                       meta.className,
                     )}
                   >
-                    {header.isPlaceholder ? null : sortable && 'getToggleSortingHandler' in column ? (
+                    {header.isPlaceholder ? null : sortable &&
+                      'getToggleSortingHandler' in column ? (
                       <button
                         type="button"
                         onClick={column.getToggleSortingHandler()}
-                        className="focus-ring hover:text-fg -mx-1 flex items-center gap-1 rounded-xs px-1 uppercase"
+                        className="-mx-1 flex items-center gap-1 rounded-xs px-1 uppercase focus-ring hover:text-fg"
                       >
                         <table.FlexRender header={header} />
                         {sorted === 'asc' ? (
@@ -150,7 +151,7 @@ export function DataTable<
         <tbody>
           {isLoading ? (
             Array.from({ length: skeletonRows }, (_, index) => (
-              <tr key={index} className="border-line-muted border-b last:border-b-0">
+              <tr key={index} className="border-b border-line-muted last:border-b-0">
                 {Array.from({ length: columnCount }, (_, cellIndex) => (
                   <td key={cellIndex} className="h-row px-3">
                     <Skeleton className="h-3 w-full max-w-40" />
@@ -189,9 +190,9 @@ export function DataTable<
                       : undefined
                   }
                   className={cn(
-                    'border-line-muted transition-control border-b last:border-b-0',
-                    onRowClick && 'focus-ring hover:bg-hover cursor-pointer',
-                    'data-[selected]:bg-selected data-[active]:bg-selected',
+                    'border-b border-line-muted transition-control last:border-b-0',
+                    onRowClick && 'cursor-pointer focus-ring hover:bg-hover',
+                    'data-[active]:bg-selected data-[selected]:bg-selected',
                   )}
                 >
                   {cells.map((cell) => {
@@ -200,7 +201,7 @@ export function DataTable<
                       <td
                         key={cell.id}
                         className={cn(
-                          'text-fg h-row px-3 align-middle',
+                          'h-row px-3 align-middle text-fg',
                           alignClass[meta.align ?? 'left'],
                           meta.hideBelowMd && 'hidden md:table-cell',
                           meta.className,

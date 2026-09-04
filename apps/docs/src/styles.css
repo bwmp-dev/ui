@@ -1,0 +1,111 @@
+@import 'tailwindcss';
+@import '@stack/tokens/theme.css';
+@import '@stack/ui/styles.css';
+@import '@stack/tokens/themes/brands.css';
+
+@source './';
+
+/* Documentation reads as prose, so body copy goes back to 16px. */
+@layer base {
+  body {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+}
+
+/*
+ * Long-form article styling. Written out rather than pulled from a typography
+ * plugin: it is forty lines, it uses the design tokens, and it stays readable.
+ */
+.prose {
+  --prose-gap: 1.1em;
+}
+.prose > * + * {
+  margin-top: var(--prose-gap);
+}
+.prose h2 {
+  margin-top: 2.2em;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  scroll-margin-top: 5rem;
+}
+.prose h3 {
+  margin-top: 1.8em;
+  font-size: 1.125rem;
+  font-weight: 600;
+  scroll-margin-top: 5rem;
+}
+.prose p,
+.prose li {
+  color: var(--fg-muted);
+  max-width: var(--width-prose);
+}
+.prose strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+.prose a {
+  color: var(--accent-text);
+  text-underline-offset: 3px;
+  text-decoration: underline;
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.3em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45em;
+}
+.prose ul {
+  list-style: disc;
+}
+.prose ol {
+  list-style: decimal;
+}
+.prose :not(pre) > code {
+  background: var(--surface-sunken);
+  border: 1px solid var(--line-muted);
+  border-radius: var(--radius-xs);
+  padding: 0.1em 0.35em;
+  font-size: 0.875em;
+  color: var(--fg);
+}
+.prose pre {
+  background: var(--surface-sunken) !important;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+.prose blockquote {
+  border-left: 2px solid var(--accent-line);
+  padding-left: 1rem;
+  color: var(--fg-muted);
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.prose th,
+.prose td {
+  border-bottom: 1px solid var(--line-muted);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.prose th {
+  color: var(--fg-subtle);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Shiki emits both themes; show the one matching the current appearance. */
+:root[data-appearance='dark'] .astro-code,
+:root[data-appearance='dark'] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: transparent !important;
+}

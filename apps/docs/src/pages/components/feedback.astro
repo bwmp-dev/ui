@@ -1,0 +1,52 @@
+---
+import DocsShell from '~/components/DocsShell.astro'
+import Preview from '~/components/Preview.astro'
+import PropsTable from '~/components/PropsTable.astro'
+import FeedbackDemo from '~/demos/feedback-demo'
+---
+
+<DocsShell
+  title="Feedback"
+  description="Alerts, toasts, and the three states every asynchronous region needs."
+>
+  <Preview demo="feedback-demo" title="Alerts, toasts and states" contained={false}>
+    <FeedbackDemo client:visible />
+  </Preview>
+
+  <h2 id="alert">Alert</h2>
+  <p>
+    A persistent, inline message about the surrounding content. <code>warning</code> and
+    <code>danger</code> are announced assertively; the rest are polite. For transient feedback about something
+    the user just did, use a toast.
+  </p>
+  <PropsTable type="AlertProps" element="div" />
+
+  <h2 id="toast">Toast</h2>
+  <p>
+    Mount <code>ToastProvider</code> once near the app root and <code>Toaster</code> once inside it.
+    <code>useToast().promise()</code> wires a pending, success and error toast to an async action in one
+    call.
+  </p>
+  <p>
+    Toasts render with <code>role="dialog"</code> — the ARIA pattern for a notification that can contain
+    actions. Worth knowing when writing tests: address dialogs by their accessible name.
+  </p>
+  <PropsTable type="ToasterProps" />
+
+  <h2 id="states">Empty, loading and error</h2>
+  <ul>
+    <li>
+      If a list is empty because a filter excluded everything, say so and offer to clear it. Telling
+      someone to "create your first item" when they have fifty is the classic version of this bug.
+    </li>
+    <li>
+      Prefer <code>Skeleton</code> over <code>LoadingState</code> when you know the shape of what is coming
+      — it avoids the layout shift that a spinner cannot.
+    </li>
+    <li>
+      <code>ErrorState</code> shows a generic message to the user and the real error in development. Swallowing
+      the message is how a five minute bug becomes an afternoon.
+    </li>
+  </ul>
+  <PropsTable type="ErrorStateProps" element="div" />
+</DocsShell>

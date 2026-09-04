@@ -89,26 +89,31 @@ export function Toaster({ position = 'bottom-right', className }: ToasterProps) 
               key={toast.id}
               toast={toast}
               className={cn(
-                'surface-panel drawer-motion relative flex gap-2.5 p-3 shadow-md',
+                'relative flex gap-2.5 surface-panel p-3 shadow-md drawer-motion',
                 'data-[starting-style]:translate-y-2 data-[starting-style]:opacity-0',
                 'data-[ending-style]:translate-y-1 data-[ending-style]:opacity-0',
               )}
             >
               {Icon ? (
-                <Icon width={15} height={15} aria-hidden className={cn('mt-0.5 shrink-0', toneClass[tone])} />
+                <Icon
+                  width={15}
+                  height={15}
+                  aria-hidden
+                  className={cn('mt-0.5 shrink-0', toneClass[tone])}
+                />
               ) : null}
 
               <div className="min-w-0 flex-1">
-                <BaseToast.Title className="text-ui text-fg font-medium" />
-                <BaseToast.Description className="text-fg-muted mt-0.5 text-xs" />
+                <BaseToast.Title className="text-ui font-medium text-fg" />
+                <BaseToast.Description className="mt-0.5 text-xs text-fg-muted" />
                 {toast.actionProps ? (
-                  <BaseToast.Action className="text-accent-text focus-ring mt-2 rounded-xs text-xs font-medium hover:underline" />
+                  <BaseToast.Action className="mt-2 rounded-xs text-xs font-medium text-accent-text focus-ring hover:underline" />
                 ) : null}
               </div>
 
               <BaseToast.Close
                 aria-label="Dismiss"
-                className="text-fg-subtle hover:text-fg hover:bg-hover focus-ring -mt-0.5 -mr-0.5 grid size-5 shrink-0 place-items-center rounded-xs"
+                className="-mt-0.5 -mr-0.5 grid size-5 shrink-0 place-items-center rounded-xs text-fg-subtle focus-ring hover:bg-hover hover:text-fg"
               >
                 <X size={12} aria-hidden />
               </BaseToast.Close>

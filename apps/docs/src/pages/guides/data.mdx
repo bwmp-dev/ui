@@ -1,0 +1,158 @@
+---
+layout: ~/layouts/GuideLayout.astro
+title: Data and API
+description: One transport, typed functions above it, TanStack Query above those. The backend can be anything.
+---
+
+## The layers
+
+```
+components        useQuery / useMutation
+     ↑
+queries.ts        caching, invalidation, optimistic updates
+     ↑
+api.ts            typed functions, response parsing
+     ↑
+api/client.ts     the single transport: fetch, headers, auth, errors
+```
+
+The rule that makes it work: **nothing above `api/client.ts` ever sees `fetch`,
+a status code, or JSON parsing.** That is what lets the backend be Go, .NET,
+Node or anything else without a component caring, and it is the seam a generated
+OpenAPI client slots into.
+
+## The transport
+
+`src/api/client.ts` owns the base URL, credentials, headers, and turning every
+possible failure into one error type:
+
+```ts
+export const api = {
+  get: <T>(path, options?) => request<T>(path, { ...options, method: 'GET' }),
+  post: <T>(path, body?, options?) => request<T>(path, { ...options, method: 'POST', body }),
+  // …
+}
+```
+
+Auth is wired once, by the auth provider, rather than threaded through every
+call:
+
+```ts
+configureApiAuth({ token: () => currentToken, onUnauthorized: () => signOut() })
+```
+
+A setter rather than a React context, so route loaders — which run outside
+React — can use the client too. For cookie sessions, leave the token provider
+alone; `credentials: 'include'` is already set.
+
+## Errors
+
+Everything that leaves the transport is an `ApiError` with a `kind`:
+
+| kind         | Means                                                    |
+| ------------ | -------------------------------------------------------- |
+| `network`    | The request never completed: offline, DNS, CORS, aborted |
+| `http`       | The server answered with a non-2xx status                |
+| `validation` | 422 or equivalent, with per-field messages               |
+| `auth`       | 401 or 403, already handled centrally                    |
+| `parse`      | The body was not what the contract promised              |
+
+That single shape is what makes the layers above it simple. An error boundary
+does not have to guess whether it is holding a `TypeError` from a dropped
+connection or a 422 with field errors.
+
+```ts
+if (isApiError(error) && error.fields) applyServerErrors(form, error.fields)
+else toast.add({ title: userMessage(error), type: 'danger' })
+```
+
+`userMessage()` returns copy that is safe to show. It is deliberately vague for
+server faults — a stack trace is noise to the user and a liability to you — and
+the real error stays on the object for logging and for `<ErrorState error={…} />`,
+which shows details in development only.
+
+`error.isTransient` distinguishes what is worth retrying. The query client uses
+it: network failures and 5xx are retried, a 404 or a 422 is not, and an auth
+failure never is.
+
+## Feature API functions
+
+They live beside the feature, so deleting the folder deletes its endpoints:
+
+```ts
+// features/devices/api.ts
+export async function listDevices(params, signal?) {
+  const response = await api.get('/devices', { query: { ...params }, signal })
+  return pageSchema.parse(response)
+}
+```
+
+Parsing at the boundary catches drift between frontend and backend where it
+happens, rather than three components deep as `undefined is not an object`.
+
+Pass the `signal` through. TanStack Query supplies one, and it is what makes an
+abandoned navigation stop fetching.
+
+## Query above transport
+
+```ts
+export const deviceKeys = {
+  all: ['devices'] as const,
+  lists: () => [...deviceKeys.all, 'list'] as const,
+  list: (params) => [...deviceKeys.lists(), params] as const,
+  detail: (id) => [...deviceKeys.all, 'detail', id] as const,
+}
+```
+
+One factory, so an invalidation can never miss a query because two files spelled
+the key differently.
+
+Use `queryOptions()` rather than a custom hook, so the same definition works in
+a component, in a route loader for prefetching, and in `ensureQueryData`:
+
+```ts
+export const deviceListQuery = (params) =>
+  queryOptions({
+    queryKey: deviceKeys.list(params),
+    queryFn: ({ signal }) => listDevices(params, signal),
+    placeholderData: (previous) => previous, // paging must not blank the table
+  })
+```
+
+### Defaults worth knowing
+
+The template sets `staleTime: 30_000`. The library default of `0` refetches on
+every mount, which makes moving between two pages feel like reloading the app.
+
+Mutations do not retry. A retried write can duplicate a resource; that decision
+belongs to the caller.
+
+## Server state belongs in the URL
+
+Filters, sorting, paging and the selected row go in the URL, not in `useState`.
+A filtered view becomes linkable, survives a reload, and the back button behaves.
+It also lets a route loader prefetch exactly what the page is about to ask for:
+
+```ts
+export const Route = createFileRoute('/_app/devices')({
+  validateSearch: searchSchema,
+  loaderDeps: ({ search }) => toListParams(search),
+  loader: ({ context, deps }) => prefetchDeviceList(context.queryClient, deps),
+})
+```
+
+`loaderDeps` should include only what the data depends on. The selected row is
+in the URL too, and selecting a row must not refetch the list.
+
+## Generated clients
+
+If you have an OpenAPI document, generate the types and the calls, and keep the
+same boundary: the generated code replaces `api.ts`, and it should still throw
+`ApiError`. Wrapping the generated client rather than calling it from components
+is what keeps the error handling, auth and cancellation in one place.
+
+## Server functions
+
+The full-stack template uses TanStack Start's server functions instead of HTTP.
+The layering is identical — server functions are the transport, `queries.ts`
+sits above them, components see neither. Only the bottom layer changes.

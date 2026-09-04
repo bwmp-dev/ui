@@ -17,7 +17,11 @@ const output = join(workspace, 'out.css')
 
 writeFileSync(
   input,
-  ['@import "tailwindcss";', '@import "@stack/tokens/theme.css";', '@import "@stack/ui/styles.css";'].join('\n'),
+  [
+    '@import "tailwindcss";',
+    '@import "@stack/tokens/theme.css";',
+    '@import "@stack/ui/styles.css";',
+  ].join('\n'),
 )
 
 const cli = createRequire(import.meta.url).resolve('@tailwindcss/cli/package.json')

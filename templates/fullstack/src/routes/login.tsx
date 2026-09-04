@@ -91,9 +91,9 @@ function LoginPage() {
           </form>
         </Card>
 
-        <p className="text-fg-subtle mt-3 text-center text-2xs">
-          Sample credentials: any email with the password <code className="font-mono">password</code>
-          .
+        <p className="mt-3 text-center text-2xs text-fg-subtle">
+          Sample credentials: any email with the password{' '}
+          <code className="font-mono">password</code>.
         </p>
       </div>
     </main>

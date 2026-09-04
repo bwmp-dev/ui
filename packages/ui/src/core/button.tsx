@@ -14,7 +14,7 @@ export const buttonVariants = cv({
   base: [
     'relative inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap',
     'rounded-md border font-medium select-none',
-    'transition-control focus-ring',
+    'focus-ring transition-control',
     'disabled:pointer-events-none disabled:opacity-50',
     'aria-disabled:pointer-events-none aria-disabled:opacity-50',
   ],

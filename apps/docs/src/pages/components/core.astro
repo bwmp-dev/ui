@@ -1,0 +1,83 @@
+---
+import DocsShell from '~/components/DocsShell.astro'
+import Preview from '~/components/Preview.astro'
+import PropsTable from '~/components/PropsTable.astro'
+import ButtonVariants from '~/demos/button-variants'
+import ButtonSizes from '~/demos/button-sizes'
+import ButtonLoading from '~/demos/button-loading'
+import ButtonRender from '~/demos/button-render'
+import Badges from '~/demos/badges'
+import CoreBits from '~/demos/core-bits'
+---
+
+<DocsShell
+  title="Core"
+  description="The primitives everything else is built from: buttons, badges, cards and the small pieces that fill them."
+>
+  <h2 id="button">Button</h2>
+  <p>
+    Buttons default to the neutral <code>secondary</code> variant. Promoting an action to
+    <code>primary</code> should be a decision, not the path of least resistance — a screen with five primary
+    buttons has no primary action.
+  </p>
+
+  <Preview demo="button-variants" title="Variants">
+    <ButtonVariants />
+  </Preview>
+  <Preview
+    demo="button-sizes"
+    title="Sizes"
+    description="Heights come from the density tokens, so every control shrinks together in compact mode."
+  >
+    <ButtonSizes />
+  </Preview>
+  <Preview
+    demo="button-loading"
+    title="Loading and disabled"
+    description="Loading keeps the button's width and sets aria-busy."
+  >
+    {/* Stateful, so it hydrates; the static demos above ship no JavaScript. */}
+    <ButtonLoading client:visible />
+  </Preview>
+  <Preview
+    demo="button-render"
+    title="Rendering as something else"
+    description="The render prop swaps the element while keeping the variants. This is how a router Link becomes a button."
+  >
+    <ButtonRender />
+  </Preview>
+
+  <h3>Accessibility</h3>
+  <ul>
+    <li>Renders a real <code>&lt;button&gt;</code>, so Enter, Space and form submission work.</li>
+    <li>
+      When <code>render</code> replaces the element, <code>disabled</code> becomes
+      <code>aria-disabled</code> — the HTML attribute means nothing on an anchor.
+    </li>
+    <li><code>IconButton</code> requires a <code>label</code>; an icon alone announces nothing.</li>
+  </ul>
+
+  <h3>API</h3>
+  <PropsTable type="ButtonProps" element="button" />
+
+  <h2 id="badge">Badge</h2>
+  <p>
+    Status, not decoration. Use <code>dot</code> when the badge conveys state — colour alone is not a
+    reliable signal. Square by default; pills are for things that read as chips.
+  </p>
+  <Preview demo="badges" title="Tones and variants">
+    <Badges />
+  </Preview>
+  <PropsTable type="BadgeProps" element="span" />
+
+  <h2 id="card">Card and friends</h2>
+  <p>
+    Reach for a <code>Card</code> when content genuinely needs separating from what surrounds it. Grouping
+    with headings, spacing and dividers is usually better — a page of nested cards has no hierarchy left
+    to give.
+  </p>
+  <Preview demo="core-bits" title="Avatar, Spinner, Kbd, Code, Progress, Separator, Skeleton, Card">
+    <CoreBits />
+  </Preview>
+  <PropsTable type="CardProps" element="div" />
+</DocsShell>
