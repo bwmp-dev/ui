@@ -127,11 +127,13 @@
   --easing-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
 
   /* ------------------------------------------------------------- layering */
+  /* `--z-overlay` is the scrim, so it sits below everything it dims. Putting it
+     above the drawer paints the drawer's own surface 66% black. */
   --z-base: 0;
   --z-sticky: 100;
   --z-navbar: 200;
-  --z-drawer: 300;
-  --z-overlay: 400;
+  --z-overlay: 300;
+  --z-drawer: 400;
   --z-dialog: 500;
   --z-popover: 600;
   --z-toast: 700;
