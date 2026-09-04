@@ -1,6 +1,6 @@
 {
   "name": "@bwmp-dev/ui",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The shared React component system.",
   "license": "MIT",
   "repository": {

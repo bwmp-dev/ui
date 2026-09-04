@@ -1,6 +1,6 @@
 {
   "name": "@bwmp-dev/create-stack",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Generate a project from one of the stack templates.",
   "license": "MIT",
   "repository": {

@@ -1,6 +1,6 @@
 {
   "name": "@bwmp-dev/hooks",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Reusable React hooks with no design-system coupling.",
   "license": "MIT",
   "repository": {
