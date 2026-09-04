@@ -81,9 +81,12 @@ against a real browser.
 ## Commands
 
 ```bash
-pnpm dev              # every dev server
+pnpm dev              # docs and playground — the loop for the system itself
 pnpm docs             # just the documentation site
 pnpm playground       # just the component sandbox
+pnpm app              # the application template
+pnpm site             # the website template
+pnpm fullstack        # the full-stack template
 pnpm build
 pnpm lint
 pnpm typecheck

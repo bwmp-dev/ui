@@ -8,6 +8,7 @@ export default defineConfig({
   site: 'https://stack.example',
   integrations: [react(), mdx()],
   vite: { plugins: [tailwindcss()] },
+  server: { port: 4321 },
   markdown: {
     shikiConfig: { themes: { light: 'github-light', dark: 'github-dark-dimmed' }, wrap: true },
   },

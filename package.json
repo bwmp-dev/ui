@@ -8,9 +8,12 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "turbo run dev",
+    "dev": "turbo run dev --filter=@stack/docs --filter=@stack/playground",
     "docs": "turbo run dev --filter=@stack/docs",
     "playground": "turbo run dev --filter=@stack/playground",
+    "app": "turbo run dev --filter=@stack/template-app",
+    "site": "turbo run dev --filter=@stack/template-site",
+    "fullstack": "turbo run dev --filter=@stack/template-fullstack",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",

@@ -9,6 +9,7 @@ export default defineConfig({
   site: SITE.url,
   integrations: [react(), sitemap()],
   vite: { plugins: [tailwindcss()] },
+  server: { port: 4322 },
   // Every page is prerendered. Switch to 'server' only when a page genuinely
   // needs a request at runtime.
   output: 'static',
