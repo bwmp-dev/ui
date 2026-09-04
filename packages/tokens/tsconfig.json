@@ -1,0 +1,5 @@
+{
+  "extends": "@stack/config-typescript/library",
+  "include": ["src"],
+  "compilerOptions": { "outDir": "dist", "noEmit": true }
+}

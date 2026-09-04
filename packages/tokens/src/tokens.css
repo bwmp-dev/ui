@@ -1,0 +1,193 @@
+/**
+ * @stack/tokens — raw design tokens.
+ *
+ * Plain CSS custom properties with no framework dependency: usable from React,
+ * Astro, vanilla CSS or anything else. Tailwind consumes these via tailwind.css.
+ *
+ * Three orthogonal axes, all driven by attributes on a root element:
+ *   data-appearance="light|dark"        colour scheme (falls back to the OS)
+ *   data-theme="<name>"                 brand identity
+ *   data-density="comfortable|compact"  geometry
+ *
+ * Colours use light-dark(), so every token is declared once and resolves
+ * against `color-scheme`. That keeps a brand override to a single line and
+ * makes the whole system work with JavaScript disabled.
+ */
+
+:root {
+  color-scheme: light dark;
+}
+
+[data-appearance='light'] {
+  color-scheme: light;
+}
+
+[data-appearance='dark'] {
+  color-scheme: dark;
+}
+
+:root {
+  /* ---------------------------------------------------------------- brand */
+  /* The single knob most projects need to change. */
+  --accent: light-dark(oklch(0.55 0.16 254), oklch(0.7 0.15 254));
+  --accent-hover: light-dark(oklch(0.49 0.16 254), oklch(0.76 0.14 254));
+  --accent-active: light-dark(oklch(0.44 0.15 254), oklch(0.81 0.12 254));
+  --accent-fg: light-dark(oklch(1 0 0), oklch(0.18 0.02 254));
+  --accent-text: light-dark(oklch(0.5 0.16 254), oklch(0.78 0.13 254));
+  --accent-subtle: color-mix(in oklab, var(--accent) 12%, transparent);
+  --accent-line: color-mix(in oklab, var(--accent) 42%, transparent);
+
+  /* ------------------------------------------------------------- surfaces */
+  --canvas: light-dark(oklch(0.985 0.001 265), oklch(0.168 0.006 265));
+  --surface: light-dark(oklch(1 0 0), oklch(0.205 0.007 265));
+  --surface-raised: light-dark(oklch(1 0 0), oklch(0.245 0.008 265));
+  --surface-sunken: light-dark(oklch(0.965 0.002 265), oklch(0.142 0.006 265));
+  --overlay: light-dark(oklch(0.24 0.01 265 / 0.42), oklch(0.09 0.005 265 / 0.66));
+
+  /* ----------------------------------------------------------- foreground */
+  --fg: light-dark(oklch(0.22 0.008 265), oklch(0.955 0.003 265));
+  --fg-muted: light-dark(oklch(0.47 0.01 265), oklch(0.725 0.008 265));
+  --fg-subtle: light-dark(oklch(0.62 0.011 265), oklch(0.575 0.009 265));
+  --fg-disabled: light-dark(oklch(0.74 0.008 265), oklch(0.45 0.008 265));
+
+  /* ---------------------------------------------------------------- lines */
+  --line: light-dark(oklch(0.9 0.004 265), oklch(0.302 0.008 265));
+  --line-muted: light-dark(oklch(0.94 0.003 265), oklch(0.252 0.008 265));
+  --line-strong: light-dark(oklch(0.82 0.006 265), oklch(0.4 0.01 265));
+
+  /* ---------------------------------------------------------- interactive */
+  /* Translucent so they layer correctly on any surface. */
+  --hover: light-dark(oklch(0.2 0.01 265 / 0.045), oklch(1 0 0 / 0.055));
+  --active: light-dark(oklch(0.2 0.01 265 / 0.08), oklch(1 0 0 / 0.1));
+  --selected: color-mix(in oklab, var(--accent) 16%, transparent);
+  --ring: var(--accent);
+  --ring-width: 2px;
+  --ring-offset: 1px;
+
+  /* --------------------------------------------------------------- status */
+  --success: light-dark(oklch(0.52 0.13 152), oklch(0.7 0.14 152));
+  --success-fg: light-dark(oklch(1 0 0), oklch(0.17 0.03 152));
+  --success-text: light-dark(oklch(0.46 0.12 152), oklch(0.76 0.13 152));
+  --success-subtle: color-mix(in oklab, var(--success) 13%, transparent);
+  --success-line: color-mix(in oklab, var(--success) 40%, transparent);
+
+  --warning: light-dark(oklch(0.72 0.15 72), oklch(0.79 0.15 78));
+  --warning-fg: light-dark(oklch(0.22 0.05 72), oklch(0.2 0.05 78));
+  --warning-text: light-dark(oklch(0.52 0.13 62), oklch(0.83 0.14 82));
+  --warning-subtle: color-mix(in oklab, var(--warning) 15%, transparent);
+  --warning-line: color-mix(in oklab, var(--warning) 42%, transparent);
+
+  --danger: light-dark(oklch(0.55 0.2 25), oklch(0.65 0.19 25));
+  --danger-hover: light-dark(oklch(0.49 0.2 25), oklch(0.71 0.18 25));
+  --danger-active: light-dark(oklch(0.44 0.19 25), oklch(0.77 0.16 25));
+  --danger-fg: light-dark(oklch(1 0 0), oklch(0.17 0.04 25));
+  --danger-text: light-dark(oklch(0.51 0.19 25), oklch(0.74 0.17 25));
+  --danger-subtle: color-mix(in oklab, var(--danger) 13%, transparent);
+  --danger-line: color-mix(in oklab, var(--danger) 42%, transparent);
+
+  --info: light-dark(oklch(0.58 0.11 232), oklch(0.72 0.11 232));
+  --info-fg: light-dark(oklch(1 0 0), oklch(0.18 0.03 232));
+  --info-text: light-dark(oklch(0.5 0.11 232), oklch(0.78 0.1 232));
+  --info-subtle: color-mix(in oklab, var(--info) 13%, transparent);
+  --info-line: color-mix(in oklab, var(--info) 40%, transparent);
+
+  /* ----------------------------------------------------------- typography */
+  --font-ui:
+    "InterVariable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-code:
+    "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  /* ---------------------------------------------------------------- shape */
+  /* One knob drives the whole radius identity; the scale lives in tailwind.css. */
+  --radius-base: 0.375rem;
+
+  /* ------------------------------------------------------------ elevation */
+  /* Shadows read as depth in light mode and as separation in dark mode, so the
+     dark variants stay tight rather than turning into a soft glow. */
+  --elevation-1: 0 1px 2px light-dark(oklch(0.2 0.01 265 / 0.06), oklch(0 0 0 / 0.4));
+  --elevation-2:
+    0 1px 2px light-dark(oklch(0.2 0.01 265 / 0.06), oklch(0 0 0 / 0.4)),
+    0 2px 6px -1px light-dark(oklch(0.2 0.01 265 / 0.07), oklch(0 0 0 / 0.35));
+  --elevation-3:
+    0 2px 4px light-dark(oklch(0.2 0.01 265 / 0.06), oklch(0 0 0 / 0.45)),
+    0 8px 20px -4px light-dark(oklch(0.2 0.01 265 / 0.1), oklch(0 0 0 / 0.5));
+  --elevation-4:
+    0 4px 8px light-dark(oklch(0.2 0.01 265 / 0.07), oklch(0 0 0 / 0.5)),
+    0 16px 40px -8px light-dark(oklch(0.2 0.01 265 / 0.14), oklch(0 0 0 / 0.6));
+
+  /* --------------------------------------------------------------- motion */
+  --duration-instant: 60ms;
+  --duration-fast: 120ms;
+  --duration-normal: 180ms;
+  --duration-slow: 280ms;
+  --easing-standard: cubic-bezier(0.2, 0, 0.13, 1);
+  --easing-entrance: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --easing-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+
+  /* ------------------------------------------------------------- layering */
+  --z-base: 0;
+  --z-sticky: 100;
+  --z-navbar: 200;
+  --z-drawer: 300;
+  --z-overlay: 400;
+  --z-dialog: 500;
+  --z-popover: 600;
+  --z-toast: 700;
+  --z-tooltip: 800;
+
+  /* --------------------------------------------------------------- layout */
+  --width-page: 80rem;
+  --width-content: 56rem;
+  --width-narrow: 34rem;
+  --width-prose: 68ch;
+}
+
+/* --------------------------------------------------------------- density */
+/* Geometry only. Colour and brand identity never change with density. */
+:root,
+[data-density='comfortable'] {
+  --control-h-xs: 1.5rem;
+  --control-h-sm: 1.75rem;
+  --control-h-md: 2rem;
+  --control-h-lg: 2.5rem;
+  --control-px-xs: 0.5rem;
+  --control-px-sm: 0.625rem;
+  --control-px-md: 0.75rem;
+  --control-px-lg: 1rem;
+  --row-h: 2.5rem;
+  --stack-gap: 0.75rem;
+  --section-gap: 1.5rem;
+  --sidebar-w: 15rem;
+  --navbar-h: 3rem;
+  --ui-text-size: 0.875rem;
+  --ui-line-height: 1.25rem;
+}
+
+[data-density='compact'] {
+  --control-h-xs: 1.25rem;
+  --control-h-sm: 1.5rem;
+  --control-h-md: 1.75rem;
+  --control-h-lg: 2.125rem;
+  --control-px-xs: 0.375rem;
+  --control-px-sm: 0.5rem;
+  --control-px-md: 0.625rem;
+  --control-px-lg: 0.875rem;
+  --row-h: 2rem;
+  --stack-gap: 0.5rem;
+  --section-gap: 1rem;
+  --sidebar-w: 13.5rem;
+  --navbar-h: 2.5rem;
+  --ui-text-size: 0.8125rem;
+  --ui-line-height: 1.125rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 1ms;
+    --duration-fast: 1ms;
+    --duration-normal: 1ms;
+    --duration-slow: 1ms;
+  }
+}

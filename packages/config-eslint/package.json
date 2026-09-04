@@ -1,0 +1,22 @@
+{
+  "name": "@stack/config-eslint",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "files": ["*.js"],
+  "publishConfig": { "access": "restricted" },
+  "exports": {
+    "./base": "./base.js",
+    "./react": "./react.js",
+    "./react-app": "./react-app.js"
+  },
+  "dependencies": {
+    "@eslint/js": "catalog:",
+    "eslint-plugin-jsx-a11y": "catalog:",
+    "eslint-plugin-react-hooks": "catalog:",
+    "eslint-plugin-react-refresh": "catalog:",
+    "globals": "catalog:",
+    "typescript-eslint": "catalog:"
+  },
+  "peerDependencies": { "eslint": ">=9" }
+}

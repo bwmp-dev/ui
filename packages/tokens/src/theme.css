@@ -1,0 +1,252 @@
+/**
+ * @stack/tokens — Tailwind bridge.
+ *
+ * Assumes `@import "tailwindcss"` has already run. Maps the raw tokens onto
+ * Tailwind's theme namespaces with `@theme inline`, so utilities emit the
+ * underlying `var(--token)` directly and keep responding to `data-appearance`,
+ * `data-theme` and `data-density` through the cascade.
+ *
+ *   @import "tailwindcss";
+ *   @import "@stack/tokens/theme.css";
+ */
+
+@import './tokens.css';
+
+/* `dark:` needs an explicit attribute. Semantic tokens work without it — reach
+   for `dark:` only when a value genuinely cannot be expressed as a token. */
+@custom-variant dark (&:where([data-appearance='dark'], [data-appearance='dark'] *));
+@custom-variant compact (&:where([data-density='compact'], [data-density='compact'] *));
+
+@theme inline {
+  /* ------------------------------------------------------------- colours */
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-overlay: var(--overlay);
+
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-fg-disabled: var(--fg-disabled);
+
+  --color-line: var(--line);
+  --color-line-muted: var(--line-muted);
+  --color-line-strong: var(--line-strong);
+
+  --color-hover: var(--hover);
+  --color-active: var(--active);
+  --color-selected: var(--selected);
+  --color-ring: var(--ring);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-active: var(--accent-active);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-text: var(--accent-text);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-line: var(--accent-line);
+
+  --color-success: var(--success);
+  --color-success-fg: var(--success-fg);
+  --color-success-text: var(--success-text);
+  --color-success-subtle: var(--success-subtle);
+  --color-success-line: var(--success-line);
+
+  --color-warning: var(--warning);
+  --color-warning-fg: var(--warning-fg);
+  --color-warning-text: var(--warning-text);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-warning-line: var(--warning-line);
+
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-active: var(--danger-active);
+  --color-danger-fg: var(--danger-fg);
+  --color-danger-text: var(--danger-text);
+  --color-danger-subtle: var(--danger-subtle);
+  --color-danger-line: var(--danger-line);
+
+  --color-info: var(--info);
+  --color-info-fg: var(--info-fg);
+  --color-info-text: var(--info-text);
+  --color-info-subtle: var(--info-subtle);
+  --color-info-line: var(--info-line);
+
+  /* ---------------------------------------------------------- typography */
+  --font-sans: var(--font-ui);
+  --font-mono: var(--font-code);
+
+  /* Density-aware UI text size; the rest of the Tailwind type scale is intact. */
+  --text-ui: var(--ui-text-size);
+  --text-ui--line-height: var(--ui-line-height);
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+
+  /* --------------------------------------------------------------- shape */
+  /* Derived from one knob so a project can restyle every corner at once. */
+  --radius-xs: calc(var(--radius-base) * 0.5);
+  --radius-sm: calc(var(--radius-base) * 0.75);
+  --radius-md: var(--radius-base);
+  --radius-lg: calc(var(--radius-base) * 1.5);
+  --radius-xl: calc(var(--radius-base) * 2);
+  --radius-2xl: calc(var(--radius-base) * 3);
+
+  /* --------------------------------------------------------- geometry */
+  /* Named spacing entries also produce h-*, w-*, p-*, gap-* utilities. */
+  --spacing-control-xs: var(--control-h-xs);
+  --spacing-control-sm: var(--control-h-sm);
+  --spacing-control-md: var(--control-h-md);
+  --spacing-control-lg: var(--control-h-lg);
+  --spacing-gutter-xs: var(--control-px-xs);
+  --spacing-gutter-sm: var(--control-px-sm);
+  --spacing-gutter-md: var(--control-px-md);
+  --spacing-gutter-lg: var(--control-px-lg);
+  --spacing-row: var(--row-h);
+  --spacing-stack: var(--stack-gap);
+  --spacing-section: var(--section-gap);
+  --spacing-sidebar: var(--sidebar-w);
+  --spacing-navbar: var(--navbar-h);
+
+  /* ------------------------------------------------------------ surfaces */
+  --shadow-xs: var(--elevation-1);
+  --shadow-sm: var(--elevation-2);
+  --shadow-md: var(--elevation-3);
+  --shadow-lg: var(--elevation-4);
+
+  /* -------------------------------------------------------------- motion */
+  --ease-standard: var(--easing-standard);
+  --ease-entrance: var(--easing-entrance);
+  --ease-exit: var(--easing-exit);
+
+  /* ------------------------------------------------------------- layout */
+  --container-page: var(--width-page);
+  --container-content: var(--width-content);
+  --container-narrow: var(--width-narrow);
+}
+
+@theme {
+  --animate-spin-slow: spin 1.4s linear infinite;
+  --animate-pulse-subtle: pulse-subtle 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes pulse-subtle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.45;
+    }
+  }
+}
+
+@layer base {
+  /*
+   * Tailwind v4 defaults borders to `currentColor`. Every surface in this system
+   * wants the neutral line token instead, so make that the default and let
+   * `border-accent-line` etc. opt out.
+   */
+  *,
+  ::before,
+  ::after,
+  ::backdrop {
+    border-color: var(--line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--line-strong) transparent;
+    scrollbar-width: thin;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--fg);
+    font-family: var(--font-ui);
+    font-size: var(--ui-text-size);
+    line-height: var(--ui-line-height);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Pointer interaction gets no ring; keyboard focus always does. */
+  :focus-visible {
+    outline: var(--ring-width) solid var(--ring);
+    outline-offset: var(--ring-offset);
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--accent) 28%, transparent);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@utility focus-ring {
+  outline: var(--ring-width) solid transparent;
+  outline-offset: var(--ring-offset);
+
+  &:focus-visible {
+    outline-color: var(--ring);
+  }
+}
+
+/* Base UI marks the active trigger/popup while an overlay is open. */
+@utility surface-panel {
+  background-color: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-3);
+}
+
+/**
+ * Motion lives here rather than in component class strings so that a single
+ * change restyles every transition, and so reduced-motion (which only rewrites
+ * the duration tokens) actually reaches the components.
+ */
+@utility transition-control {
+  transition-property: color, background-color, border-color, box-shadow, outline-color, opacity;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--easing-standard);
+}
+
+/* Base UI marks popups with data-starting-style / data-ending-style while they
+   enter and leave, which is enough to drive a transition without JS. */
+@utility popup-motion {
+  transition-property: opacity, transform;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--easing-entrance);
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  &[data-ending-style] {
+    transition-timing-function: var(--easing-exit);
+  }
+}
+
+@utility overlay-motion {
+  transition-property: opacity;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--easing-standard);
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+  }
+}
+
+@utility drawer-motion {
+  transition-property: opacity, transform;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--easing-entrance);
+
+  &[data-ending-style] {
+    transition-timing-function: var(--easing-exit);
+  }
+}

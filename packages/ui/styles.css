@@ -1,0 +1,12 @@
+/**
+ * Tell Tailwind to scan this package for utility classes.
+ *
+ * The path is relative to this file, so it resolves the same way whether the
+ * package is linked in the monorepo or installed into node_modules. `src` is
+ * always published, which is why it is scanned instead of `dist`.
+ *
+ *   @import "tailwindcss";
+ *   @import "@stack/tokens/theme.css";
+ *   @import "@stack/ui/styles.css";
+ */
+@source "./src";

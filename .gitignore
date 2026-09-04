@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.output/
+.vinxi/
+.astro/
+.turbo/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.DS_Store
+routeTree.gen.ts
+.css-test-*/
+.css-dbg-*/

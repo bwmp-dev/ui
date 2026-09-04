@@ -1,0 +1,44 @@
+{
+  "name": "@stack/icons",
+  "version": "0.1.0",
+  "description": "Brand marks Lucide does not ship, plus the shared icon contract.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "src",
+    "dist"
+  ],
+  "exports": {
+    ".": "./src/index.tsx"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "clean": "rimraf dist .turbo"
+  },
+  "peerDependencies": {
+    "react": "catalog:"
+  },
+  "devDependencies": {
+    "@stack/config-eslint": "workspace:*",
+    "@stack/config-typescript": "workspace:*",
+    "@types/react": "catalog:",
+    "eslint": "catalog:",
+    "react": "catalog:",
+    "rimraf": "^6.1.2",
+    "tsdown": "^0.23.0",
+    "typescript": "catalog:"
+  }
+}
