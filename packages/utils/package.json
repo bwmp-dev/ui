@@ -1,6 +1,6 @@
 {
   "name": "@bwmp-dev/utils",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Small framework-independent helpers shared across the stack.",
   "license": "MIT",
   "repository": {
