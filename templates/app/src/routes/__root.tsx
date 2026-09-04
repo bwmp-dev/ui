@@ -52,8 +52,8 @@ function NotFound() {
           The page you asked for does not exist, or you no longer have access to it.
         </p>
         <div className="mt-2 flex items-center gap-2">
-          <LinkButton variant="primary" render={<Link to="/devices" />}>
-            Go to devices
+          <LinkButton variant="primary" render={<Link to="/" />}>
+            Go home
           </LinkButton>
           <Button onClick={() => history.back()}>Go back</Button>
         </div>

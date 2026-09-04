@@ -2,7 +2,8 @@ import { useMemo } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { CommandMenu, useTheme, type CommandAction } from '@stack/ui'
 import { Kbd } from '@stack/ui'
-import { Contrast, LogOut, Rows3, Server, Settings } from 'lucide-react'
+import { Contrast, LogOut, Rows3 } from 'lucide-react'
+import { NAV_ITEMS } from '~/config/navigation'
 import { useAuth } from '~/features/auth/auth-context'
 
 export type AppCommandMenuProps = {
@@ -25,21 +26,16 @@ export function AppCommandMenu({ open, onOpenChange, pageActions = [] }: AppComm
   const actions = useMemo<CommandAction[]>(
     () => [
       ...pageActions,
-      {
-        id: 'nav-devices',
-        label: 'Go to devices',
+      // Navigation commands come from the same list the sidebar renders, so a
+      // new section appears in both without being registered twice.
+      ...NAV_ITEMS.map((item) => ({
+        id: `nav-${item.to}`,
+        label: `Go to ${item.label.toLowerCase()}`,
         group: 'Navigation',
-        icon: Server,
-        keywords: ['fleet', 'hardware'],
-        onSelect: () => void navigate({ to: '/devices' }),
-      },
-      {
-        id: 'nav-settings',
-        label: 'Go to settings',
-        group: 'Navigation',
-        icon: Settings,
-        onSelect: () => void navigate({ to: '/settings' }),
-      },
+        icon: item.icon,
+        ...(item.keywords ? { keywords: item.keywords } : {}),
+        onSelect: () => void navigate({ to: item.to }),
+      })),
       {
         id: 'toggle-appearance',
         label: resolvedAppearance === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',

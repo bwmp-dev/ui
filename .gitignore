@@ -17,3 +17,4 @@ routeTree.gen.ts
 .css-dbg-*/
 shot-*.png
 .output/
+tooling/create-stack/templates/

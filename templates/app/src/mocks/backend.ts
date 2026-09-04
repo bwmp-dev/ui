@@ -9,9 +9,31 @@
  * Delete this directory and set `VITE_API_MOCK=false` once a backend exists.
  */
 
-import type { Paginated } from '~/api/types'
-import type { Device, DeviceInput } from '~/features/devices/schema'
-import type { Session } from '~/features/auth/schema'
+/**
+ * The mock declares its own shapes rather than importing the feature schemas.
+ *
+ * It is standing in for a server, and a server has its own copy of the
+ * contract — importing the client's types here would hide exactly the kind of
+ * drift that the per-feature schemas exist to catch.
+ */
+type MockUser = { id: string; name: string; email: string; role: 'admin' | 'member' | 'viewer' }
+type Session = { token: string; user: MockUser }
+
+type Device = {
+  id: string
+  name: string
+  kind: 'gateway' | 'sensor' | 'controller'
+  status: 'online' | 'degraded' | 'offline'
+  region: string
+  firmware: string
+  lastSeen: string
+  throughputKbps: number
+  notes: string
+}
+
+type DeviceInput = Pick<Device, 'name' | 'kind' | 'region' | 'notes'>
+
+type Paginated<T> = { items: T[]; total: number; page: number; pageSize: number }
 
 const REGIONS = ['eu-west-1', 'eu-central-1', 'us-east-1', 'us-west-2', 'ap-south-1']
 const STATUSES = ['online', 'degraded', 'offline'] as const

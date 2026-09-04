@@ -1,13 +1,9 @@
 import { Link } from '@tanstack/react-router'
 import { Avatar, DropdownMenu, Kbd, Sidebar } from '@stack/ui'
-import { LogOut, Monitor, Search, Server, Settings, SlidersHorizontal } from 'lucide-react'
+import { LogOut, Monitor, Search, SlidersHorizontal } from 'lucide-react'
 import { env } from '~/lib/env'
+import { NAV_ITEMS } from '~/config/navigation'
 import { useAuth } from '~/features/auth/auth-context'
-
-const NAV = [
-  { to: '/devices', label: 'Devices', icon: Server },
-  { to: '/settings', label: 'Settings', icon: Settings },
-] as const
 
 export type AppSidebarProps = {
   onOpenCommandMenu: () => void
@@ -37,7 +33,7 @@ export function AppSidebar({ onOpenCommandMenu }: AppSidebarProps) {
         </Sidebar.Group>
 
         <Sidebar.Group title="Fleet">
-          {NAV.map(({ to, label, icon }) => (
+          {NAV_ITEMS.map(({ to, label, icon }) => (
             <Sidebar.Item
               key={to}
               icon={icon}
