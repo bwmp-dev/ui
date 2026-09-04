@@ -1,1 +1,1 @@
-export { reactApp as default } from '@stack/config-eslint/react-app'
+export { reactApp as default } from '@bwmp-dev/eslint-config/react-app'

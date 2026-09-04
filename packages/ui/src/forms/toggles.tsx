@@ -4,7 +4,7 @@ import { Radio as BaseRadio } from '@base-ui/react/radio'
 import { RadioGroup as BaseRadioGroup } from '@base-ui/react/radio-group'
 import { Switch as BaseSwitch } from '@base-ui/react/switch'
 import { Check, Minus } from 'lucide-react'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 
 const controlBox = [
   'grid shrink-0 place-items-center border transition-control focus-ring',

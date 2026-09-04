@@ -1,4 +1,4 @@
-import { Badge, Code, PropertyPanel, SettingsSection, SplitPane, Switch } from '@stack/ui'
+import { Badge, Code, PropertyPanel, SettingsSection, SplitPane, Switch } from '@bwmp-dev/ui'
 import { Stack } from './shared'
 
 export function LayoutSection() {

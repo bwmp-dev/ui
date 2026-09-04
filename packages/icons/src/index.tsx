@@ -1,14 +1,14 @@
 import type { ComponentType, SVGProps } from 'react'
 
 /**
- * @stack/icons
+ * @bwmp-dev/icons
  *
  * This package deliberately does **not** re-export Lucide. A barrel over 1500
  * icons defeats tree shaking in some bundlers and adds an indirection that buys
  * nothing — import from `lucide-react` directly.
  *
  * What lives here is the small set of marks Lucide does not ship (brands are
- * out of scope for it) plus the shared icon contract that @stack/ui components
+ * out of scope for it) plus the shared icon contract that @bwmp-dev/ui components
  * accept for their `icon` props.
  */
 

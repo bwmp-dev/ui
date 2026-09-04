@@ -1,4 +1,4 @@
-import { Tabs } from '@stack/ui'
+import { Tabs } from '@bwmp-dev/ui'
 
 export type Shot = {
   src: string
@@ -11,7 +11,7 @@ export type Shot = {
  * The one React island on this site.
  *
  * It exists to show that the shared design system works client-side: `Tabs`
- * comes straight from @stack/ui, with its roving focus and ARIA wiring intact.
+ * comes straight from @bwmp-dev/ui, with its roving focus and ARIA wiring intact.
  * It hydrates on `visible`, so a visitor who never scrolls this far downloads
  * none of it — which is the whole reason the header is plain HTML instead.
  */

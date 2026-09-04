@@ -1,4 +1,4 @@
-import { Button, LinkButton } from '@stack/ui'
+import { Button, LinkButton } from '@bwmp-dev/ui'
 
 /**
  * `render` swaps the underlying element while keeping the styling and the

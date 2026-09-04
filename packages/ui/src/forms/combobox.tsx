@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 import { Check, ChevronsUpDown, X } from 'lucide-react'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 import { controlVariants, type ControlVariants } from './input'
 
 /**

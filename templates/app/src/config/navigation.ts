@@ -1,5 +1,5 @@
 import { Server, Settings } from 'lucide-react'
-import type { IconComponent } from '@stack/icons'
+import type { IconComponent } from '@bwmp-dev/icons'
 
 /**
  * The application's navigation, in one place.

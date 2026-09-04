@@ -6,9 +6,9 @@ import {
   defaultTableFeatures,
   selectionColumn,
   type DefaultTableFeatures,
-} from '@stack/ui/table'
-import { Badge, Code, EmptyState, SearchInput } from '@stack/ui'
-import { formatNumber } from '@stack/utils'
+} from '@bwmp-dev/ui/table'
+import { Badge, Code, EmptyState, SearchInput } from '@bwmp-dev/ui'
+import { formatNumber } from '@bwmp-dev/utils'
 import { Server } from 'lucide-react'
 
 type Device = {

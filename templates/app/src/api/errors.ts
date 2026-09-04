@@ -23,7 +23,7 @@ export class ApiError extends Error {
   override readonly name = 'ApiError'
   readonly kind: ApiErrorKind
   readonly status: number | undefined
-  /** Field path to message, for forms. See `applyServerErrors` in @stack/ui/form. */
+  /** Field path to message, for forms. See `applyServerErrors` in @bwmp-dev/ui/form. */
   readonly fields: Record<string, string> | undefined
   /** The decoded body, kept for debugging. Never render this to a user. */
   readonly body: unknown

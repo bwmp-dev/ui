@@ -1,12 +1,12 @@
 /**
- * @stack/ui
+ * @bwmp-dev/ui
  *
  * Exports are intentional: everything here is part of the supported surface.
  * The `variants` objects are exported alongside their components so a project
  * can extend them (`cv({ base: buttonVariants.variants… })`) rather than fork.
  *
  * Two things live behind subpaths because they carry an optional peer
- * dependency: `@stack/ui/table` (TanStack Table) and `@stack/ui/form`
+ * dependency: `@bwmp-dev/ui/table` (TanStack Table) and `@bwmp-dev/ui/form`
  * (TanStack Form). Nothing in the main entry point imports either.
  */
 

@@ -1,5 +1,5 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 
 export type AppShellProps = ComponentPropsWithRef<'div'> & {
   /** The persistent navigation rail. Usually a `<Sidebar>`. */

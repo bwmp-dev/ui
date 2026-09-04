@@ -7,6 +7,7 @@ import {
   PLAYWRIGHT_DEPENDENCIES,
   PLAYWRIGHT_PATHS,
   TEMPLATES,
+  WORKSPACE_PACKAGE_DIRECTORIES,
   WORKSPACE_PACKAGES,
 } from './templates.mjs'
 
@@ -168,7 +169,7 @@ async function publishedVersions() {
 
   versionCache = {}
   for (const name of WORKSPACE_PACKAGES) {
-    const directory = name.replace('@stack/', '')
+    const directory = WORKSPACE_PACKAGE_DIRECTORIES[name]
     const path = join(REPO_ROOT, 'packages', directory, 'package.json')
     if (!existsSync(path)) continue
     const pkg = JSON.parse(await readFile(path, 'utf8'))
@@ -188,7 +189,7 @@ async function writeNavigation(root) {
   await writeFile(
     join(root, 'src/config/navigation.ts'),
     `import { Settings } from 'lucide-react'
-import type { IconComponent } from '@stack/icons'
+import type { IconComponent } from '@bwmp-dev/icons'
 
 /**
  * The application's navigation, in one place.
@@ -220,7 +221,7 @@ async function writeStarterRoute(root, projectName) {
   await writeFile(
     path,
     `import { createFileRoute } from '@tanstack/react-router'
-import { EmptyState, Page, PageHeader } from '@stack/ui'
+import { EmptyState, Page, PageHeader } from '@bwmp-dev/ui'
 import { Rocket } from 'lucide-react'
 
 export const Route = createFileRoute('/_app/')({
@@ -282,7 +283,7 @@ Application code is organised by feature, not by file type. A feature owns its
 components, hooks, queries, API calls and schema; anything genuinely shared
 moves up into \`src/components\` or \`src/lib\` once there is a second user.
 
-Design tokens come from \`@stack/tokens\` and components from \`@stack/ui\`.
+Design tokens come from \`@bwmp-dev/tokens\` and components from \`@bwmp-dev/ui\`.
 To rebrand, override the custom properties in \`src/styles.css\` — there is
 never a reason to fork the component library.
 `,

@@ -1,5 +1,5 @@
 import type { ComponentPropsWithRef } from 'react'
-import { cv, type VariantProps } from '@stack/utils'
+import { cv, type VariantProps } from '@bwmp-dev/utils'
 
 export const badgeVariants = cv({
   base: 'inline-flex shrink-0 items-center gap-1 border font-medium whitespace-nowrap',

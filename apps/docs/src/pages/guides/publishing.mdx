@@ -19,8 +19,8 @@ packages changed and how, and writes a markdown file to `.changeset/`.
 
 ```md
 ---
-'@stack/ui': minor
-'@stack/tokens': patch
+'@bwmp-dev/ui': minor
+'@bwmp-dev/tokens': patch
 ---
 
 Add SplitPane, and a --row-h token for table rows.
@@ -42,13 +42,13 @@ breaking API change, but they will show up in someone's screenshots.
 
 ## Versioning
 
-Packages version independently. A change to `@stack/ui` does not bump
-`@stack/hooks`, so a project can upgrade one without auditing the other.
+Packages version independently. A change to `@bwmp-dev/ui` does not bump
+`@bwmp-dev/hooks`, so a project can upgrade one without auditing the other.
 
-Changesets bumps dependants automatically: a `minor` on `@stack/tokens` gives
-`@stack/ui` a `patch`, because its dependency range moved.
+Changesets bumps dependants automatically: a `minor` on `@bwmp-dev/tokens` gives
+`@bwmp-dev/ui` a `patch`, because its dependency range moved.
 
-`@stack/config-eslint` and `@stack/config-typescript` change rarely and version
+`@bwmp-dev/eslint-config` and `@bwmp-dev/tsconfig` change rarely and version
 on their own, which matters — a lint rule change should never force a component
 library upgrade.
 
@@ -64,19 +64,18 @@ that does not compile is never published.
 ## Registry
 
 Nothing in the architecture is tied to one. The packages are scoped
-(`@stack/*`), publish with `access: restricted`, and can go to npm, GitHub
+(`@bwmp-dev/*`), publish with `access: restricted`, and can go to npm, GitHub
 Packages, or anything else, by pointing `.npmrc` at it:
 
 ```ini
-@stack:registry=https://npm.pkg.github.com
+@bwmp-dev:registry=https://npm.pkg.github.com
 ```
 
 Adding a registry later is a configuration change, not a refactor.
 
 ## Before publishing for the first time
 
-- Decide the scope. `@stack` is a placeholder; renaming after publishing is
-  worse than deciding now.
+- Confirm that the publishing account can publish under the `@bwmp-dev` scope.
 - Set `publishConfig.access` to `public` if that is the intent — the default
   here is `restricted`, which is the safe way round.
 - Check `files` in each `package.json`. The packages ship `src` alongside
@@ -86,7 +85,7 @@ Adding a registry later is a configuration change, not a refactor.
 
 ## The generator
 
-`@stack/create-stack` bundles the templates at pack time, so an installed CLI
+`@bwmp-dev/create-stack` bundles the templates at pack time, so an installed CLI
 does not need the monorepo. `prepack` copies them in and freezes the versions
 it would otherwise read from the workspace, which is why a generated project
 gets real ranges rather than `workspace:*`.

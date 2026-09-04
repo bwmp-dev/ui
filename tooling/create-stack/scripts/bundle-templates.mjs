@@ -1,7 +1,12 @@
 import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { ALWAYS_EXCLUDE, TEMPLATES, WORKSPACE_PACKAGES } from '../src/templates.mjs'
+import {
+  ALWAYS_EXCLUDE,
+  TEMPLATES,
+  WORKSPACE_PACKAGE_DIRECTORIES,
+  WORKSPACE_PACKAGES,
+} from '../src/templates.mjs'
 
 /**
  * Copy the templates into the package so a published CLI is self-contained,
@@ -36,7 +41,7 @@ for (const template of Object.values(TEMPLATES)) {
 
 const packages = {}
 for (const name of WORKSPACE_PACKAGES) {
-  const path = join(REPO_ROOT, 'packages', name.replace('@stack/', ''), 'package.json')
+  const path = join(REPO_ROOT, 'packages', WORKSPACE_PACKAGE_DIRECTORIES[name], 'package.json')
   try {
     packages[name] = `^${JSON.parse(await readFile(path, 'utf8')).version}`
   } catch {

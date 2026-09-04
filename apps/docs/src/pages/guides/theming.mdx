@@ -20,7 +20,7 @@ every other one, because each axis touches a different set of tokens.
 ## Brand
 
 Overriding a handful of custom properties rebrands every component. There is
-never a reason to fork `@stack/ui`.
+never a reason to fork `@bwmp-dev/ui`.
 
 ```css
 /* src/styles.css, after the token import so it wins */
@@ -67,7 +67,7 @@ specificity as the project's own `:root` block, and the extra `:root` is what
 makes the brand win when the attribute is on `<html>`. A bare `[data-theme]`
 still works for theming a subtree, where it is the only rule that matches.
 
-`@stack/tokens/themes/brands.css` has four worked examples. It exists for the
+`@bwmp-dev/tokens/themes/brands.css` has four worked examples. It exists for the
 docs and the playground; a real project ships one block of its own.
 
 ## Appearance
@@ -94,7 +94,7 @@ blocking inline script in `<head>`; a module script is deferred and runs after
 the browser has painted.
 
 ```tsx
-import { themeInitScript } from '@stack/ui'
+import { themeInitScript } from '@bwmp-dev/ui'
 
 ;<script dangerouslySetInnerHTML={{ __html: themeInitScript() }} />
 ```

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
 
 /**
- * Read the props of every exported `*Props` type in @stack/ui straight from the
+ * Read the props of every exported `*Props` type in @bwmp-dev/ui straight from the
  * source, using the TypeScript compiler, and write them to a JSON file the docs
  * import.
  *

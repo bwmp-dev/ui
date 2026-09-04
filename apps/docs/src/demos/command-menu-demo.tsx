@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Button, CommandMenu, Kbd, type CommandAction } from '@stack/ui'
-import { useHotkey } from '@stack/hooks'
+import { Button, CommandMenu, Kbd, type CommandAction } from '@bwmp-dev/ui'
+import { useHotkey } from '@bwmp-dev/hooks'
 import { Contrast, LogOut, Server, Settings } from 'lucide-react'
 
 export default function CommandMenuDemo() {

@@ -1,4 +1,4 @@
-import { react } from '@stack/config-eslint/react'
+import { react } from '@bwmp-dev/eslint-config/react'
 
 export default [
   ...react,

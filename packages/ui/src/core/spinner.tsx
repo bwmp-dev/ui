@@ -1,4 +1,4 @@
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 import { Loader2 } from 'lucide-react'
 
 export type SpinnerProps = {

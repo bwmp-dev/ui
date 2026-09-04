@@ -8,7 +8,7 @@ import type {
   TableState,
 } from '@tanstack/react-table'
 import { ArrowDown, ArrowUp, ChevronsUpDown } from 'lucide-react'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 import { Skeleton } from '../core/primitives'
 import { Pagination } from '../navigation/pagination'
 import type { StackColumnMeta } from './features'

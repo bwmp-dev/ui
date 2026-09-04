@@ -1,7 +1,7 @@
 import { useId, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { Toolbar as BaseToolbar } from '@base-ui/react/toolbar'
 import { Search, X } from 'lucide-react'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 import { Input, type InputProps } from '../forms/input'
 import { Separator } from '../core/primitives'
 

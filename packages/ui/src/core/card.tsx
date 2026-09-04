@@ -1,5 +1,5 @@
 import type { ComponentPropsWithRef } from 'react'
-import { cn, cv, type VariantProps } from '@stack/utils'
+import { cn, cv, type VariantProps } from '@bwmp-dev/utils'
 
 /**
  * A bordered surface.

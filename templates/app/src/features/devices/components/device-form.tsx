@@ -1,6 +1,6 @@
 import { useForm } from '@tanstack/react-form'
-import { Button, Dialog, Input, Select, Textarea, useToast } from '@stack/ui'
-import { FormField, SubmitButton, applyServerErrors } from '@stack/ui/form'
+import { Button, Dialog, Input, Select, Textarea, useToast } from '@bwmp-dev/ui'
+import { FormField, SubmitButton, applyServerErrors } from '@bwmp-dev/ui/form'
 import { isApiError, userMessage } from '~/api/errors'
 import {
   DEVICE_REGIONS,

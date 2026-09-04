@@ -1,4 +1,4 @@
-import { Combobox, Field } from '@stack/ui'
+import { Combobox, Field } from '@bwmp-dev/ui'
 
 const REGIONS = [
   'eu-west-1',

@@ -1,1 +1,1 @@
-export { react as default } from '@stack/config-eslint/react'
+export { react as default } from '@bwmp-dev/eslint-config/react'

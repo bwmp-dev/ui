@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef } from 'react'
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { X } from 'lucide-react'
-import { cn, cv, type VariantProps } from '@stack/utils'
+import { cn, cv, type VariantProps } from '@bwmp-dev/utils'
 import { IconButton } from '../core/button'
 
 /**

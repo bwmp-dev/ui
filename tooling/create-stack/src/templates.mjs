@@ -79,12 +79,14 @@ export const PLAYWRIGHT_DEPENDENCIES = ['@playwright/test']
  * `workspace:*` protocol is meaningless, so these are rewritten to a version
  * range against the published packages.
  */
-export const WORKSPACE_PACKAGES = [
-  '@stack/tokens',
-  '@stack/ui',
-  '@stack/hooks',
-  '@stack/utils',
-  '@stack/icons',
-  '@stack/config-eslint',
-  '@stack/config-typescript',
-]
+export const WORKSPACE_PACKAGE_DIRECTORIES = {
+  '@bwmp-dev/tokens': 'tokens',
+  '@bwmp-dev/ui': 'ui',
+  '@bwmp-dev/hooks': 'hooks',
+  '@bwmp-dev/utils': 'utils',
+  '@bwmp-dev/icons': 'icons',
+  '@bwmp-dev/eslint-config': 'config-eslint',
+  '@bwmp-dev/tsconfig': 'config-typescript',
+}
+
+export const WORKSPACE_PACKAGES = Object.keys(WORKSPACE_PACKAGE_DIRECTORIES)

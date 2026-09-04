@@ -1,5 +1,5 @@
 import { Link, Outlet, createFileRoute, redirect, useRouter } from '@tanstack/react-router'
-import { Avatar, Button, Navbar } from '@stack/ui'
+import { Avatar, Button, Navbar } from '@bwmp-dev/ui'
 import { LogOut } from 'lucide-react'
 import { signOut } from '~/features/auth/server'
 

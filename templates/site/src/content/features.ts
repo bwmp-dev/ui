@@ -1,5 +1,5 @@
 import { Database, FileSearch, GitBranch, HardDrive, Share2, Terminal } from 'lucide-react'
-import type { IconComponent } from '@stack/icons'
+import type { IconComponent } from '@bwmp-dev/icons'
 
 export type Feature = {
   title: string

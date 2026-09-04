@@ -1,5 +1,5 @@
 {
-  "extends": "@stack/config-typescript/react-app",
+  "extends": "@bwmp-dev/tsconfig/react-app",
   "include": ["src", "e2e", "*.config.ts", "vitest.setup.ts"],
   "compilerOptions": {
     "paths": { "~/*": ["./src/*"] },

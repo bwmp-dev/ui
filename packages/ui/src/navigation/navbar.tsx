@@ -2,7 +2,7 @@ import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { NavigationMenu as BaseNavigationMenu } from '@base-ui/react/navigation-menu'
 import { useRender } from '@base-ui/react/use-render'
 import { ChevronDown } from 'lucide-react'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 
 export type NavbarProps = ComponentPropsWithRef<'header'> & {
   /** Keeps the bar pinned while the page scrolls. */

@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { Progress as BaseProgress } from '@base-ui/react/progress'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 
 export type ProgressProps = Omit<ComponentPropsWithRef<typeof BaseProgress.Root>, 'render'> & {
   label?: ReactNode

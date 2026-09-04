@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
 import { z } from 'zod'
-import { Alert, Button, Card, Field, Input } from '@stack/ui'
+import { Alert, Button, Card, Field, Input } from '@bwmp-dev/ui'
 import { isApiError, userMessage } from '~/api/errors'
 import { useAuth } from '~/features/auth/auth-context'
 import { env } from '~/lib/env'

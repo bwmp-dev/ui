@@ -1,5 +1,5 @@
 /**
- * @stack/tokens — Tailwind bridge.
+ * @bwmp-dev/tokens — Tailwind bridge.
  *
  * Assumes `@import "tailwindcss"` has already run. Maps the raw tokens onto
  * Tailwind's theme namespaces with `@theme inline`, so utilities emit the
@@ -7,7 +7,7 @@
  * `data-theme` and `data-density` through the cascade.
  *
  *   @import "tailwindcss";
- *   @import "@stack/tokens/theme.css";
+ *   @import "@bwmp-dev/tokens/theme.css";
  */
 
 @import './tokens.css';

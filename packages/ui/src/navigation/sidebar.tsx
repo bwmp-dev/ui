@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { useRender } from '@base-ui/react/use-render'
-import { cn } from '@stack/utils'
-import type { IconComponent } from '@stack/icons'
+import { cn } from '@bwmp-dev/utils'
+import type { IconComponent } from '@bwmp-dev/icons'
 
 export type SidebarProps = ComponentPropsWithRef<'aside'> & {
   label?: string

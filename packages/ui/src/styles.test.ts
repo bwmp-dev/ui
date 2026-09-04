@@ -9,7 +9,7 @@ import { afterAll, describe, expect, it } from 'vitest'
  * token or breaking the `@theme inline` bridge type-checks fine and silently
  * removes styling from every consumer, so compile the stylesheet for real.
  */
-// Kept inside the package so `@import "@stack/ui/styles.css"` and the
+// Kept inside the package so `@import "@bwmp-dev/ui/styles.css"` and the
 // `@source` globs it contains resolve exactly as they do for a consumer.
 const workspace = mkdtempSync(join(process.cwd(), '.css-test-'))
 const input = join(workspace, 'in.css')
@@ -19,8 +19,8 @@ writeFileSync(
   input,
   [
     '@import "tailwindcss";',
-    '@import "@stack/tokens/theme.css";',
-    '@import "@stack/ui/styles.css";',
+    '@import "@bwmp-dev/tokens/theme.css";',
+    '@import "@bwmp-dev/ui/styles.css";',
   ].join('\n'),
 )
 

@@ -1,4 +1,4 @@
-import { FilterBar, SearchInput, Select } from '@stack/ui'
+import { FilterBar, SearchInput, Select } from '@bwmp-dev/ui'
 import { DEVICE_REGIONS, deviceStatusSchema, type DeviceStatus } from '../schema'
 import { countActiveFilters, emptyDeviceFilters, type DeviceFilterValues } from '../filters'
 

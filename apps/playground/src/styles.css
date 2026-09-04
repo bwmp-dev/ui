@@ -1,6 +1,6 @@
 @import 'tailwindcss';
-@import '@stack/tokens/theme.css';
-@import '@stack/ui/styles.css';
-@import '@stack/tokens/themes/brands.css';
+@import '@bwmp-dev/tokens/theme.css';
+@import '@bwmp-dev/ui/styles.css';
+@import '@bwmp-dev/tokens/themes/brands.css';
 
 @source './';

@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { useRender } from '@base-ui/react/use-render'
-import { cn, cv, type VariantProps } from '@stack/utils'
-import type { IconComponent } from '@stack/icons'
+import { cn, cv, type VariantProps } from '@bwmp-dev/utils'
+import type { IconComponent } from '@bwmp-dev/icons'
 import { Spinner } from './spinner'
 
 /**

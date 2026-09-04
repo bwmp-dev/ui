@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Field, Input } from '@stack/ui'
+import { Button, Field, Input } from '@bwmp-dev/ui'
 
 /**
  * `Field` wires the label, description and error to the control. Errors appear

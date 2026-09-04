@@ -42,7 +42,7 @@ tooling/
 A small stable core, and progressively more opinionated layers on top:
 
 ```
-project code  →  features  →  template  →  @stack/ui  →  Base UI  →  @stack/tokens
+project code  →  features  →  template  →  @bwmp-dev/ui  →  Base UI  →  @bwmp-dev/tokens
 ```
 
 The lower something sits, the more stable and generic it has to be. Things move
@@ -50,7 +50,7 @@ down only when they have earned it — not because they might be reusable one da
 
 Three things follow from that:
 
-**Tokens are CSS, not JavaScript.** `@stack/tokens` has no dependencies and no
+**Tokens are CSS, not JavaScript.** `@bwmp-dev/tokens` has no dependencies and no
 React. Colours are declared once with `light-dark()`, so a brand override is one
 block and the whole system works with JavaScript disabled.
 
@@ -65,7 +65,7 @@ using our components at all. A canvas editor has no business being expressed in
 `Button` and `Card`.
 
 The dependency direction is checked rather than described: `pnpm check:boundaries`
-fails if `@stack/tokens` ever imports React, or `@stack/ui` ever imports a
+fails if `@bwmp-dev/tokens` ever imports React, or `@bwmp-dev/ui` ever imports a
 router. A documented rule that nothing enforces stops being true.
 
 ## Templates are the examples
@@ -99,9 +99,9 @@ pnpm check:boundaries  # the dependency direction still holds
 Working on one thing:
 
 ```bash
-pnpm --filter @stack/ui test:watch
-pnpm --filter @stack/template-app dev
-pnpm turbo run build --filter=@stack/ui...   # and everything it depends on
+pnpm --filter @bwmp-dev/ui test:watch
+pnpm --filter @bwmp-dev/template-app dev
+pnpm turbo run build --filter=@bwmp-dev/ui...   # and everything it depends on
 ```
 
 Turbo knows the dependency graph, so packages build before their consumers and

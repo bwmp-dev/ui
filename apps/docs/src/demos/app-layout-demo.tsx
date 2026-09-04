@@ -7,7 +7,7 @@ import {
   Toolbar,
   SearchInput,
   SplitPane,
-} from '@stack/ui'
+} from '@bwmp-dev/ui'
 import { useState } from 'react'
 import { Filter, RefreshCw } from 'lucide-react'
 

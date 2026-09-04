@@ -1,20 +1,20 @@
 ---
-'@stack/config-typescript': minor
-'@stack/config-eslint': minor
-'@stack/create-stack': minor
-'@stack/tokens': minor
-'@stack/hooks': minor
-'@stack/icons': minor
-'@stack/utils': minor
-'@stack/ui': minor
+'@bwmp-dev/tsconfig': minor
+'@bwmp-dev/eslint-config': minor
+'@bwmp-dev/create-stack': minor
+'@bwmp-dev/tokens': minor
+'@bwmp-dev/hooks': minor
+'@bwmp-dev/icons': minor
+'@bwmp-dev/utils': minor
+'@bwmp-dev/ui': minor
 ---
 
 First release.
 
-- `@stack/tokens`: design tokens as CSS custom properties, declared once with
+- `@bwmp-dev/tokens`: design tokens as CSS custom properties, declared once with
   `light-dark()`, plus the Tailwind v4 theme bridge. Appearance, brand and
   density are three independent attributes.
-- `@stack/ui`: around 45 components over Base UI, with `DataTable` (TanStack
+- `@bwmp-dev/ui`: around 45 components over Base UI, with `DataTable` (TanStack
   Table v9) and the TanStack Form bindings behind optional subpaths.
-- `@stack/hooks`, `@stack/utils`, `@stack/icons`: the supporting packages.
-- `@stack/create-stack`: `pnpm stack create <name> --type app|site|fullstack`.
+- `@bwmp-dev/hooks`, `@bwmp-dev/utils`, `@bwmp-dev/icons`: the supporting packages.
+- `@bwmp-dev/create-stack`: `pnpm stack create <name> --type app|site|fullstack`.

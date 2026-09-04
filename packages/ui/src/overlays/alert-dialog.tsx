@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef } from 'react'
 import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 import { dialogContentVariants, type DialogContentProps } from './dialog'
 
 /**

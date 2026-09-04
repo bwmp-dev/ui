@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef } from 'react'
 import { Popover as BasePopover } from '@base-ui/react/popover'
 import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 
 export type PopoverContentProps = ComponentPropsWithRef<typeof BasePopover.Popup> & {
   side?: 'top' | 'right' | 'bottom' | 'left'

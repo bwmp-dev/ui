@@ -1,4 +1,4 @@
-import { Button, IconButton } from '@stack/ui'
+import { Button, IconButton } from '@bwmp-dev/ui'
 import { RefreshCw } from 'lucide-react'
 
 export default function ButtonSizes() {

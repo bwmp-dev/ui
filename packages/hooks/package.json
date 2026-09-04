@@ -1,5 +1,5 @@
 {
-  "name": "@stack/hooks",
+  "name": "@bwmp-dev/hooks",
   "version": "0.1.0",
   "description": "Reusable React hooks with no design-system coupling.",
   "license": "MIT",
@@ -34,8 +34,8 @@
     "react": "catalog:"
   },
   "devDependencies": {
-    "@stack/config-eslint": "workspace:*",
-    "@stack/config-typescript": "workspace:*",
+    "@bwmp-dev/eslint-config": "workspace:*",
+    "@bwmp-dev/tsconfig": "workspace:*",
     "@testing-library/dom": "catalog:",
     "@testing-library/react": "catalog:",
     "@types/react": "catalog:",

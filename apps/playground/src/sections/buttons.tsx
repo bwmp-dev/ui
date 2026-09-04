@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, IconButton } from '@stack/ui'
+import { Button, IconButton } from '@bwmp-dev/ui'
 import { Pencil, Plus, Trash2 } from 'lucide-react'
 import { Row, Stack } from './shared'
 

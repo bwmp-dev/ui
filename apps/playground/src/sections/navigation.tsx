@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Badge, Button, FilterBar, Pagination, SearchInput, Tabs, Toolbar } from '@stack/ui'
+import { Badge, Button, FilterBar, Pagination, SearchInput, Tabs, Toolbar } from '@bwmp-dev/ui'
 import { Plus } from 'lucide-react'
 import { Stack } from './shared'
 

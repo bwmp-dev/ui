@@ -1,4 +1,4 @@
-import { Badge } from '@stack/ui'
+import { Badge } from '@bwmp-dev/ui'
 
 export default function Badges() {
   const tones = ['neutral', 'accent', 'success', 'warning', 'danger', 'info'] as const

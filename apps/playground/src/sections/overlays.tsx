@@ -13,9 +13,9 @@ import {
   Popover,
   Tooltip,
   type CommandAction,
-} from '@stack/ui'
+} from '@bwmp-dev/ui'
 import { Copy, Info, MoreHorizontal, Pencil, Trash2 } from 'lucide-react'
-import { useClipboard } from '@stack/hooks'
+import { useClipboard } from '@bwmp-dev/hooks'
 import { Row, Stack } from './shared'
 
 export function OverlaysSection() {

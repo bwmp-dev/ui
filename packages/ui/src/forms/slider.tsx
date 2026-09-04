@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { Slider as BaseSlider } from '@base-ui/react/slider'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 
 export type SliderProps = ComponentPropsWithRef<typeof BaseSlider.Root> & {
   label?: ReactNode

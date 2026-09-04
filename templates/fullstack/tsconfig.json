@@ -1,5 +1,5 @@
 {
-  "extends": "@stack/config-typescript/react-app",
+  "extends": "@bwmp-dev/tsconfig/react-app",
   "include": ["src", "*.config.ts"],
   "compilerOptions": {
     "paths": { "~/*": ["./src/*"] },

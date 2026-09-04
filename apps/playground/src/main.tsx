@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { ThemeProvider, ToastProvider, Toaster, TooltipProvider } from '@stack/ui'
+import { ThemeProvider, ToastProvider, Toaster, TooltipProvider } from '@bwmp-dev/ui'
 import { Playground } from './playground'
 import './styles.css'
 

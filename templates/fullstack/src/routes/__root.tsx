@@ -6,7 +6,7 @@ import {
   createRootRouteWithContext,
 } from '@tanstack/react-router'
 import type { QueryClient } from '@tanstack/react-query'
-import { LinkButton, ToastProvider, Toaster, TooltipProvider } from '@stack/ui'
+import { LinkButton, ToastProvider, Toaster, TooltipProvider } from '@bwmp-dev/ui'
 import { getCurrentUser } from '~/features/auth/server'
 import type { SessionUser } from '~/server/session'
 import styles from '~/styles.css?url'

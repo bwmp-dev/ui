@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { Input as BaseInput } from '@base-ui/react/input'
-import { cn, cv, type VariantProps } from '@stack/utils'
-import type { IconComponent } from '@stack/icons'
+import { cn, cv, type VariantProps } from '@bwmp-dev/utils'
+import type { IconComponent } from '@bwmp-dev/icons'
 
 /**
  * Shared styling for anything that reads as a text control: Input, Textarea,

@@ -1,6 +1,6 @@
 import { createContext, use, type ComponentPropsWithRef } from 'react'
 import { Tabs as BaseTabs } from '@base-ui/react/tabs'
-import { cn, cv, type VariantProps } from '@stack/utils'
+import { cn, cv, type VariantProps } from '@bwmp-dev/utils'
 
 export const tabsListVariants = cv({
   base: 'relative flex items-center',

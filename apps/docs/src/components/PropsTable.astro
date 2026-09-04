@@ -26,7 +26,7 @@ const { type, element } = Astro.props
 const entry = (propTypes as Record<string, PropType>)[type]
 
 if (!entry) {
-  throw new Error(`No exported type named ${type} was found in @stack/ui.`)
+  throw new Error(`No exported type named ${type} was found in @bwmp-dev/ui.`)
 }
 ---
 

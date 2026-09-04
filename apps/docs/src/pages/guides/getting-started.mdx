@@ -39,19 +39,19 @@ pnpm stack create summa-site --type site --no-install
 Install the packages and import three stylesheets, in this order:
 
 ```bash
-pnpm add @stack/ui @stack/tokens @stack/utils @stack/hooks
+pnpm add @bwmp-dev/ui @bwmp-dev/tokens @bwmp-dev/utils @bwmp-dev/hooks
 pnpm add -D tailwindcss @tailwindcss/vite
 ```
 
 ```css
 /* src/styles.css */
 @import 'tailwindcss';
-@import '@stack/tokens/theme.css';
-@import '@stack/ui/styles.css';
+@import '@bwmp-dev/tokens/theme.css';
+@import '@bwmp-dev/ui/styles.css';
 ```
 
 The third line is the one people forget. It tells Tailwind to scan
-`@stack/ui` for the class names its components use — without it, every
+`@bwmp-dev/ui` for the class names its components use — without it, every
 component renders unstyled.
 
 Then set the appearance attribute on `<html>` before the page paints:
@@ -64,17 +64,17 @@ In a client-rendered app, inline a small blocking script that reads the stored
 preference; a deferred module script runs after the browser has already painted,
 which is the flash you are trying to avoid. Both the application and site
 templates show it. Server-rendered apps can call `themeInitScript()` from
-`@stack/ui` instead.
+`@bwmp-dev/ui` instead.
 
 ## What you get
 
 ```tsx
-import { Button, Dialog, DataTable } from '@stack/ui'
-import { useHotkey } from '@stack/hooks'
-import { cn, formatBytes } from '@stack/utils'
+import { Button, Dialog, DataTable } from '@bwmp-dev/ui'
+import { useHotkey } from '@bwmp-dev/hooks'
+import { cn, formatBytes } from '@bwmp-dev/utils'
 ```
 
-`@stack/ui/table` and `@stack/ui/form` are separate entry points, because they
+`@bwmp-dev/ui/table` and `@bwmp-dev/ui/form` are separate entry points, because they
 carry TanStack Table and TanStack Form as optional peer dependencies. Nothing in
 the main entry point imports either, so a project that does not use them does
 not pay for them.

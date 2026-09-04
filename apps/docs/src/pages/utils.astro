@@ -2,12 +2,12 @@
 import DocsShell from '~/components/DocsShell.astro'
 import { Code } from 'astro:components'
 
-const cnExample = `import { cn } from '@stack/utils'
+const cnExample = `import { cn } from '@bwmp-dev/utils'
 
 // Later classes win, including against the component's own variants.
 cn('h-8 bg-accent', 'h-10 bg-danger') // 'h-10 bg-danger'`
 
-const cvExample = `import { cv, type VariantProps } from '@stack/utils'
+const cvExample = `import { cv, type VariantProps } from '@bwmp-dev/utils'
 
 export const badgeVariants = cv({
   base: 'inline-flex items-center rounded-sm border',
@@ -20,8 +20,8 @@ export const badgeVariants = cv({
 
 export type BadgeVariants = VariantProps<typeof badgeVariants>`
 
-const extendExample = `import { cv } from '@stack/utils'
-import { buttonVariants } from '@stack/ui'
+const extendExample = `import { cv } from '@bwmp-dev/utils'
+import { buttonVariants } from '@bwmp-dev/ui'
 
 // The variant map is exported, so a project extends rather than forks.
 const projectButton = cv({
@@ -103,7 +103,7 @@ const groups = [
 
 <DocsShell
   title="Utilities"
-  description="@stack/utils — small, framework-independent helpers. Deliberately not a dumping ground."
+  description="@bwmp-dev/utils — small, framework-independent helpers. Deliberately not a dumping ground."
 >
   <h2 id="cn">cn</h2>
   <p>

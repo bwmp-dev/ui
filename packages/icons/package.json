@@ -1,5 +1,5 @@
 {
-  "name": "@stack/icons",
+  "name": "@bwmp-dev/icons",
   "version": "0.1.0",
   "description": "Brand marks Lucide does not ship, plus the shared icon contract.",
   "license": "MIT",
@@ -32,8 +32,8 @@
     "react": "catalog:"
   },
   "devDependencies": {
-    "@stack/config-eslint": "workspace:*",
-    "@stack/config-typescript": "workspace:*",
+    "@bwmp-dev/eslint-config": "workspace:*",
+    "@bwmp-dev/tsconfig": "workspace:*",
     "@types/react": "catalog:",
     "eslint": "catalog:",
     "react": "catalog:",

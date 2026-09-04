@@ -1,4 +1,4 @@
-import { buildUrl, type QueryValue } from '@stack/utils'
+import { buildUrl, type QueryValue } from '@bwmp-dev/utils'
 import { env } from '~/lib/env'
 import { mockFetch } from '~/mocks/backend'
 import { ApiError } from './errors'

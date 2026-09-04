@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { createFileRoute, redirect, useRouter } from '@tanstack/react-router'
 import { z } from 'zod'
-import { Alert, Button, Card, Field, Input } from '@stack/ui'
+import { Alert, Button, Card, Field, Input } from '@bwmp-dev/ui'
 import { signIn } from '~/features/auth/server'
 
 const searchSchema = z.object({ redirect: z.string().optional() })

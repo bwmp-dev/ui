@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef } from 'react'
 import { Drawer as BaseDrawer } from '@base-ui/react/drawer'
 import { X } from 'lucide-react'
-import { cn, cv, type VariantProps } from '@stack/utils'
+import { cn, cv, type VariantProps } from '@bwmp-dev/utils'
 import { IconButton } from '../core/button'
 
 export const drawerContentVariants = cv({

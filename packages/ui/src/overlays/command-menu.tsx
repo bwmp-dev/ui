@@ -2,8 +2,8 @@ import { useMemo, type ReactNode } from 'react'
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox'
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { Search } from 'lucide-react'
-import { cn } from '@stack/utils'
-import type { IconComponent } from '@stack/icons'
+import { cn } from '@bwmp-dev/utils'
+import type { IconComponent } from '@bwmp-dev/icons'
 import { Kbd } from '../core/primitives'
 
 export type CommandAction = {

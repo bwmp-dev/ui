@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url'
  *
  * These rules are documented, and a documented rule that nothing checks stops
  * being true the first time someone is in a hurry. The cost of getting this
- * wrong is not abstract: a React import in `@stack/tokens` makes the tokens
+ * wrong is not abstract: a React import in `@bwmp-dev/tokens` makes the tokens
  * unusable from Astro markup or plain CSS, which is most of why they exist.
  */
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
@@ -23,35 +23,35 @@ const RULES = [
     /** Runtime dependencies allowed in package.json. */
     allowedDependencies: [],
     /** Import specifiers that must not appear anywhere in src. */
-    forbiddenImports: ['react', 'react-dom', '@stack/'],
+    forbiddenImports: ['react', 'react-dom', '@bwmp-dev/'],
     because: 'the tokens must work outside React, and outside JavaScript entirely',
   },
   {
     package: 'utils',
-    allowedDependencies: ['@stack/tokens', 'clsx', 'tailwind-merge'],
-    forbiddenImports: ['react', 'react-dom', '@stack/ui', '@stack/hooks'],
+    allowedDependencies: ['@bwmp-dev/tokens', 'clsx', 'tailwind-merge'],
+    forbiddenImports: ['react', 'react-dom', '@bwmp-dev/ui', '@bwmp-dev/hooks'],
     because: 'the utilities are framework-independent',
   },
   {
     package: 'hooks',
     allowedDependencies: [],
-    forbiddenImports: ['@stack/ui', '@stack/tokens', 'lucide-react'],
+    forbiddenImports: ['@bwmp-dev/ui', '@bwmp-dev/tokens', 'lucide-react'],
     because: 'hooks are React and nothing else — no design system, no styling',
   },
   {
     package: 'icons',
     allowedDependencies: [],
-    forbiddenImports: ['@stack/ui', '@stack/hooks', 'lucide-react'],
+    forbiddenImports: ['@bwmp-dev/ui', '@bwmp-dev/hooks', 'lucide-react'],
     because: 'icons must not re-export Lucide; a 1500-icon barrel defeats tree shaking',
   },
   {
     package: 'ui',
     allowedDependencies: [
       '@base-ui/react',
-      '@stack/hooks',
-      '@stack/icons',
-      '@stack/tokens',
-      '@stack/utils',
+      '@bwmp-dev/hooks',
+      '@bwmp-dev/icons',
+      '@bwmp-dev/tokens',
+      '@bwmp-dev/utils',
       'lucide-react',
     ],
     forbiddenImports: ['@tanstack/react-router', '@tanstack/react-query'],
@@ -80,7 +80,7 @@ for (const rule of RULES) {
   for (const name of Object.keys(manifest.dependencies ?? {})) {
     if (rule.allowedDependencies.includes(name)) continue
     problems.push(
-      `@stack/${rule.package} depends on ${name}, which is not allowed — ${rule.because}.`,
+      `@bwmp-dev/${rule.package} depends on ${name}, which is not allowed — ${rule.because}.`,
     )
   }
 

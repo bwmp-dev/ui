@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { Avatar, DropdownMenu, Kbd, Sidebar } from '@stack/ui'
+import { Avatar, DropdownMenu, Kbd, Sidebar } from '@bwmp-dev/ui'
 import { LogOut, Monitor, Search, SlidersHorizontal } from 'lucide-react'
 import { env } from '~/lib/env'
 import { NAV_ITEMS } from '~/config/navigation'

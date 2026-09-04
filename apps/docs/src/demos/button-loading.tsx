@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button } from '@stack/ui'
+import { Button } from '@bwmp-dev/ui'
 
 export default function ButtonLoading() {
   const [saving, setSaving] = useState(false)

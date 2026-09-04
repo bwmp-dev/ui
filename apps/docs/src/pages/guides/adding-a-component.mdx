@@ -1,12 +1,12 @@
 ---
 layout: ~/layouts/GuideLayout.astro
 title: Adding a component
-description: When something belongs in @stack/ui, and what it has to do once it is there.
+description: When something belongs in @bwmp-dev/ui, and what it has to do once it is there.
 ---
 
 ## First: should it be here?
 
-Most components should not be. `@stack/ui` is the layer that is most expensive
+Most components should not be. `@bwmp-dev/ui` is the layer that is most expensive
 to change, and every addition is a permanent maintenance cost.
 
 It belongs in the shared library when:
@@ -39,7 +39,7 @@ window splitter pattern is small enough to implement correctly — a focusable
 
 ```tsx
 import type { ComponentPropsWithRef } from 'react'
-import { cn, cv, type VariantProps } from '@stack/utils'
+import { cn, cv, type VariantProps } from '@bwmp-dev/utils'
 
 export const thingVariants = cv({
   base: 'inline-flex items-center rounded-md border focus-ring transition-control',

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Outlet, createFileRoute, redirect } from '@tanstack/react-router'
-import { AppShell } from '@stack/ui'
-import { useHotkey } from '@stack/hooks'
+import { AppShell } from '@bwmp-dev/ui'
+import { useHotkey } from '@bwmp-dev/hooks'
 import { AppCommandMenu } from '~/components/app-command-menu'
 import { AppSidebar } from '~/components/app-sidebar'
 

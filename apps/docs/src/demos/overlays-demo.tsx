@@ -10,7 +10,7 @@ import {
   Kbd,
   Popover,
   Tooltip,
-} from '@stack/ui'
+} from '@bwmp-dev/ui'
 import { Info, MoreHorizontal, Pencil, Trash2 } from 'lucide-react'
 
 export default function OverlaysDemo() {

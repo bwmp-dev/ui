@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { useRender } from '@base-ui/react/use-render'
 import { ChevronRight } from 'lucide-react'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 
 export type BreadcrumbsProps = ComponentPropsWithRef<'nav'> & {
   /** Overrides the `nav` label. */

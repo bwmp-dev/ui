@@ -1,6 +1,6 @@
 import { useCallback, useId, useRef, type ReactNode } from 'react'
-import { useControllableState } from '@stack/hooks'
-import { cn } from '@stack/utils'
+import { useControllableState } from '@bwmp-dev/hooks'
+import { cn } from '@bwmp-dev/utils'
 
 export type SplitPaneProps = {
   /** Panel rendered before the handle. */

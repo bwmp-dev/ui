@@ -1,5 +1,5 @@
 {
-  "name": "@stack/create-stack",
+  "name": "@bwmp-dev/create-stack",
   "version": "0.1.0",
   "description": "Generate a project from one of the stack templates.",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "node": ">=22.12.0"
   },
   "devDependencies": {
-    "@stack/config-eslint": "workspace:*",
+    "@bwmp-dev/eslint-config": "workspace:*",
     "eslint": "catalog:",
     "rimraf": "^6.1.2"
   }

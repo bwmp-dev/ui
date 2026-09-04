@@ -1,6 +1,6 @@
 import { Link, Outlet, createRootRouteWithContext, useRouter } from '@tanstack/react-router'
 import type { QueryClient } from '@tanstack/react-query'
-import { Button, ErrorState, LinkButton, LoadingState } from '@stack/ui'
+import { Button, ErrorState, LinkButton, LoadingState } from '@bwmp-dev/ui'
 import { userMessage } from '~/api/errors'
 import type { AuthState } from '~/features/auth/auth-context'
 

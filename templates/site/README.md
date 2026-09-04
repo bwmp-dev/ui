@@ -1,6 +1,6 @@
 # Website template
 
-Astro with React islands, sharing `@stack/ui` and `@stack/tokens` with the
+Astro with React islands, sharing `@bwmp-dev/ui` and `@bwmp-dev/tokens` with the
 application template.
 
 ## Why Astro
@@ -10,7 +10,7 @@ the server and ships JavaScript only for the components you explicitly mark as
 islands, which is the opposite default to a React SPA — and the right one when
 most of the page never changes.
 
-The shared design system still works: `@stack/ui` components render to HTML
+The shared design system still works: `@bwmp-dev/ui` components render to HTML
 during the build (see `ProjectHero.astro`, which uses `LinkButton`), and they
 hydrate normally inside an island when interaction is required (see
 `ScreenshotGallery.tsx`, which uses `Tabs`).

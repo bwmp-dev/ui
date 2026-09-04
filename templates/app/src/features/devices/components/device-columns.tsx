@@ -1,11 +1,11 @@
 import { createColumnHelper } from '@tanstack/react-table'
-import { selectionColumn, type DefaultTableFeatures } from '@stack/ui/table'
-import { Badge, Code } from '@stack/ui'
-import { formatNumber, formatRelativeTime } from '@stack/utils'
+import { selectionColumn, type DefaultTableFeatures } from '@bwmp-dev/ui/table'
+import { Badge, Code } from '@bwmp-dev/ui'
+import { formatNumber, formatRelativeTime } from '@bwmp-dev/utils'
 import { statusTone, type Device } from '../schema'
 
 /**
- * Column definitions live beside the feature, not inside @stack/ui.
+ * Column definitions live beside the feature, not inside @bwmp-dev/ui.
  *
  * `DataTable` only knows how to render a table instance; what the columns mean
  * is application knowledge.

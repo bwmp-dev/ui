@@ -1,5 +1,5 @@
 {
-  "name": "@stack/template-fullstack",
+  "name": "@bwmp-dev/template-fullstack",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -13,11 +13,11 @@
     "clean": "rimraf dist .output .turbo"
   },
   "dependencies": {
-    "@stack/hooks": "workspace:*",
-    "@stack/icons": "workspace:*",
-    "@stack/tokens": "workspace:*",
-    "@stack/ui": "workspace:*",
-    "@stack/utils": "workspace:*",
+    "@bwmp-dev/hooks": "workspace:*",
+    "@bwmp-dev/icons": "workspace:*",
+    "@bwmp-dev/tokens": "workspace:*",
+    "@bwmp-dev/ui": "workspace:*",
+    "@bwmp-dev/utils": "workspace:*",
     "@tanstack/react-form": "catalog:",
     "@tanstack/react-query": "catalog:",
     "@tanstack/react-router": "catalog:",
@@ -30,8 +30,8 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@stack/config-eslint": "workspace:*",
-    "@stack/config-typescript": "workspace:*",
+    "@bwmp-dev/eslint-config": "workspace:*",
+    "@bwmp-dev/tsconfig": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "@tanstack/router-cli": "catalog:",
     "@types/node": "catalog:",

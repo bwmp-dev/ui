@@ -7,7 +7,7 @@ import {
   Toaster,
   ToastProvider,
   useToast,
-} from '@stack/ui'
+} from '@bwmp-dev/ui'
 import { Inbox } from 'lucide-react'
 
 function ToastButtons() {

@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { Avatar as BaseAvatar } from '@base-ui/react/avatar'
-import { cv, type VariantProps } from '@stack/utils'
+import { cv, type VariantProps } from '@bwmp-dev/utils'
 
 export const avatarVariants = cv({
   base: 'relative inline-flex shrink-0 items-center justify-center overflow-hidden bg-surface-sunken font-medium text-fg-muted select-none',

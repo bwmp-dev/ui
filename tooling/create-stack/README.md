@@ -1,4 +1,4 @@
-# @stack/create-stack
+# @bwmp-dev/create-stack
 
 Generates a project from one of the templates in `templates/`.
 

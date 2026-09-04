@@ -1,5 +1,5 @@
 {
-  "extends": "@stack/config-typescript/library",
+  "extends": "@bwmp-dev/tsconfig/library",
   "include": ["src", "*.config.ts", "vitest.setup.ts"],
   "compilerOptions": {
     "outDir": "dist",

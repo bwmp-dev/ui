@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Select, Separator, useTheme } from '@stack/ui'
+import { Select, Separator, useTheme } from '@bwmp-dev/ui'
 import { SECTIONS } from './sections'
 
 /**

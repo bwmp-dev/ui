@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from 'clsx'
 import { extendTailwindMerge } from 'tailwind-merge'
-import { themeNamespaces } from '@stack/tokens'
+import { themeNamespaces } from '@bwmp-dev/tokens'
 
 export type { ClassValue }
 

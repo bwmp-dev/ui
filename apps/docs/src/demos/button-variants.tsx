@@ -1,4 +1,4 @@
-import { Button } from '@stack/ui'
+import { Button } from '@bwmp-dev/ui'
 import { Plus } from 'lucide-react'
 
 export default function ButtonVariants() {

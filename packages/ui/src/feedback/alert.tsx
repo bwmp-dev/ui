@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { AlertCircle, CheckCircle2, Info, TriangleAlert, X } from 'lucide-react'
-import { cn, cv, type VariantProps } from '@stack/utils'
-import type { IconComponent } from '@stack/icons'
+import { cn, cv, type VariantProps } from '@bwmp-dev/utils'
+import type { IconComponent } from '@bwmp-dev/icons'
 import { IconButton } from '../core/button'
 
 export const alertVariants = cv({

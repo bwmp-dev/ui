@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef } from 'react'
 import { Separator as BaseSeparator } from '@base-ui/react/separator'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 
 export type SeparatorProps = ComponentPropsWithRef<typeof BaseSeparator>
 

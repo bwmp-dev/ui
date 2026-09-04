@@ -3,7 +3,7 @@
  *
  * This file exists to demonstrate the override surface and to give the docs and
  * playground something to switch between. A real project ships one block like
- * these in its own stylesheet — it never forks @stack/ui.
+ * these in its own stylesheet — it never forks @bwmp-dev/ui.
  *
  * A brand only ever needs to set what actually differs. Everything unset keeps
  * inheriting from the base tokens, including all light/dark handling.

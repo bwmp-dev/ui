@@ -1,5 +1,5 @@
 {
-  "name": "@stack/tokens",
+  "name": "@bwmp-dev/tokens",
   "version": "0.1.0",
   "description": "Framework-agnostic design tokens as CSS custom properties.",
   "license": "MIT",
@@ -39,8 +39,8 @@
     "clean": "rimraf dist .turbo"
   },
   "devDependencies": {
-    "@stack/config-eslint": "workspace:*",
-    "@stack/config-typescript": "workspace:*",
+    "@bwmp-dev/eslint-config": "workspace:*",
+    "@bwmp-dev/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "rimraf": "^6.1.2",
     "tailwindcss": "catalog:",

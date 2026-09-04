@@ -1,4 +1,4 @@
-import { Avatar, Card, Code, Kbd, Progress, Separator, Skeleton, Spinner } from '@stack/ui'
+import { Avatar, Card, Code, Kbd, Progress, Separator, Skeleton, Spinner } from '@bwmp-dev/ui'
 
 export default function CoreBits() {
   return (

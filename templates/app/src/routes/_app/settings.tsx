@@ -12,8 +12,8 @@ import {
   Tabs,
   useTheme,
   useToast,
-} from '@stack/ui'
-import { useLocalStorage } from '@stack/hooks'
+} from '@bwmp-dev/ui'
+import { useLocalStorage } from '@bwmp-dev/hooks'
 import { useAuth } from '~/features/auth/auth-context'
 
 const searchSchema = z.object({

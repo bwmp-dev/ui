@@ -1,6 +1,6 @@
 import { createContext, use, useCallback, useEffect, useMemo, useSyncExternalStore } from 'react'
-import type { Appearance, Density } from '@stack/tokens'
-import { useMediaQuery } from '@stack/hooks'
+import type { Appearance, Density } from '@bwmp-dev/tokens'
+import { useMediaQuery } from '@bwmp-dev/hooks'
 
 export type AppearanceSetting = Appearance | 'system'
 

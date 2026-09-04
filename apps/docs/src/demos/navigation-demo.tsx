@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Breadcrumbs, Pagination, Tabs } from '@stack/ui'
+import { Breadcrumbs, Pagination, Tabs } from '@bwmp-dev/ui'
 
 export default function NavigationDemo() {
   const [page, setPage] = useState(0)

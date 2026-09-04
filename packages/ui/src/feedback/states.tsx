@@ -1,7 +1,7 @@
 import { useState, type ComponentPropsWithRef, type ReactNode } from 'react'
 import { ChevronDown } from 'lucide-react'
-import { cn } from '@stack/utils'
-import type { IconComponent } from '@stack/icons'
+import { cn } from '@bwmp-dev/utils'
+import type { IconComponent } from '@bwmp-dev/icons'
 import { Button } from '../core/button'
 import { Spinner } from '../core/spinner'
 

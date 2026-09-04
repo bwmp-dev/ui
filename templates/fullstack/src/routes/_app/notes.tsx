@@ -16,9 +16,9 @@ import {
   Switch,
   Textarea,
   useToast,
-} from '@stack/ui'
-import { FormField, SubmitButton } from '@stack/ui/form'
-import { formatRelativeTime } from '@stack/utils'
+} from '@bwmp-dev/ui'
+import { FormField, SubmitButton } from '@bwmp-dev/ui/form'
+import { formatRelativeTime } from '@bwmp-dev/utils'
 import { NotebookPen, Pin, Plus, Trash2 } from 'lucide-react'
 import { noteInputSchema, type Note, type NoteInput } from '~/features/notes/schema'
 import { notesQuery, useAddNote, useEditNote, useRemoveNote } from '~/features/notes/queries'

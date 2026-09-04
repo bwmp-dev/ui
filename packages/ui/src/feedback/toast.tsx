@@ -1,7 +1,7 @@
 import { Toast as BaseToast } from '@base-ui/react/toast'
 import { AlertCircle, CheckCircle2, Info, TriangleAlert, X } from 'lucide-react'
-import { cn } from '@stack/utils'
-import type { IconComponent } from '@stack/icons'
+import { cn } from '@bwmp-dev/utils'
+import type { IconComponent } from '@bwmp-dev/icons'
 
 export type ToastTone = 'neutral' | 'success' | 'warning' | 'danger' | 'info'
 

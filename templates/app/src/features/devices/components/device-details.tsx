@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { AlertDialog, Badge, Button, Code, EmptyState, PropertyPanel, useToast } from '@stack/ui'
-import { formatDateTime, formatNumber, formatRelativeTime } from '@stack/utils'
+import { AlertDialog, Badge, Button, Code, EmptyState, PropertyPanel, useToast } from '@bwmp-dev/ui'
+import { formatDateTime, formatNumber, formatRelativeTime } from '@bwmp-dev/utils'
 import { MousePointerSquareDashed, Pencil, Trash2 } from 'lucide-react'
 import { userMessage } from '~/api/errors'
 import { useAuth } from '~/features/auth/auth-context'

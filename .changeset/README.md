@@ -9,5 +9,5 @@ pnpm version-packages   # apply it: bump versions, write changelogs
 pnpm release            # build and publish
 ```
 
-The apps and templates are ignored: they are not published, and `@stack/create-stack`
+The apps and templates are ignored: they are not published, and `@bwmp-dev/create-stack`
 bundles the templates at pack time. See the [publishing guide](../apps/docs/src/pages/guides/publishing.mdx).

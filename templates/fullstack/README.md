@@ -1,7 +1,7 @@
 # Full-stack template
 
 TanStack Start: React with server-side rendering, server functions and server
-routes, sharing `@stack/ui` and `@stack/tokens` with the other templates.
+routes, sharing `@bwmp-dev/ui` and `@bwmp-dev/tokens` with the other templates.
 
 ## When to use this
 

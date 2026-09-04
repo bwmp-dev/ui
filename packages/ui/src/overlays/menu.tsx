@@ -2,8 +2,8 @@ import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
 import { Check, ChevronRight } from 'lucide-react'
-import { cn } from '@stack/utils'
-import type { IconComponent } from '@stack/icons'
+import { cn } from '@bwmp-dev/utils'
+import type { IconComponent } from '@bwmp-dev/icons'
 
 const popupClass = [
   'surface-panel popup-motion',

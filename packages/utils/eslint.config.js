@@ -1,1 +1,1 @@
-export { base as default } from '@stack/config-eslint/base'
+export { base as default } from '@bwmp-dev/eslint-config/base'

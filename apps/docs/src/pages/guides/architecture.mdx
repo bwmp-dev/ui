@@ -13,21 +13,21 @@ description: A small stable core, and progressively more opinionated layers on t
                        ↑
                     template
                        ↑
-                   @stack/ui
+                   @bwmp-dev/ui
                        ↑
                     Base UI
                        ↑
-                 @stack/tokens
+                 @bwmp-dev/tokens
 ```
 
 The lower something sits, the more stable and generic it has to be, and the more
-expensive it is to change. That is the whole design: `@stack/tokens` is CSS
+expensive it is to change. That is the whole design: `@bwmp-dev/tokens` is CSS
 custom properties with no dependencies, and by the time you reach the top you
 are writing whatever this particular product actually is.
 
 The rule that keeps it honest: **things move down only when they have earned
 it.** A component used by two features stays in the app. A pattern used by three
-projects might belong in `@stack/ui`. Moving an abstraction down because it
+projects might belong in `@bwmp-dev/ui`. Moving an abstraction down because it
 might be reusable one day is how a shared library becomes a place where nobody
 wants to make changes.
 
@@ -39,31 +39,31 @@ tokens  ←  utils  ←  hooks  ←  ui  ←  templates  ←  projects
 
 Enforced by what each package is allowed to import:
 
-- **`@stack/tokens`** has no dependencies at all, and no React. It is CSS plus a
+- **`@bwmp-dev/tokens`** has no dependencies at all, and no React. It is CSS plus a
   small data file describing itself, so it works outside React entirely.
-- **`@stack/utils`** is framework-independent. It imports tokens only to
+- **`@bwmp-dev/utils`** is framework-independent. It imports tokens only to
   configure tailwind-merge with the theme's namespaces.
-- **`@stack/hooks`** is React, and nothing else. No design system, no styling.
-- **`@stack/ui`** may use all of the above. It never imports an application, a
+- **`@bwmp-dev/hooks`** is React, and nothing else. No design system, no styling.
+- **`@bwmp-dev/ui`** may use all of the above. It never imports an application, a
   router, or a data-fetching library.
 - **Templates and projects** use everything.
 
-Nothing points back up the chain. If `@stack/ui` ever needs something from an
+Nothing points back up the chain. If `@bwmp-dev/ui` ever needs something from an
 application, the design is wrong somewhere below it.
 
 ## Packages
 
-| Package                    | What it is                                                            |
-| -------------------------- | --------------------------------------------------------------------- |
-| `@stack/tokens`            | Design tokens as CSS custom properties, and the Tailwind theme bridge |
-| `@stack/utils`             | `cn`, `cv`, assertions, object, URL, formatting and JSON helpers      |
-| `@stack/hooks`             | Reusable React hooks                                                  |
-| `@stack/icons`             | The icon contract, and the brand marks Lucide does not ship           |
-| `@stack/ui`                | The component system                                                  |
-| `@stack/config-eslint`     | Shared flat ESLint configurations                                     |
-| `@stack/config-typescript` | Shared `tsconfig` bases                                               |
+| Package                   | What it is                                                            |
+| ------------------------- | --------------------------------------------------------------------- |
+| `@bwmp-dev/tokens`        | Design tokens as CSS custom properties, and the Tailwind theme bridge |
+| `@bwmp-dev/utils`         | `cn`, `cv`, assertions, object, URL, formatting and JSON helpers      |
+| `@bwmp-dev/hooks`         | Reusable React hooks                                                  |
+| `@bwmp-dev/icons`         | The icon contract, and the brand marks Lucide does not ship           |
+| `@bwmp-dev/ui`            | The component system                                                  |
+| `@bwmp-dev/eslint-config` | Shared flat ESLint configurations                                     |
+| `@bwmp-dev/tsconfig`      | Shared `tsconfig` bases                                               |
 
-`@stack/icons` deliberately does **not** re-export Lucide. A barrel over 1500
+`@bwmp-dev/icons` deliberately does **not** re-export Lucide. A barrel over 1500
 icons defeats tree shaking in some bundlers and buys nothing — import from
 `lucide-react` directly. What lives there is the `IconComponent` type that
 components accept, and a handful of brand marks.
@@ -107,7 +107,7 @@ would slot in.
 **Query above transport.** `api.ts` fetches and parses; `queries.ts` decides
 caching and invalidation. Components see neither.
 
-**Base UI below `@stack/ui`.** We own the API, the styling, the variants and the
+**Base UI below `@bwmp-dev/ui`.** We own the API, the styling, the variants and the
 composition. Base UI owns focus trapping, focus restoration, Escape, scroll
 locking, typeahead and roving focus — behaviour that is a project in itself to
 get right, and invisible when it is wrong.

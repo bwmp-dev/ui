@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 import { Field as BaseField } from '@base-ui/react/field'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 
 /**
  * Field wires a label, description, error message and control together.

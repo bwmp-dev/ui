@@ -1,4 +1,4 @@
-import { Alert, Button, EmptyState, ErrorState, LoadingState, useToast } from '@stack/ui'
+import { Alert, Button, EmptyState, ErrorState, LoadingState, useToast } from '@bwmp-dev/ui'
 import { Inbox } from 'lucide-react'
 import { Row, Stack } from './shared'
 

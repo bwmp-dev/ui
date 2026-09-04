@@ -9,7 +9,7 @@ import {
   Separator,
   Skeleton,
   Spinner,
-} from '@stack/ui'
+} from '@bwmp-dev/ui'
 
 import { Row, Stack } from './shared'
 

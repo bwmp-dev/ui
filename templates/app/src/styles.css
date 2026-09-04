@@ -2,21 +2,21 @@
  * Three imports, in this order:
  *   1. Tailwind itself
  *   2. the design tokens and their Tailwind theme bridge
- *   3. the class names used inside @stack/ui, so they survive tree shaking
+ *   3. the class names used inside @bwmp-dev/ui, so they survive tree shaking
  */
 @import 'tailwindcss';
-@import '@stack/tokens/theme.css';
-@import '@stack/ui/styles.css';
+@import '@bwmp-dev/tokens/theme.css';
+@import '@bwmp-dev/ui/styles.css';
 
 /*
  * Example brands, so the appearance settings page has something to switch
  * between. A real project deletes this import and keeps only the block below.
  */
-@import '@stack/tokens/themes/brands.css';
+@import '@bwmp-dev/tokens/themes/brands.css';
 
 /*
  * Project branding. Overriding a handful of custom properties rebrands every
- * component; there is never a reason to fork @stack/ui.
+ * component; there is never a reason to fork @bwmp-dev/ui.
  *
  * Declared after the token import, so it beats the base tokens at equal
  * specificity. A `data-theme` on <html> uses `:root[data-theme]` and beats

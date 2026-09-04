@@ -10,7 +10,7 @@ import {
   Slider,
   Switch,
   Textarea,
-} from '@stack/ui'
+} from '@bwmp-dev/ui'
 import { Stack } from './shared'
 import { REGIONS } from './data'
 

@@ -4,7 +4,7 @@ import { Field } from '../forms/field'
 import { Button, type ButtonProps } from '../core/button'
 
 /**
- * @stack/ui/form
+ * @bwmp-dev/ui/form
  *
  * Thin bindings between TanStack Form and the `Field` primitives. Separate
  * entry point because `@tanstack/react-form` is an optional peer dependency.

@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef } from 'react'
 import { NumberField } from '@base-ui/react/number-field'
 import { Minus, Plus } from 'lucide-react'
-import { cn } from '@stack/utils'
+import { cn } from '@bwmp-dev/utils'
 import { controlVariants, type ControlVariants } from './input'
 
 export type NumberInputProps = ComponentPropsWithRef<typeof NumberField.Root> &

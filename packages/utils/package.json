@@ -1,5 +1,5 @@
 {
-  "name": "@stack/utils",
+  "name": "@bwmp-dev/utils",
   "version": "0.1.0",
   "description": "Small framework-independent helpers shared across the stack.",
   "license": "MIT",
@@ -31,13 +31,13 @@
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
-    "@stack/tokens": "workspace:*",
+    "@bwmp-dev/tokens": "workspace:*",
     "clsx": "catalog:",
     "tailwind-merge": "catalog:"
   },
   "devDependencies": {
-    "@stack/config-eslint": "workspace:*",
-    "@stack/config-typescript": "workspace:*",
+    "@bwmp-dev/eslint-config": "workspace:*",
+    "@bwmp-dev/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "rimraf": "^6.1.2",
     "tsdown": "^0.23.0",

@@ -6,7 +6,7 @@
  * always published, which is why it is scanned instead of `dist`.
  *
  *   @import "tailwindcss";
- *   @import "@stack/tokens/theme.css";
- *   @import "@stack/ui/styles.css";
+ *   @import "@bwmp-dev/tokens/theme.css";
+ *   @import "@bwmp-dev/ui/styles.css";
  */
 @source './src';

@@ -1,6 +1,6 @@
 ---
 import DocsShell from '~/components/DocsShell.astro'
-import { colorTokens, scaleTokens } from '@stack/tokens'
+import { colorTokens, scaleTokens } from '@bwmp-dev/tokens'
 
 const tokensExample = `:root {
   --accent: light-dark(oklch(0.55 0.16 254), oklch(0.7 0.15 254));
@@ -12,7 +12,7 @@ const tokensExample = `:root {
   description="Plain CSS custom properties. No framework, no React, and one declaration per value."
 >
   <p>
-    Every token is a CSS custom property in <code>@stack/tokens</code>. That package has no
+    Every token is a CSS custom property in <code>@bwmp-dev/tokens</code>. That package has no
     dependencies and no JavaScript in its critical path, so the same values work in React, in Astro
     markup, in a stylesheet, or in something that is not JavaScript at all.
   </p>

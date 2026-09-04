@@ -1,5 +1,5 @@
 {
-  "name": "@stack/ui",
+  "name": "@bwmp-dev/ui",
   "version": "0.1.0",
   "description": "The shared React component system.",
   "license": "MIT",
@@ -47,10 +47,10 @@
   },
   "dependencies": {
     "@base-ui/react": "catalog:",
-    "@stack/hooks": "workspace:*",
-    "@stack/icons": "workspace:*",
-    "@stack/tokens": "workspace:*",
-    "@stack/utils": "workspace:*",
+    "@bwmp-dev/hooks": "workspace:*",
+    "@bwmp-dev/icons": "workspace:*",
+    "@bwmp-dev/tokens": "workspace:*",
+    "@bwmp-dev/utils": "workspace:*",
     "lucide-react": "catalog:"
   },
   "peerDependencies": {
@@ -68,8 +68,8 @@
     }
   },
   "devDependencies": {
-    "@stack/config-eslint": "workspace:*",
-    "@stack/config-typescript": "workspace:*",
+    "@bwmp-dev/eslint-config": "workspace:*",
+    "@bwmp-dev/tsconfig": "workspace:*",
     "@tailwindcss/cli": "catalog:",
     "@tanstack/react-form": "catalog:",
     "@tanstack/react-table": "catalog:",
