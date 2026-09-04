@@ -41,6 +41,10 @@ jobs:
       - name: Check formatting
         run: pnpm format:check
 
+      # A documented rule that nothing checks stops being true.
+      - name: Check dependency boundaries
+        run: pnpm check:boundaries
+
   e2e:
     name: End-to-end
     runs-on: ubuntu-latest

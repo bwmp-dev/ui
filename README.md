@@ -64,6 +64,10 @@ its variant map so you can extend rather than fork, and nothing depends on you
 using our components at all. A canvas editor has no business being expressed in
 `Button` and `Card`.
 
+The dependency direction is checked rather than described: `pnpm check:boundaries`
+fails if `@stack/tokens` ever imports React, or `@stack/ui` ever imports a
+router. A documented rule that nothing enforces stops being true.
+
 ## Templates are the examples
 
 There is no `examples/` directory. The templates _are_ the worked examples,
@@ -86,6 +90,7 @@ pnpm typecheck
 pnpm test
 pnpm test:e2e
 pnpm format
+pnpm check:boundaries  # the dependency direction still holds
 ```
 
 Working on one thing:
