@@ -19,6 +19,14 @@ export default defineConfig({
   // failures harder to read, and this is closer to what ships.
   webServer: {
     command: `pnpm build && pnpm preview --port ${PORT} --strictPort`,
+    // The suite owns this production build, so give it an explicit mock-only
+    // environment instead of relying on a developer's untracked `.env` file.
+    // Regular production builds still require their deployment configuration.
+    env: {
+      VITE_API_URL: 'http://api.invalid',
+      VITE_API_MOCK: 'true',
+      VITE_APP_NAME: 'Stack App E2E',
+    },
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
