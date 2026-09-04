@@ -16,3 +16,4 @@ routeTree.gen.ts
 .css-test-*/
 .css-dbg-*/
 shot-*.png
+.output/
