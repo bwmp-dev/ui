@@ -7,6 +7,7 @@
     "dev": "vite dev",
     "build": "vite build",
     "start": "node server.mjs",
+    "pretypecheck": "tsr generate",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "clean": "rimraf dist .output .turbo"
@@ -32,6 +33,7 @@
     "@stack/config-eslint": "workspace:*",
     "@stack/config-typescript": "workspace:*",
     "@tailwindcss/vite": "catalog:",
+    "@tanstack/router-cli": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
