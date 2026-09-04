@@ -4,6 +4,9 @@ packages:
   - 'templates/*'
   - 'tooling/*'
 
+# Native packages permitted to run install scripts. pnpm seeds this with a
+# placeholder the first time it meets one, and `pnpm install` fails until every
+# entry is a real true/false — so an unanswered placeholder breaks CI.
 allowBuilds:
   '@parcel/watcher': true
   esbuild: true
@@ -80,9 +83,3 @@ minimumReleaseAgeExclude:
   - lucide-react@1.40.0
   - astro@7.3.1
   - srvx@1.0.3
-
-onlyBuiltDependencies:
-  - esbuild
-  - '@parcel/watcher'
-  - '@tailwindcss/oxide'
-  - sharp
