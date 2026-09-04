@@ -68,6 +68,7 @@ export const ALWAYS_EXCLUDE = new Set([
   'test-results',
   '.env',
   'routeTree.gen.ts',
+  'tsconfig.tsbuildinfo',
   'CHANGELOG.md',
 ])
 

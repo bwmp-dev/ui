@@ -1,8 +1,13 @@
 {
   "name": "@bwmp-dev/tokens",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Framework-agnostic design tokens as CSS custom properties.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bwmp-dev/ui.git",
+    "directory": "packages/tokens"
+  },
   "type": "module",
   "sideEffects": [
     "*.css"
@@ -19,7 +24,7 @@
     "./tailwind-intellisense.css": "./src/tailwind-intellisense.css"
   },
   "publishConfig": {
-    "access": "restricted",
+    "access": "public",
     "exports": {
       ".": {
         "types": "./dist/index.d.mts",

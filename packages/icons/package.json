@@ -1,8 +1,13 @@
 {
   "name": "@bwmp-dev/icons",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Brand marks Lucide does not ship, plus the shared icon contract.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bwmp-dev/ui.git",
+    "directory": "packages/icons"
+  },
   "type": "module",
   "sideEffects": false,
   "files": [
@@ -13,7 +18,7 @@
     ".": "./src/index.tsx"
   },
   "publishConfig": {
-    "access": "restricted",
+    "access": "public",
     "exports": {
       ".": {
         "types": "./dist/index.d.mts",

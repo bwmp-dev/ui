@@ -1,8 +1,13 @@
 {
   "name": "@bwmp-dev/create-stack",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Generate a project from one of the stack templates.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bwmp-dev/ui.git",
+    "directory": "tooling/create-stack"
+  },
   "type": "module",
   "bin": {
     "stack": "./bin/stack.mjs",
@@ -15,7 +20,7 @@
     "README.md"
   ],
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "scripts": {
     "prepack": "node scripts/bundle-templates.mjs",

@@ -1,13 +1,18 @@
 {
   "name": "@bwmp-dev/tsconfig",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": false,
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bwmp-dev/ui.git",
+    "directory": "packages/config-typescript"
+  },
   "files": [
     "*.json"
   ],
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "exports": {
     "./base": "./base.json",

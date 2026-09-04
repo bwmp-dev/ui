@@ -1,8 +1,13 @@
 {
   "name": "@bwmp-dev/utils",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Small framework-independent helpers shared across the stack.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bwmp-dev/ui.git",
+    "directory": "packages/utils"
+  },
   "type": "module",
   "sideEffects": false,
   "files": [
@@ -13,7 +18,7 @@
     ".": "./src/index.ts"
   },
   "publishConfig": {
-    "access": "restricted",
+    "access": "public",
     "exports": {
       ".": {
         "types": "./dist/index.d.mts",

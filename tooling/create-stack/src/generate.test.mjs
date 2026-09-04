@@ -88,6 +88,7 @@ describe('generate', () => {
     assert.ok(existsSync(join(target, '.env')), '.env is created from .env.example')
     assert.ok(!existsSync(join(target, 'node_modules')))
     assert.ok(!existsSync(join(target, 'dist')))
+    assert.ok(!existsSync(join(target, 'tsconfig.tsbuildinfo')))
   })
 
   it('omits the sample feature and its dependencies', async () => {

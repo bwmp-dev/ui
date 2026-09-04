@@ -64,7 +64,7 @@ that does not compile is never published.
 ## Registry
 
 Nothing in the architecture is tied to one. The packages are scoped
-(`@bwmp-dev/*`), publish with `access: restricted`, and can go to npm, GitHub
+(`@bwmp-dev/*`), publish publicly to npm, and can go to npm, GitHub
 Packages, or anything else, by pointing `.npmrc` at it:
 
 ```ini
@@ -76,8 +76,8 @@ Adding a registry later is a configuration change, not a refactor.
 ## Before publishing for the first time
 
 - Confirm that the publishing account can publish under the `@bwmp-dev` scope.
-- Set `publishConfig.access` to `public` if that is the intent — the default
-  here is `restricted`, which is the safe way round.
+- Confirm that each package's `publishConfig.access` matches its intended
+  visibility. The shared packages in this repository publish publicly.
 - Check `files` in each `package.json`. The packages ship `src` alongside
   `dist`, deliberately: the Tailwind `@source` directive scans it, and it makes
   debugging a published package possible.

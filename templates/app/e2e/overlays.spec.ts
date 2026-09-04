@@ -18,8 +18,9 @@ test.describe('overlay keyboard behaviour', () => {
     // Tab well past the end of the dialog; focus must stay inside it.
     for (let step = 0; step < 12; step += 1) {
       await page.keyboard.press('Tab')
-      const insideDialog = await dialog.evaluate((node) => node.contains(document.activeElement))
-      expect(insideDialog).toBe(true)
+      await expect
+        .poll(() => dialog.evaluate((node) => node.contains(document.activeElement)))
+        .toBe(true)
     }
 
     await page.keyboard.press('Escape')
